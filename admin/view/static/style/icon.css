@@ -1,0 +1,149 @@
+@charset "utf-8";
+/* CSS Document */
+
+.icon-user{color:#666;position:absolute;width:14px;height:6px;margin-left:3px;margin-top:11px;border-left:solid 1px currentColor;border-right:solid 1px currentColor;border-top:solid 1px currentColor;border-bottom:solid 1px transparent;border-radius:6px 6px 0 0;}
+.icon-user:before{content:'';position:absolute;left:2px;top:-10px;width:8px;height:8px;border-radius:50%;border:solid 1px currentColor;}
+.icon-password{color:#666;position:absolute;margin-left:1px;margin-top:6px;width:7px;height:7px;border-radius:50%;border:solid 1px currentColor;}
+.icon-password:before{content:'';position:absolute;left:7px;top:3px;width:11px;height:1px;background-color:currentColor;}
+.icon-password:after{content:'';position:absolute;left:13px;top:3px;width:1px;height:3px;border-left:solid 1px currentColor;border-right:solid 1px currentColor;}
+.icon-code{color:#666;position:absolute;margin-left:3px;margin-top:10px;width:12px;height:7px;border-radius:1px;border:solid 1px currentColor;}
+.icon-code:before{content:'';position:absolute;left:2px;top:-7px;width:6px;height:5px;border-radius:4px 4px 0 0;border-top:solid 1px currentColor;border-left:solid 1px currentColor;border-right:solid 1px currentColor;}
+
+.icon-pic{color:#666;position:absolute;margin-left:2px;margin-top:2px;width:15px;height:15px;border-radius:2px;border:solid 1px currentColor;}
+.icon-pic:before{content:'';position:absolute;left:2px;top:2px;width:2px;height:2px;border-radius:50%;border:solid 1px currentColor;}
+.icon-pic:after{content:'';position:absolute;left:2px;top:9px;width:12px;height:8px;border-top:solid 1px currentColor;border-right:solid 1px currentColor;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);}
+
+.icon-file{color:#666;position:absolute;margin-left:9px;margin-top:2px;width:6px;height:12px;border-radius:4px 4px 0 0;border-left:solid 1px currentColor;border-right:solid 1px currentColor;border-top:solid 1px currentColor;-webkit-transform:rotate(45deg);transform:rotate(45deg);}
+.icon-file:before{content:'';position:absolute;top:11px;left:-1px;width:4px;height:6px;border-radius:0 0 3px 3px;border-left:solid 1px currentColor;border-right:solid 1px currentColor;border-bottom:solid 1px currentColor;}
+.icon-file:after{content:'';position:absolute;left:1px;top:1px;width:2px;height:10px;border-radius:4px 4px 0 0;border-left:solid 1px currentColor;border-right:solid 1px currentColor;border-top:solid 1px currentColor;}
+
+
+.icon-mail{color:#666;position:absolute;margin-left:1px;margin-top:5px;width:15px;height:10px;border-radius:1px;border:solid 1px currentColor;}
+.icon-mail:before{content:'';position:absolute;left:7px;top:-4px;width:1px;height:10px;background-color:currentColor;-webkit-transform-origin:bottom;transform-origin:bottom;-webkit-transform:rotate(-54deg);transform:rotate(-54deg);}
+.icon-mail:after{content:'';position:absolute;left:7px;top:-4px;width:1px;height:10px;background-color:currentColor;-webkit-transform-origin:bottom;transform-origin:bottom;-webkit-transform:rotate(54deg);transform:rotate(54deg);}
+
+.icon-total{color:#666;position:absolute;margin-left:-28px;margin-top:11px;width:18px;height:18px;border-radius:50%;background:currentColor;}
+.icon-total:before{content:'';position:absolute;left:9px;top:0px;width:8px;height:8px;background-color:currentColor;border-left:#fff 1px solid;border-bottom:#fff 1px solid;border-radius:0px 100% 0px 0px;}
+
+.icon-wait{color:#666;position:absolute;margin-left:-28px;margin-top:11px;width:18px;height:18px;border-radius:50%;background:currentColor;}
+.icon-wait:before{content:'';position:absolute;left:4px;top:4px;width:5px;height:5px;border-right:#fff 1px solid;border-bottom:#fff 1px solid;}
+
+
+.icon-notes{color:#666;position:absolute;margin-left:-24px;margin-top:36px;width:15px;height:6px;border-radius:1px;background:currentColor;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);}
+.icon-notes:before{content:'';position:absolute;left:-13px;top:-0px;width:0px;height:0px;border-left:solid 6px transparent;border-right:solid 6px currentColor;border-top:solid 3px transparent;border-bottom:solid 3px transparent;}
+
+.icon-collect{color:#666;position:absolute;margin-left:-24px;margin-top:32px;width:10px;height:15px;border:solid 2px currentColor;border-bottom:none;}
+.icon-collect:before{content:'';position:absolute;left:0px;top:9px;width:8px;height:8px;border-left:currentColor 2px solid;border-top:currentColor 2px solid;-webkit-transform:rotate(45deg);transform:rotate(45deg);}
+
+.icon-follow{color:#666;position:absolute;margin-left:-28px;margin-top:31px;width:18px;height:18px;border-radius:50%;background:currentColor;}
+.icon-follow:before{content:'';position:absolute;left:3px;top:6px;width:4px;height:4px;border-radius:50%;background:#fff;}
+.icon-follow:after{content:'';position:absolute;right:3px;top:5px;width:3px;height:3px;border-radius:50%;background:currentColor;border:2px solid #fff;}
+.icon-follow i{color:currentColor;position:absolute;display:inline-block;right:3px;top:9px;width:0px;height:5px;border-right:solid 3px #fff;-webkit-transform:rotate(-30deg);transform:rotate(-30deg);}
+
+.icon-fans{color:#666;position:absolute;margin-left:-28px;margin-top:36px;width:10px;height:10px;background:currentColor;-webkit-transform:rotate(45deg);transform:rotate(45deg);}
+.icon-fans:before{content:'';position:absolute;left:0px;top:-6px;width:10px;height:8px;background:currentColor;border-radius:50% 50% 0px 0px;border-bottom:solid 2px currentColor;}
+.icon-fans:after{content:'';position:absolute;left:-6px;top:0px;width:8px;height:10px;background:currentColor;border-radius:50% 0px 0px 50%;border-right:solid 2px currentColor;}
+
+.icon-bell{color:#666;position:absolute;margin-left:-22px;margin-top:22px;width:10px;height:10px;border:1px solid currentColor;border-radius:5px 5px 0px 0px;}
+.icon-bell:before{content:'';position:absolute;left:-4px;bottom:-1px;width:18px;height:0px;background:currentColor;border-bottom:solid 1px currentColor;}
+.icon-bell:after{content:'';position:absolute;left:1px;bottom:-6px;width:5px;height:3px;border-radius:0 0 50% 50%;border:solid 1px currentColor;border-top:none;}
+
+
+
+
+
+.aicon-user{color:#666;position:absolute;width:10px;height:5px;margin-left:3px;margin-top:12px;border-left:solid 1px currentColor;border-right:solid 1px currentColor;border-top:solid 1px currentColor;border-bottom:solid 1px transparent;border-radius:6px 6px 0 0;}
+.aicon-user:before{content:'';position:absolute;left:1px;top:-8px;width:6px;height:6px;border-radius:50%;border:solid 1px currentColor;}
+
+.aicon-edit{color:#666;position:absolute;margin-left:4px;margin-top:8px;width:11px;height:2px;border-radius:1px;border:solid 1px currentColor;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);}
+.aicon-edit:before{content:'';position:absolute;left:-12px;top:-1px;width:0px;height:0px;border-left:solid 5px transparent;border-right:solid 5px currentColor;border-top:solid 2px transparent;border-bottom:solid 2px transparent;}
+
+.aicon-edit2{color:#666;position:absolute;margin-left:4px;margin-top:8px;width:11px;height:2px;background-color:currentColor;border-radius:1px;border:solid 1px currentColor;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);}
+.aicon-edit2:before{content:'';position:absolute;left:-12px;top:-1px;width:0px;height:0px;border-left:solid 5px transparent;border-right:solid 5px currentColor;border-top:solid 2px transparent;border-bottom:solid 2px transparent;}
+
+.aicon-list{color:#666;position:absolute;display:inline-block;width:13px;height:9px;margin-left:3px;margin-top:6px;border-top:1px currentColor solid;border-bottom:1px currentColor solid;}
+.aicon-list:before{position:absolute;content:"";display:inline-block;width:13px;margin-top:4px;border-top:1px currentColor solid;}
+
+.aicon-bookmark{color:#666;position:absolute;margin-left:4px;margin-top:5px;width:10px;height:13px;border-radius:1px 1px 0 0;border-top:solid 1px currentColor;border-left:solid 1px currentColor;border-right:solid 1px currentColor;}
+.aicon-bookmark:before{content:'';position:absolute;top:8px;left:1px;width:7px;height:7px;border-top:solid 1px currentColor;border-left:solid 1px currentColor;-webkit-transform:rotate(45deg);transform:rotate(45deg);}
+
+.aicon-link{color:#666;position:absolute;display:inline-block;width:2px;height:8px;margin-left:8px;margin-top:8px;background:currentColor;transform:rotate(45deg);-ms-transform:rotate(45deg);-moz-transform:rotate(45deg);-webkit-transform:rotate(45deg);-o-transform:rotate(45deg);}
+.aicon-link:before{position:absolute;content:"";display:inline-block;width:5px;height:6px;margin-left:-2px;margin-top:-5px;border:1px currentColor solid;border-radius:3px;}
+.aicon-link:after{position:absolute;content:"";display:inline-block;width:5px;height:6px;margin-left:-2px;margin-top:4px;border:1px currentColor solid;border-radius:3px;}
+
+.aicon-tag{color:#666;position:absolute;display:inline-block;width:6px;height:6px;margin-left:4px;margin-top:6px;border-top:1px currentColor solid;border-left:1px currentColor solid;}
+.aicon-tag:before{position:absolute;content:"";display:inline-block;width:10px;height:9px;margin-left:1px;margin-top:1px;border:1px currentColor solid;border-left:none;transform:rotate(45deg);-ms-transform:rotate(45deg);-moz-transform:rotate(45deg);-webkit-transform:rotate(45deg);-o-transform:rotate(45deg);border-radius:1px 0px 0px 1px;}
+.aicon-tag:after{position:absolute;content:"";display:inline-block;width:3px;height:3px;margin-left:3px;margin-top:3px;border-radius:50%;background:currentColor;}
+
+.aicon-page{position:absolute;display:inline-block;width:9px;height:12px;margin-left:4px;margin-top:5px;border:1px currentColor solid;border-radius:1px 7px 1px 1px;}
+.aicon-page:before{position:absolute;content:"";display:inline-block;width:1px;height:1px;margin-left:5px;margin-top:-1px;border-top:2px solid transparent;border-right:2px solid transparent;border-left:2px solid currentColor;border-bottom:2px solid currentColor;}
+
+.aicon-home{color:#666;position:absolute;display:inline-block;width:8px;height:4px;border:currentColor solid 3px;border-top:currentColor solid 3px;border-bottom:none;margin-top:11px;margin-left:4px;}
+.aicon-home:before{position:absolute;border-top:none;border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:6px solid currentColor;content:"";width:0px;height:0px;margin-top:-9px;margin-left:-3px;}
+
+.aicon-write{color:#666;position:absolute;display:inline-block;width:12px;height:8px;margin-left:3px;margin-top:8px;border-radius:2px;border:1px currentColor solid;}
+.aicon-write:before{position:absolute;content:"";display:inline-block;width:2px;height:10px;margin-left:8px;margin-top:-7px;border:1px currentColor solid;transform:rotate(45deg);-ms-transform:rotate(45deg);-moz-transform:rotate(45deg);-webkit-transform:rotate(45deg);-o-transform:rotate(45deg);background:currentColor;}
+.aicon-write:after{position:absolute;content:"";width:0px;height:0px;margin-left:-2px;margin-top:5px;border-left:solid 4px transparent;border-right:solid 4px currentColor;border-top:solid 2px transparent;border-bottom:solid 2px transparent;transform:rotate(-45deg);-ms-transform:rotate(-45deg);-moz-transform:rotate(-45deg);-webkit-transform:rotate(-45deg);-o-transform:rotate(-45deg);}
+
+.aicon-class{color:#666;position:absolute;display:inline-block;width:7px;height:8px;margin-left:6px;margin-top:7px;border:1px currentColor solid;border-radius:2px;}
+.aicon-class:before{position:absolute;content:"";display:inline-block;width:0px;height:11px;margin-left:-3px;margin-top:-1px;border-left:1px currentColor solid;}
+
+.aicono-user{color:#666;position:absolute;display:inline-block;width:4px;height:4px;margin-left:7px;margin-top:6px;border:1px currentColor solid;border-radius:4px;}
+.aicono-user:before{position:absolute;content:"";display:inline-block;width:10px;height:5px;left:-4px;top:4px;border:1px currentColor solid;border-radius:5px 5px 0px 0px;border-bottom:2px solid transparent;}
+
+.aicon-chat{color:#666;position:absolute;display:inline-block;width:11px;height:8px;margin-left:4px;margin-top:6px;border:1px currentColor solid;border-bottom:1px currentColor solid;border-radius:3px;background:currentColor;}
+.aicon-chat:before{position:absolute;content:"";display:inline-block;width:4px;height:4px;margin-left:3px;margin-top:6px;border-right:1px currentColor solid;border-bottom:1px currentColor solid;transform:rotate(45deg);-ms-transform:rotate(45deg);-moz-transform:rotate(45deg);-webkit-transform:rotate(45deg);-o-transform:rotate(45deg);background:currentColor;}
+
+.aicon-eye{position:absolute;display:inline-block;width:11px;height:11px;margin-left:4px;margin-top:6px;border-radius:70% 15%;border:solid 1px currentColor;transform:rotate(45deg);-ms-transform:rotate(45deg);-moz-transform:rotate(45deg);-webkit-transform:rotate(45deg);-o-transform:rotate(45deg);}
+.aicon-eye:before{position:absolute;content:"";display:inline-block;width:5px;height:5px;margin-left:3px;margin-top:3px;border-radius:2px;background:currentColor;}
+
+.aicon-fied{color:#666;position:absolute;display:inline-block;width:13px;height:9px;margin-left:5px;margin-top:6px;border-top:solid 1px currentColor;border-bottom:solid 1px currentColor;}
+.aicon-fied:before{position:absolute;content:"";display:inline-block;width:13px;height:0px;margin-left:0px;margin-top:4px;border-top:solid 1px currentColor;}
+
+.aicon-set{color:#666;position:absolute;display:inline-block;width:5px;height:5px;margin-left:6px;margin-top:8px;border:solid 3px currentColor;border-radius:10px;}
+.aicon-set:before{position:absolute;content:"";display:inline-block;width:9px;height:2px;margin-left:-5px;margin-top:2px;border-left:solid 3px currentColor;border-right:solid 3px currentColor;}
+.aicon-set:after{position:absolute;content:"";display:inline-block;width:2px;height:9px;margin-left:2px;margin-top:-5px;border-top:solid 3px currentColor;border-bottom:solid 3px currentColor;}
+.aicon-set i{color:currentColor;position:absolute;display:inline-block;width:9px;height:2px;margin-left:-5px;margin-top:1px;border-left:solid 3px currentColor;border-right:solid 3px currentColor;transform:rotate(45deg);-ms-transform:rotate(45deg);-moz-transform:rotate(45deg);-webkit-transform:rotate(45deg);-o-transform:rotate(45deg);}
+.aicon-set i:before{position:absolute;content:"";display:inline-block;width:2px;height:9px;margin-left:4px;margin-top:-6px;border-top:solid 3px currentColor;border-bottom:solid 3px currentColor;}
+
+.aicon-side{color:#666;position:absolute;display:inline-block;width:11px;height:6px;margin-left:5px;margin-top:8px;border:solid 1px currentColor;border-top:solid 3px currentColor;}
+.aicon-side:before{position:absolute;content:"";display:inline-block;height:6px;margin-left:5px;margin-top:0px;border-left:solid 1px currentColor;}
+
+.aicon-data{color:#666;position:absolute;display:inline-block;width:13px;height:5px;margin-left:5px;margin-top:7px;background:currentColor;border-radius:50%;}
+.aicon-data:before{position:absolute;content:"";display:inline-block;width:11px;height:3px;margin-left:0px;margin-top:3px;border-width:1px 1px 2px 1px;border-radius:50%;border-style:solid;border-color:currentColor;}
+.aicon-data:after{position:absolute;content:"";display:inline-block;width:11px;height:3px;margin-left:0px;margin-top:6px;border-width:1px 1px 2px 1px;border-radius:50%;border-style:solid;border-color:currentColor;}
+
+.aicon-plugin{color:#666;position:absolute;display:inline-block;width:13px;height:6px;margin-left:6px;margin-top:6px;border-bottom:solid 5px currentColor;border-radius:0 0 30% 30%;}
+.aicon-plugin:before{position:absolute;content:"";width:3px;height:5px;margin-left:5px;margin-top:10px;background:currentColor;}
+.aicon-plugin:after{position:absolute;content:"";width:5px;height:6px;margin-left:2px;margin-top:1px;border-left:solid 2px currentColor;border-right:solid 2px currentColor;}
+
+.aicon-store{color:#666;position:absolute;display:inline-block;width:10px;height:0px;margin-left:4px;margin-top:7px;border-top:solid 7px currentColor;border-left:solid 2px transparent;border-right:solid 2px transparent;}
+.aicon-store:before{position:absolute;content:"";display:inline-block;width:3px;height:3px;margin-left:-1px;margin-top:2px;border-radius:50%;background:currentColor;}
+.aicon-store:after{position:absolute;content:"";display:inline-block;width:3px;height:3px;margin-left:7px;margin-top:2px;border-radius:50%;background:currentColor;}
+
+.aicon-more{color:#666;position:absolute;display:inline-block;width:0px;height:0px;margin-left:6px;margin-top:8px;border-left:13px solid currentColor;border-top:5px solid transparent;border-bottom:5px solid transparent;}
+
+.aicon-info{color:#666;position:absolute;display:inline-block;border:1px solid currentColor;border-radius:3px;width:11px;height:7px;margin-left:6px;margin-top:7px;}
+.aicon-info:before{position:absolute;content:"";display:inline-block;border-radius:60%;border-bottom:2px solid currentColor;width:15px;height:0px;margin-top:9px;margin-left:-2px;}
+
+.aicon-tian{color:#666;position:absolute;display:inline-block;width:5px;height:1px;margin-left:6px;margin-top:7px;border-top:solid 5px currentColor;border-bottom:solid 5px currentColor;}
+.aicon-tian:after{position:absolute;content:"";display:inline-block;width:5px;height:1px;margin-left:6px;margin-top:-5px;border-top:solid 5px currentColor;border-bottom:solid 5px currentColor;}
+
+.aicon-pass{color:#666;position:absolute;display:inline-block;width:13px;height:8px;margin-left:3px;margin-top:10px;background:currentColor;}
+.aicon-pass:before{position:absolute;content:"";display:inline-block;width:7px;height:5px;margin-left:2px;margin-top:-5px;border:1px solid currentColor;border-radius:3px 3px 0 0;}
+
+.aicon-code{color:#666;position:absolute;display:inline-block;width:6px;height:6px;margin-left:7px;margin-top:6px;border:solid 1px currentColor;border-radius:50%;transform:rotate(-45deg);-ms-transform:rotate(-45deg);-moz-transform:rotate(-45deg);-webkit-transform:rotate(-45deg);-o-transform:rotate(-45deg);}
+.aicon-code:before{position:absolute;content:"";display:inline-block;width:9px;height:0px;margin-left:-10px;margin-top:2px;border-top:1px solid currentColor;}
+.aicon-code:after{position:absolute;content:"";display:inline-block;width:3px;height:4px;margin-left:-8px;margin-top:2px;border-left:1px solid currentColor;border-right:1px solid currentColor;}
+
+.aicon-fold{color:#666;position:absolute;display:inline-block;width:6px;height:6px;border-left:currentColor 2px solid;border-top:currentColor 2px solid;margin-left:70px;margin-top:10px;transform:rotate(45deg);-ms-transform:rotate(45deg);-moz-transform:rotate(45deg);-webkit-transform:rotate(45deg);-o-transform:rotate(45deg);}
+
+.aicon-fold2{color:#666;position:absolute;display:inline-block;width:6px;height:6px;border-left:currentColor 2px solid;border-top:currentColor 2px solid;margin-left:70px;margin-top:6px;transform:rotate(225deg);-ms-transform:rotate(225deg);-moz-transform:rotate(225deg);-webkit-transform:rotate(225deg);-o-transform:rotate(225deg);}
+
+.aicon-infor{color:#666;position:absolute;display:inline-block;width:0px;height:3px;margin-left:9px;margin-top:7px;border-top:5px solid transparent;border-bottom:5px solid transparent;border-right:5px solid currentColor;}
+.aicon-infor:before{position:absolute;content:"";display:inline-block;width:4px;height:5px;margin-top:-2px;margin-left:3px;border-radius:0px 60% 60% 0px;border:1px solid currentColor;border-left:none;}
+.aicon-infor:after{position:absolute;content:"";display:inline-block;width:3px;height:5px;margin-left:-2px;margin-top:-1px;background:currentColor;}
+
+.aicon-write2{color:#666;position:absolute;display:inline-block;width:12px;height:8px;margin-left:0px;margin-top:8px;border-radius:2px;border:1px currentColor solid;}
+.aicon-write2:before{position:absolute;content:"";display:inline-block;width:2px;height:10px;margin-left:2px;margin-top:-7px;border:1px currentColor solid;transform:rotate(45deg);-ms-transform:rotate(45deg);-moz-transform:rotate(45deg);-webkit-transform:rotate(45deg);-o-transform:rotate(45deg);background:currentColor;}
+.aicon-write2:after{position:absolute;content:"";width:0px;height:0px;margin-left:-8px;margin-top:5px;border-left:solid 4px transparent;border-right:solid 4px currentColor;border-top:solid 2px transparent;border-bottom:solid 2px transparent;transform:rotate(-45deg);-ms-transform:rotate(-45deg);-moz-transform:rotate(-45deg);-webkit-transform:rotate(-45deg);-o-transform:rotate(-45deg);}
