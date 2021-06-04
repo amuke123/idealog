@@ -297,8 +297,8 @@ class art_Model{
 		$sql2.=$sqltem;
 		return $counts=$db->getlist($sql2);
 	}
-}
 
 **/
+}
 
 ?>

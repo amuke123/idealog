@@ -18,6 +18,12 @@ function updateCacheAll($tb=null){//更新全部缓存
 	Sitemap::setXml('sitemap');
 }
 
+function getStr($number){//随机不重复字符串$number长度
+	$str="QWERTYUIOPASDFGHJKLZXCVBNM1234567890qwertyuiopasdfghjklzxcvbnm";
+	$name=substr(str_shuffle($str),16,$number);
+	return $name;
+}
+
 function getStrSub($str,$strat=10,$num=16){//字符串截取
 	return substr($str,$strat,$num);
 }
@@ -81,11 +87,7 @@ function getGravatar($email,$s =40,$d='mm',$g ='g'){
     return $avatar;
 }
 
-function getStr($number){//随机不重复字符串$number长度
-	$str="QWERTYUIOPASDFGHJKLZXCVBNM1234567890qwertyuiopasdfghjklzxcvbnm";
-	$name=substr(str_shuffle($str),16,$number);
-	return $name;
-}
+
 
 
 

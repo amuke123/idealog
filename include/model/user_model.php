@@ -182,7 +182,8 @@ class user_Model{
 			updateCacheAll(array('sta','newArts','wishlist'));return 1;
 		}
 	}
+	**/
+	
+	
 }
-
-**/
 ?>

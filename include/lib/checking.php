@@ -35,7 +35,7 @@ class Checking{
 		self::setSession();
 		$password = setUTF8(self::jm($password));
 		if(Control::get('login_code')){
-			if(!isset($_SESSION['code'])){echo "<script>alert('非法操作！');location.href='". IDEA_URL ."';</script>";exit;}
+			if(!isset($_SESSION['code'])){echo "<script>alert('非法操作！');</script>";mkDirect(IDEA_URL);exit;}
 			if(strtolower($code)!=$_SESSION['code']){echo "<script>alert('验证码错误！');window.history.go(-1);</script>";exit;}
 		}
 		$conn=Conn::getConnect();
@@ -66,7 +66,6 @@ class Checking{
 		}else{
 			echo "<script>alert('邮箱/手机/账户不存在！');window.history.go(-1);</script>";
 		}
-		
 	}
 	
 	public static function checkPw($password,$pass){//密码验证
@@ -97,8 +96,21 @@ class Checking{
 		echo "<script>location.href='". IDEA_URL ."';</script>";
 	}
 	
+	static function checkSendId($sendId,$uid=''){//检测邮箱或手机号是否存在
+		$db=Conn::getConnect();
+		$sql="SELECT COUNT(*) AS total FROM `". DB_PRE ."user` WHERE (`email`='".$sendId."' OR `tel`='".$sendId."') ";
+		if($uid!=''){$sql.=' AND `id`!='.$uid;}
+		$userid=$db->getOnce($sql);
+		return $userid['total']>0?1:0;
+	}
+	
 	public static function jm($str){//加密
 		return $str=md5($str."ideashu");
+	}
+	
+	public static function getAjCode($num=6){//js异步验证码
+		self::setSession();
+		return $_SESSION['ajcode'] = getStr($num);
 	}
 	
 	///------------------------------------------
@@ -150,13 +162,7 @@ class Checking{
 		return $reset;
 	}
 	
-	static function checkSendId($sendId,$uid=''){//检测邮箱或手机号是否存在
-		$db=Conn::getConnect();
-		$sql="SELECT COUNT(*) AS total FROM `". DB_PRE ."user` WHERE (`email`='".$sendId."' OR `tel`='".$sendId."') ";
-		if($uid!=''){$sql.=' AND `id`!='.$uid;}
-		$userid=$db->getOnce($sql);
-		return $userid['total']>0?1:0;
-	}
+	
 	static function checkCode($code,$sendId){//检测验证码是否正确
 		self::setSession();
 		if(isset($_SESSION['code_'.$sendId])){
@@ -179,10 +185,7 @@ class Checking{
 	}
 	
 	
-	public static function getAjCode($num=6){//js异步验证码
-		self::setSession();
-		return $_SESSION['ajcode'] = getStr($num);
-	}
+	
 	
 }
 ?>

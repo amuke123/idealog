@@ -7,10 +7,9 @@ class action_Control{
 		//print_r($datas);
 		$cache=Conn::getCache();
 		$sorts=$cache->readCache('sort');
-		//$collects=$cache->readCache('collects');
-		//$hotArts=$cache->readCache('hotArts');
 		$system_cache=Control::getOptions();
 		extract($system_cache);
+		
 		$do=$datas[1];
 		if($do=='login'||$do=='register'||$do=='reset'){
 			loginOk();

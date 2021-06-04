@@ -18,8 +18,9 @@ a:hover{color:#33CC99;}
 
 .login{background:#fff;position:absolute;bottom:0;top:0;left:0;right:0;}
 .loginbg{position:absolute;top:0;left:0;width:100%;height:25%;background:#f7f7f7;border-bottom:1px solid #eee;}
-.loginc{position:absolute;top:25%;width:552px;height:410px;left:50%;margin-left:-261px;margin-top:-80px;}
-.home{background-image:linear-gradient(141deg,#9fb8ad 5%,#1fc8db 51%,#2cb5e8 85%);width:100%;height:80px;line-height:80px;font-family:'黑体';border-radius:5px 5px 0px 0px;border-bottom:1px dashed #9fb8ad;}
+.loginc{position:absolute;top:25%;width:452px;height:410px;left:50%;margin-left:-211px;margin-top:-80px;}
+.loginc2{position:absolute;top:25%;width:552px;height:410px;left:50%;margin-left:-261px;margin-top:-80px;}
+.home{background-image:linear-gradient(141deg,#9fb8ad 5%,#1fc8db 51%,#2cb5e8 85%);width:100%;height:80px;line-height:80px;font-family:'黑体';border-radius:0px;border-bottom:1px dashed #9fb8ad;}
 .home span{display:inline-block;font-size:32px;font-weight:blod;color:#fff;text-shadow:2px 3px 4px #444;}
 .home .h_movo1{animation:movo 1.6s ease-in-out 0.2s infinite alternate;}
 .home .h_movo2{animation:movo 1.7s ease-in-out 0.8s infinite alternate;}

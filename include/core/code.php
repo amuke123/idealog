@@ -1,6 +1,7 @@
 <?php
 require_once 'amuker.php';
 Checking::setSession();
+ob_clean();
 header('content-type:image/png');//向浏览器输出图片头信息
 $image=imagecreatetruecolor(100, 30);//1.创建黑色画布
 $bgcolor=imagecolorallocate($image, 255, 255, 255);//2.为画布定义(背景)颜色
