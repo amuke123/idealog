@@ -1,0 +1,3 @@
+http://www.a.com/
+http://www.a.com/1.html
+http://www.a.com/author/1

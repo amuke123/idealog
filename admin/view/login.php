@@ -4,8 +4,8 @@
 <meta charset="UTF-8" />
 <link rel="stylesheet" type="text/css" href="<?php echo IDEA_URL .ADMIN_TYPE;?>/view/static/style/login.css">
 <link rel="stylesheet" type="text/css" href="<?php echo IDEA_URL .ADMIN_TYPE;?>/view/static/style/icon.css">
-<!--script charset="utf-8" src="<?php echo IDEA_URL .ADMIN_TYPE;?>/view/static/js/action.js"></script>
-<script charset="utf-8" src="<?php echo IDEA_URL .ADMIN_TYPE;?>/view/static/js/ajax.js"></script-->
+<script charset="utf-8" src="<?php echo IDEA_URL .ADMIN_TYPE;?>/view/static/js/action.js"></script>
+<script charset="utf-8" src="<?php echo IDEA_URL .ADMIN_TYPE;?>/view/static/js/ajax.js"></script>
 <script charset="utf-8" src="<?php echo IDEA_URL .ADMIN_TYPE;?>/view/static/js/login.js"></script>
 <title><?php if($action=='login'){echo '登录';}if($action=='register'){echo '注册';}if($action=='reset'){echo '重置';}echo "-".SITE_NAME?></title>
 </head>

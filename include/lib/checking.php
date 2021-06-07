@@ -56,9 +56,9 @@ class Checking{
 					setcookie($iname,self::jm($row["id"]));
 				}
 				if($row["role"]!= ROLE_ADMIN ){
-					echo "<script>location.href='". IDEA_URL ."';</script>";
+					mkDirect(IDEA_URL);
 				}else{
-					echo "<script>location.href='". IDEA_URL . ADMIN_TYPE ."';</script>";
+					mkDirect(IDEA_URL . ADMIN_TYPE);
 				}
 			}else{
 				echo "<script>alert('密码错误！');window.history.go(-1);</script>";
@@ -108,12 +108,20 @@ class Checking{
 		return $str=md5($str."ideashu");
 	}
 	
+	public static function hashjm($str){//hash加密
+		if(version_compare(PHP_VERSION,'5.5.0', '<')){
+			$str=setUTF8(self::jm($str));
+		}else{
+			$str=setUTF8(password_hash($str."ideashu",PASSWORD_DEFAULT));
+		}
+		return $str;
+	}
+	
 	public static function getAjCode($num=6){//js异步验证码
 		self::setSession();
 		return $_SESSION['ajcode'] = getStr($num);
 	}
 	
-	///------------------------------------------
 	
 	static function resetUser($sendType,$sendId,$pwd){//重置密码
 		$conn=Conn::getConnect();
@@ -145,15 +153,11 @@ class Checking{
 	}
 	
 	static function getUserName(){//自动生成用户名
-		$str=Control::get('userpre');
-		$str=$str==''?'idea_':$str;
-		$str.=substr(time(),-8);
-		$str.=rand(1000,9999);
+		$pre=Control::get('userpre');
+		$pre=$pre==''?'idea_':$pre;
+		$str=uniqid($pre);
 		return $str;
 	}
-	
-
-
 	
 	static function checkSendType($sendId){//检测是邮箱还是手机号
 		$reset='';
@@ -175,14 +179,7 @@ class Checking{
 	
 	
 	
-	public static function hashjm($str){//hash加密
-		if(version_compare(PHP_VERSION,'5.5.0', '<')){
-			$str=setUTF8(self::jm($str));
-		}else{
-			$str=setUTF8(password_hash($str."ideashu",PASSWORD_DEFAULT));
-		}
-		return $str;
-	}
+	
 	
 	
 	

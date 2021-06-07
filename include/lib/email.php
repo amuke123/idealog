@@ -4,16 +4,12 @@ class Email{
 		include_once IDEA_ROOT .'/include/core/mail/PHPMailer.php';
 		include_once IDEA_ROOT .'/include/core/mail/SMTP.php';
 		
-		//$host=Control::get('mailhost');
-		$host='smtp.qq.com';
-		//$port=Control::get('mailport');
-		$port=25;
-		//$sendmail=Control::get('mail');
-		$sendmail='amuke123@ideashu.com';
+		$host=Control::get('mailhost');
+		$port=Control::get('mailport');
+		$sendmail=Control::get('mail');
 		$te=explode('@',$sendmail);
 		$sendname=$te[0];
-		//$sendmailpswd=Control::get('mailpswd');
-		$sendmailpswd='dmpvsmoxczwbcbca';
+		$sendmailpswd=Control::get('mailpswd');
 		$title='验证码';
 		$code=Cellcode::getCode($emailid);
 		$sitename=SITE_NAME;
@@ -34,7 +30,8 @@ class Email{
 		$mail->Password = $sendmailpswd;// smtp登录的密码 使用生成的授权码
 		$mail->From = $sendmail;// 设置发件人邮箱地址 同登录账号
 		$mail->isHTML(true);// 邮件正文是否为html编码 注意此处是一个方法
-		$mail->addAddress($toemail );// 设置收件人邮箱地址// 添加多个收件人 则多次调用方法即可
+		$mail->addAddress($sendmail);// 添加密送者，Mail Header不会显示密送者信息
+		$mail->addAddress($toemail);// 设置收件人邮箱地址// 添加多个收件人 则多次调用方法即可
 		$mail->Subject = $title;// 添加该邮件的主题
 		$mail->Body = $str;// 添加邮件正文
 		//$mail->addAttachment('./example.pdf');// 为该邮件添加附件
