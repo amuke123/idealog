@@ -4,16 +4,16 @@ class App{
 		$code = Cellcode::getCode($phoneNumber);
 		$params = array($code);
 		$nationCode = "86";
-		$templId = '346441';
-		$sign = "创意书";
-        $appid = "1400435435";  //自己的短信appid
-        $appkey = "b35f66722cb1cd648a8ce531c32f9eae"; //自己的短信appkey
+		$templId = Control::get('message_templId');
+		$sign = Control::get('message_sign');
+        $appid = Control::get('message_appid');  //自己的短信appid
+        $appkey = Control::get('message_appkey'); //自己的短信appkey
 		$extend = "";
 		$ext = "";
 
         $random = rand(100000, 999999);//生成随机数
         $curTime = time();
-        $wholeUrl = "https://yun.tim.qq.com/v5/tlssmssvr/sendsms". "?sdkappid=" . $appid . "&random=" . $random;
+        $wholeUrl = Control::get('message_url'). "?sdkappid=" . $appid . "&random=" . $random;
 
         // 按照协议组织 post 包体
         $data = new \stdClass();//创建一个没有成员方法和属性的空对象

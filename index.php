@@ -4,6 +4,6 @@ include_once 'include/core/amuker.php';
 
 Router::dispatch();
 
-//Email::sendMail('amuke123@163.com');
+Email::sendMail('amuke123@163.com');
 
 ?>
