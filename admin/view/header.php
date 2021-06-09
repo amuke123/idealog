@@ -46,8 +46,8 @@
 		</form>
 	</div>
 	<div class="h_right right">
-		<a href="#" title="网站主页"><i class="icon aicon-home"></i>&nbsp;</a>
-		<a href="#" title="更新缓存"><i class="icon aicon-cache"></i>&nbsp;</a>
+		<a href="<?php echo IDEA_URL;?>" target="_blank" title="网站主页"><i class="icon aicon-home"></i>&nbsp;</a>
+		<a href="<?php echo Url::getActionUrl('setcache');?>" title="更新缓存"><i class="icon aicon-cache"></i>&nbsp;</a>
 		<a href="#" title="消息"><i class="icon aicon-infor"></i>&nbsp;</a>
 		<div class="h_user"><span><img src="<?php echo TEMPLATE_URLA;?>static/images/avatar.png" /></span><b>用户名</b><i class="icon2 aicon-fold2"></i>
 			<div class="h_info">
@@ -57,7 +57,7 @@
 					<a href="#"><i class="icon aicon-write"></i>创作中心</a>
 					<a href="#"><i class="icon aicon-set"><i></i></i>网站设置</a>
 				</p>
-				<p><a href="#"><i class="icon aicon-out"></i>退出</a></p>
+				<p><a href="<?php echo Url::getActionUrl('goout');?>"><i class="icon aicon-out"></i>退出</a></p>
 			</div>
 		</div>
 	</div>

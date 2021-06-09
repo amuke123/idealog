@@ -14,7 +14,7 @@
 .side>ul li.active>a{background:#080808;}
 .side>ul li ul{display:none;background:#181818;}
 .side>ul li.active ul{display:block;}
-.side>ul li ul li a{padding-left:70px;}
+.side>ul li ul li a{padding-left:70px;border-left:transparent solid 3px;}
 .side>ul li ul li.action a{border-left:#e74c3c solid 3px;background:#38c;}
 .side>ul li ul li a:hover{background:#d34836;}
 .side>ul li i.icon{top:5px;left:22px;}
