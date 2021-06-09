@@ -222,6 +222,7 @@ class Cache{
 			'artnum' => $artnum,
 			'hidenum' => $hidenum,
 			'checknum' => $checknum,
+			'sayall' => $saynum+$hidesay+$checksay,
 			'saynum' => $saynum,
 			'hidesay' => $hidesay,
 			'checksay' => $checksay,

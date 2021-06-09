@@ -12,6 +12,7 @@ require_once IDEA_ROOT.'/include/core/function.main.php';
 spl_autoload_register("mkAutoload");
 //doStripslashes();
 
+$cache = Conn::getCache();
 
 //权限
 define('ROLE_ADMIN','admin');

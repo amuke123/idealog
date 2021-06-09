@@ -132,6 +132,20 @@ class Control{
 		return $roles;
 	}
 	
+	static function getAlist(){
+		$alist = array(
+			'write_art'=>array('name'=>'写笔记|write'),
+			'article'=>array('name'=>'笔记列表|edit'),
+			'sort'=>array('name'=>'分类|list'),
+			'bookmark'=>array('name'=>'功能|bookmark','child'=>array('banner'=>'轮换图|class','page'=>'页面|page','tag'=>'标签|tag','link'=>'友链|link')),
+			'ulist'=>array('name'=>'用户|user','child'=>array('user'=>'用户|user2','say'=>'评论|chat')),
+			'eye'=>array('name'=>'外观|eye','child'=>array('nav'=>'导航|fied','template'=>'模板|tian')),
+			'sys'=>array('name'=>'系统|pass','child'=>array('system'=>'设置|set','data'=>'数据|data','plugin'=>'插件|plugin','store'=>'应用|info')),
+			'extend'=>array('name'=>'扩展|code','child'=>array('more_sitimap'=>'sitemap|more','more_tel'=>'模板编辑|more','more_say'=>'评论拦截|more')),
+		);
+		return $alist;
+	}
+	
 	static function gettime(){//时区列表
 		$timelist = array(
 			'PRC'					=>	'中华人民共和国·北京时间(PRC)',
