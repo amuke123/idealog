@@ -1,6 +1,8 @@
 @charset "utf-8";
 /* CSS Document */
 
+.gray{filter:grayscale(100%);-webkit-filter:grayscale(100%);}
+
 .side{position:fixed;top:0px;left:0px;bottom:0px;width:200px;overflow:auto;z-index:99;background:#272f33;transition:all .5s;}
 .side p{line-height:60px;text-align:center;font-size:16px;}
 .side p a{display:block;width:100%;color:#fff;background:#222;height:60px;overflow:hidden;position:relative;}
@@ -113,6 +115,21 @@
 .m_button .m_but:hover{background:#449d44;border:1px solid #398439;}
 .m_button .m_but2:hover{background:#e6e6e6;border:1px solid #adadad;}
 
+.m_add{padding:20px 0px;display:none;}
+.m_add2{padding:20px;}
+.m_add p,.m_add2 p{padding:5px 0px;}
+.m_add p b,.m_add2 p b{line-height:25px;}
+.group{margin:5px 0px;padding:5px 15px;background:#fff;border-radius:5px;border:#ddd solid 1px;width:290px;position:relative;}
+.group img{height:30px;position:absolute;left:75px;top:8px;}
+.group img.xt{height:20px;position:absolute;left:75px;top:12px;}
+.formin{line-height:35px;border-radius:5px;border:#ddd solid 1px;padding:0px 15px;width:80px;}
+.formfile{padding:5px 0px;}
+.formput{line-height:35px;border-radius:5px;border:#ddd solid 1px;padding:0px 15px;width:240px;}
+.formsele{line-height:35px;height:35px;border-radius:5px;border:#ccc solid 1px;padding:0px 15px;width:180px;}
+.formtext{line-height:25px;height:110px;border-radius:5px;border:#ddd solid 1px;padding:5px 15px;width:320px;}
+.formtext2{line-height:25px;height:110px;border-radius:5px;border:#ddd solid 1px;padding:5px 15px;width:320px;}
+
+
 .m_infor{border:1px solid #e3e3e3;background:#fff;color:#444;padding-left:50px;line-height:60px;margin-top:30px;border-radius:5px;box-shadow:inset 1px 1px 1px rgba(0,0,0,0.05);font-size:14px;position:relative;}
 .m_infor b{font-size:15px;}
 .m_infor a{color:#1ab394;padding:0px 5px;}
@@ -188,6 +205,7 @@
 .icon_add:after{content:'';position:absolute;margin-left:-30px;margin-top:45px;width:60px;height:9px;background:currentColor;}
 
 
+.hint{position:fixed;top:25%;left:50%;margin-left:-160px;width:320px;padding:20px;line-height:30px;z-index:999;border:#345456 solid 1px;background:#f2f6f4;border-radius:5px;text-align:center;font-size:17px;color:#696;display:none;}
 
 .sidehide{width:0px;}
 .leftall{left:0px;}

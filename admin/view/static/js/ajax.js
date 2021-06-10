@@ -36,9 +36,14 @@ function callback(){
 	if(xmlHttp.readyState == 4){
 		if(xmlHttp.status == 200){//获取服务器返回的数据//获取纯文本数据
 			var result=xmlHttp.responseText;
-			//console.log(result);
+			console.log(result);
 			var json = eval("(" + result + ")");
 			switch (json.action){
+				case 'index':
+				case 'delline':
+				case 'showhide':
+					ts(json.text);
+					break;
 				case 'sendid':
 					setnewcode(60,json.text);
 					break;
@@ -64,6 +69,17 @@ function setnewcode(time,tstext){
 			}
 		},1000);
 	}else{alert(tstext);}
+}
+
+function ts(str){
+	hint=document.getElementById('hint');
+	hint.innerHTML=str;
+	hint.style.display="block";
+	setTimeout("ts2(hint)",600);
+}
+
+function ts2(hint){
+	location.reload();
 }
 
 /**
@@ -135,16 +151,6 @@ function xsbox(str){
 
 
 
-
-function ts(str){
-	hint=document.getElementById('hint');
-	hint.innerHTML=str;
-	hint.style.display="block";
-	setTimeout("ts2(hint)",600);
-}
-function ts2(hint){
-	location.reload();
-}
 
 function ts3(str){
 	hint=document.getElementById('hint');

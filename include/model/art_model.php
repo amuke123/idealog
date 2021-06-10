@@ -12,7 +12,7 @@ class art_Model{
 		$row=$db->getOnce($sql);
 		return $row['total'];
 	}
-	/**
+	
 	static function moveSort($sortid,$newsid=0){//更换一个分类下的笔记分类
 		$db=Conn::getConnect();
 		$sql="SELECT `id` FROM `". DB_PRE ."article` WHERE `s_id` = '".$sortid."';";
@@ -22,6 +22,8 @@ class art_Model{
 			$db->query($sqlok);
 		}
 	}
+	/**
+	
 	static function setArtTop($lists,$topmark){//设置置顶
 		$db=Conn::getConnect();
 		foreach($lists as $val){

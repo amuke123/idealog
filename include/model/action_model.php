@@ -61,6 +61,78 @@ class action_Model{
 		updateCacheAll();
 		echo "<script>alert('缓存更新成功！');window.history.go(-1);</script>";
 	}
+	
+	static function addLine($adddata,$dbtb,$sid=''){//创建
+		$db=Conn::getConnect();
+		$keystr='';
+		$valstr='';
+		$upstr='';
+		foreach($adddata as $keys => $vals){
+			$keystr.="`".$keys."`,";
+			$valstr.="'".$vals."',";
+			$upstr.="`".$keys."`='".$vals."',";
+		}
+		$keystr=trim($keystr,',');
+		$valstr=trim($valstr,',');
+		$upstr=trim($upstr,',');
+		if($sid==''){
+			$sqladd="INSERT INTO `". DB_PRE .$dbtb."` (`id`,".$keystr.") VALUES (NULL,".$valstr.");";
+			$text="创建分类失败";
+		}else{
+			$sqladd="UPDATE `". DB_PRE .$dbtb."` SET ".$upstr." WHERE `id`=".$sid;
+			$text="编辑失败";
+		}
+		if(!$db->query($sqladd)){
+			echo "<script>alert('".$text."');</script>";return 0;
+		}else{
+			updateCacheAll();return 1;
+		}
+	}
+	
+	static function setIndex($sids,$indexs,$dbtb){//更新index
+		$db=Conn::getConnect();
+		foreach($sids as $key=>$value){
+			$sql="UPDATE `". DB_PRE .$dbtb."` SET `index`='".$indexs[$key]."' WHERE `id` = ".$value.";";
+			$db->query($sql);
+		}
+	}
+	
+	static function delFile($id,$dbtb,$p=''){//删除图片
+		$db=Conn::getConnect();
+		if($p=='path'){
+			$sql2="SELECT `path` FROM `". DB_PRE ."file` WHERE `a_id` = '".$id."';";
+			$arr=$db->getlist($sql2);
+			foreach($arr as $value){
+				if($value['path']!=''){
+					delFileLine($value['path']);
+				}
+			}
+		}else{
+			$sql="SELECT `pic` FROM `". DB_PRE .$dbtb."` WHERE `id` = ".$id.";";
+			$arr=$db->getOnce($sql);
+			if($arr['pic']!=''){
+				delFileLine($arr['pic']);
+			}
+		}
+	}
+	
+	static function delLine($id,$dbtb){//删除数据
+		$db=Conn::getConnect();
+		$sql="delete from `". DB_PRE .$dbtb."` where `id`= ".$id.";";
+		$db->query($sql);
+	}
+	
+	static function array_order($data,$index='index',$order='asc',$odarr=array()){//二维数组排序，$index排序字段，$order排序 asc 升序 desc 降序,$odarr 顺序数组
+		if(empty($odarr)){foreach($data as $k=>$v){$odarr[$k]=$v[$index];}}
+		if($order=='asc'){asort($odarr);}
+		if($order=='desc'){arsort($odarr);}
+		$newdata=array();
+		foreach($odarr as $odk => $odv){
+			$newdata[]=$data[$odk];
+		}
+		return $newdata;
+	}
+	
 	/**
 	static function fc_comments($site_title){
 		$site_title='回复-'.$site_title;
@@ -120,30 +192,9 @@ class action_Model{
 	}
 	
 	
-	static function delFile($id,$dbtb,$p=''){//删除图片
-		$db=Conn::getConnect();
-		if($p=='path'){
-			$sql2="SELECT `path` FROM `". DB_PRE ."file` WHERE `a_id` = '".$id."';";
-			$arr=$db->getlist($sql2);
-			foreach($arr as $value){
-				if($value['path']!=''){
-					delFileLine($value['path']);
-				}
-			}
-		}else{
-			$sql="SELECT `pic` FROM `". DB_PRE .$dbtb."` WHERE `id` = ".$id.";";
-			$arr=$db->getOnce($sql);
-			if($arr['pic']!=''){
-				delFileLine($arr['pic']);
-			}
-		}
-	}
 	
-	static function delLine($id,$dbtb){//删除数据
-		$db=Conn::getConnect();
-		$sql="delete from `". DB_PRE .$dbtb."` where `id`= ".$id.";";
-		$db->query($sql);
-	}
+	
+	
 	
 	static function delList($lists,$dbtb,$p=''){//删除多条数据
 		$db=Conn::getConnect();
@@ -164,41 +215,9 @@ class action_Model{
 		$db->query($sql);
 	}
 	
-	static function setIndex($sids,$indexs,$dbtb){//更新index
-		$db=Conn::getConnect();
-		foreach($sids as $key=>$value){
-			$sql="UPDATE `". DB_PRE .$dbtb."` SET `index`='".$indexs[$key]."' WHERE `id` = ".$value.";";
-			$db->query($sql);
-		}
-	}
 	
-	static function addLine($adddata,$dbtb,$sid=''){//创建
-		$db=Conn::getConnect();
-		$keystr='';
-		$valstr='';
-		$upstr='';
-		foreach($adddata as $keys => $vals){
-			$keystr.="`".$keys."`,";
-			$valstr.="'".$vals."',";
-			$upstr.="`".$keys."`='".$vals."',";
-		}
-		$keystr=trim($keystr,',');
-		$valstr=trim($valstr,',');
-		$upstr=trim($upstr,',');
-		if($sid==''){
-			$sqladd="INSERT INTO `". DB_PRE .$dbtb."` (`id`,".$keystr.") VALUES (NULL,".$valstr.");";
-			$text="创建分类失败";
-		}else{
-			$sqladd="UPDATE `". DB_PRE .$dbtb."` SET ".$upstr." WHERE `id`=".$sid;
-			$text="编辑失败";
-		}
-		if(!$db->query($sqladd)){
-			echo "<script>alert('".$text."');</script>";
-			return 0;
-		}else{
-			updateCacheAll(array('sta','newArts','banner','sort','wishlist','artalias','tags','nav','link'));return 1;
-		}
-	}
+	
+
 	
 	static function pagelist($artnumb,$pages,$pageid,$urlpre,$txtsub,$urlsub,$artid='0',$pro=''){
 		//echo $artid;

@@ -18,7 +18,6 @@ function sendMail(path){//获取邮箱验证码
 	sendHttpPost(url,data);
 }
 
-/**
 function change_index(path,db=''){//改变顺序
 	var indexs = document.getElementsByName("num[]");
 	var ajcode=document.getElementById("ajcode").value;
@@ -39,6 +38,72 @@ function change_index(path,db=''){//改变顺序
 	data+="&db="+db;
 	sendHttpPost(url,data);
 }
+
+function change_index2(path,option=''){//改变顺序，配置
+	var indexs = document.getElementsByName("num[]");
+	var ajcode=document.getElementById("ajcode").value;
+	var arr1=new Array();
+	var arr2=new Array();
+	for(i=0;i<indexs.length;i++){
+		arr1.push(indexs[i]['alt']);
+		arr2.push(indexs[i]['value']);
+	}
+	if(arr1.length<1){
+		alert('没有可操作的分类');
+        return;
+	}
+	url = path + 'include/action/actiondo.php';
+	data="ajcode="+ajcode;
+	data+="&idexid2="+arr1;
+	data+="&idexval="+arr2;
+	data+="&option="+option;
+	sendHttpPost(url,data);
+}
+
+function delLine(sid,path,db=''){//删除一条数据
+	if(confirm('确定删除?')){
+		var ajcode=document.getElementById("ajcode").value;
+		url = path + 'include/action/actiondo.php';
+		data="ajcode="+ajcode;
+		data+="&delline="+sid;
+		data+="&db="+db;
+		sendHttpPost(url,data);
+	}
+}
+
+function delLine2(sid,path,option=''){//删除一条数据2
+	if(confirm('确定删除?')){
+		var ajcode=document.getElementById("ajcode").value;
+		url = path + 'include/action/actiondo.php';
+		data="ajcode="+ajcode;
+		data+="&delline2="+sid;
+		data+="&option="+option;
+		sendHttpPost(url,data);
+	}
+}
+
+function showOrHide(sid,path,key,db='',aid=''){//显示和隐藏
+	var ajcode=document.getElementById("ajcode").value;
+	url = path + 'include/action/actiondo.php';
+	data="ajcode="+ajcode;
+	data+="&showhide="+sid;
+	data+="&key="+key;
+	data+="&db="+db;
+	data+="&aid="+aid;
+	sendHttpPost(url,data);
+}
+
+function showOrHide2(sid,path,key,option=''){//显示和隐藏2
+	var ajcode=document.getElementById("ajcode").value;
+	url = path + 'include/action/actiondo.php';
+	data="ajcode="+ajcode;
+	data+="&showhide2="+sid;
+	data+="&key="+key;
+	data+="&option="+option;
+	sendHttpPost(url,data);
+}
+/**
+
 
 function delSay(path){//删除评论
 	var artcks = document.getElementsByName("artck[]");
@@ -276,16 +341,7 @@ function upFileFc2(path,zdy){//上传文件
 	sendHttpUp2(url,data);
 }
 
-function delLine(sid,path,db=''){//删除一条数据
-	if(confirm('确定删除?')){
-		var ajcode=document.getElementById("ajcode").value;
-		url = path + 'include/action/actiondo.php';
-		data="ajcode="+ajcode;
-		data+="&delline="+sid;
-		data+="&db="+db;
-		sendHttpPost(url,data);
-	}
-}
+
 
 function delList(path,db=''){//删除批量数据
 	var artcks = document.getElementsByName("artck[]");
@@ -418,13 +474,4 @@ function setTop(el,path){//设置置顶
 	sendHttpPost(url,data);
 }
 
-function showOrHide(sid,path,key,db='',aid=''){//显示和隐藏
-	var ajcode=document.getElementById("ajcode").value;
-	url = path + 'include/action/actiondo.php';
-	data="ajcode="+ajcode;
-	data+="&showhide="+sid;
-	data+="&key="+key;
-	data+="&db="+db;
-	data+="&aid="+aid;
-	sendHttpPost(url,data);
-}**/
+**/

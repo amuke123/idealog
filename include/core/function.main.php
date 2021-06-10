@@ -64,6 +64,29 @@ function mkDirect($directUrl){
 	exit;
 }
 
+function delFileLine($path){//删除操作
+	$db=Conn::getConnect();
+	delThem($path);
+	$sql="SELECT `id` FROM `". DB_PRE ."file` WHERE `path` = '".$path."';";
+	$row=$db->getOnce($sql);
+	if(!empty($row['id'])){
+		$sql2="SELECT `id`,`path` FROM `". DB_PRE ."file` WHERE `top_id`=".$row['id'];
+		$row2=$db->getOnce($sql2);
+		if(!empty($row2['id'])){
+			delThem($row2['path']);
+			$delsql1="delete from `". DB_PRE ."file` where `id`=".$row2['id'];
+			$db->query($delsql1);
+		}
+		$delsql2="delete from `". DB_PRE ."file` where `id`=".$row['id'];
+		$db->query($delsql2);
+	}
+}
+
+function delThem($path){//删除文件
+	$tem_path=str_replace('../',IDEA_ROOT .'/',$path);
+	if(file_exists($tem_path)){unlink($tem_path);}
+}
+
 /**
 function doStripslashes(){//去除多余的转义字符
     if (get_magic_quotes_gpc()) {
@@ -148,30 +171,7 @@ function delAllDirAndFile($path){//删除目录下的所有文件和文件夹
 	}
 }
 
-function delFileLine($path){//删除操作
-	$db=Conn::getConnect();
-	delThem($path);
-	$sql="SELECT `id` FROM `". DB_PRE ."file` WHERE `path` = '".$path."';";
-	$row=$db->getOnce($sql);
-	if(!empty($row['id'])){
-		$sql2="SELECT `id`,`path` FROM `". DB_PRE ."file` WHERE `top_id`=".$row['id'];
-		$row2=$db->getOnce($sql2);
-		if(!empty($row2['id'])){
-			delThem($row2['path']);
-			$delsql1="delete from `". DB_PRE ."file` where `id`=".$row2['id'];
-			$db->query($delsql1);
-		}
-		$delsql2="delete from `". DB_PRE ."file` where `id`=".$row['id'];
-		$db->query($delsql2);
-	}
-}
 
-function delThem($path){//删除文件
-	$tem_path=str_replace('../',IDEA_ROOT.'/',$path);
-	if(file_exists($tem_path)){
-		unlink($tem_path);
-	}
-}
 
 function getDir($path){//获取主题
 	$dirs=array();

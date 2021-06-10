@@ -32,3 +32,36 @@ function showurl(key){
 	if(key==1){ycxz.style.display="inline-block";geturl.style.display="none";}
 	if(key==2){ycxz.style.display="none";geturl.style.display="inline-block";}
 }
+
+function show_add(box){
+	var add = document.getElementById(box);
+	add.style.display = add.style.display != 'block' ? 'block' : 'none' ;
+}
+
+
+function yzBannAdd2(){
+	if(bannadd.pic2.value==""){
+		if(bannadd.pic.value==""){
+			prompt1('请选择图片');
+			bannadd.pic.focus();
+			return false;
+		}
+	}
+}
+function yzBannAdd(){
+	if(bannadd.pic.value==""){
+		prompt1('请选择图片');
+		bannadd.pic.focus();
+		return false;
+	}
+}
+
+function prompt1(str){
+	hint=document.getElementById('hint');
+	hint.innerHTML=str;
+	hint.style.display="block";
+	setTimeout("prompt2(hint)",3000);
+}
+function prompt2(hint){
+	hint.style.display="none";
+}

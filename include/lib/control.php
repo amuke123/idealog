@@ -25,6 +25,14 @@ class Control{
 		}
 	}
 	
+	static function set($data){
+		$db = Conn::getConnect();
+		foreach($data as $keys => $vals){
+			$sql2="UPDATE `". DB_PRE . "options` SET `value`='".$vals."' WHERE `key`='".$keys."'";
+			$db->query($sql2);
+		}
+	}
+	
 	static function getOptions(){
         $cache = Conn::getCache();
 		$op_cache = $cache->readCache('options');
