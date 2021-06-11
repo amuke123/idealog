@@ -22,6 +22,12 @@ class art_Model{
 			$db->query($sqlok);
 		}
 	}
+	
+	static function getOnceArt($aid){//获取单篇笔记
+		$db=Conn::getConnect();
+		$sql="SELECT * FROM `". DB_PRE ."article` WHERE `id` =".$aid;
+		return $art=$db->getOnce($sql);
+	}
 	/**
 	
 	static function setArtTop($lists,$topmark){//设置置顶
@@ -201,11 +207,7 @@ class art_Model{
 		return $arts=$db->getlist($sql);
 	}
 	
-	static function getOnceArt($aid){//获取单篇笔记
-		$db=Conn::getConnect();
-		$sql="SELECT * FROM `". DB_PRE ."article` WHERE `id` =".$aid;
-		return $art=$db->getOnce($sql);
-	}
+	
 	
 	static function getlogArt($aid){//笔记详情信息
 		$db=Conn::getConnect();

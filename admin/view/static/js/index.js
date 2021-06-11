@@ -38,6 +38,34 @@ function show_add(box){
 	add.style.display = add.style.display != 'block' ? 'block' : 'none' ;
 }
 
+function checked(e){
+	e.className = e.className!='ok'?'ok':'';
+	e.getElementsByTagName('input')[0].checked = e.className!='ok'?false:true;
+}
+
+function all_checked(boxid){
+	var box = document.getElementById(boxid);
+	var plist=box.getElementsByTagName('p');
+	for(i=0,len=plist.length;i<len;i++){
+		checked(plist[i]);
+	}
+}
+
+
+function tags_ck(boxid){
+	var box = document.getElementById(boxid);
+	var plist=box.getElementsByTagName('p');
+	for(i=0,len=plist.length;i<len;i++){
+		plist[i].getElementsByTagName('input')[0].checked = plist[i].className!='ok'?false:true;
+	}
+}
+
+function sub(formid,boxid){
+	if(confirm('确定删除?')){
+		tags_ck(boxid);
+		formid.submit();
+	}
+}
 
 function yzBannAdd2(){
 	if(bannadd.pic2.value==""){

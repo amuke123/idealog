@@ -10,10 +10,9 @@
 			uploadKey:false,
 			uploadUrl:"",
 			uploadPath:"",
-			navs:['html','|','bold','italic','underline','strike','fontSize','fontFamily','paragraph','color','backColor','|',
-				'orderedList','unorderedList','left','center','right','full','indent','outdent','subscript','superscript','|',
-				'link','unlink','textBlock','code','hr','selectAll','removeStyle','removeHtml','|',
-				'image','audio','video','file','|'/**,'cut','copy','paste','delete'**/,'undo','redo','|','about'],
+			navs:['undo','redo','|','bold','italic','underline','strike','fontSize'/**,'fontFamily'**/,'paragraph','color','backColor','removeStyle'/**,'selectAll','removeHtml'**/,'|',
+				'orderedList','unorderedList','left','center','right','full','indent','outdent'/**,'subscript','superscript'**/,'|',
+				'link','unlink','textBlock','code','hr','image','audio','video','file','|'/**,'cut','copy','paste','delete'**/,'html'/**,'about'**/],
 			fileType:{image:["jpg","jpeg","gif","png"],audio:["mp3","wav"],video:["avi","mp4","ogg","rm"],file:["rar","zip","txt","pdf","docx","doc","xls","xlsx"]},
 		},
 		options:{
@@ -312,15 +311,19 @@
 			this.newbox("code")
 		},
 		fc_image(id){/**图片**/
+			autoSave(this.options.Host);
 			this.newbox("image")
 		},
 		fc_audio(id){/**音频**/
+			autoSave(this.options.Host);
 			this.newbox("audio")
 		},
 		fc_video(id){/**视频**/
+			autoSave(this.options.Host);
 			this.newbox("video")
 		},
 		fc_file(id){/**附件**/
+			autoSave(this.options.Host);
 			this.newbox("file")
 		},
 		fc_about(id){/**关于**/
@@ -508,6 +511,13 @@
 			data.append("host",this.options.Host);
 			data.append("path",path);
 			data.append("type",el);
+			if(this.config.uploadUrl!=''){
+				var ajcode=document.getElementById("ajcode").value;
+				var myaid=document.getElementById("aid").value;
+				data.append("upaid",myaid);
+				data.append("ajcode",ajcode);
+			}
+			//console.log(url);
 			this.sendHttpUp(url,data);
 		},
 		getText(){/**获取纯文本**/
@@ -693,4 +703,3 @@
 		},
 	};
 })(window);
-
