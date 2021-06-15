@@ -12,7 +12,7 @@ class sort_Model{
 		}
 	}
 	
-	/**static function getSortUrl($sorts,$now='',$urlsub=''){//获取分类列表跳转链接，可指定选中列表项和后缀
+	static function getSortUrl($sorts,$now='',$urlsub=''){//获取分类列表跳转链接，可指定选中列表项和后缀
 		$text='';
 		foreach($sorts as $value){
 			if($value['top_id']==0){
@@ -37,7 +37,7 @@ class sort_Model{
 		return $text;
 	}
 	
-	static function getSortName($sid=0){
+	/**static function getSortName($sid=0){
 		$cache=Conn::getCache();
 		$sorts=$cache->readCache('sort');
 		return $sid!=0?$sorts[$sid]['sortname']:'未分类';

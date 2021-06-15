@@ -133,6 +133,52 @@ class action_Model{
 		return $newdata;
 	}
 	
+	static function pagelist($artnumb,$pages,$pageid,$urlpre,$txtsub,$urlsub,$artid='0',$pro=''){
+		//echo $artid;
+		if($artid!='0'){$astr='&artid='.$artid;}else{$astr='';}
+		$str='';
+		if($pages>1){
+			if($pages<10){
+				for($i=1;$i<=$pages;$i++){
+					if($i==$pageid){
+						$str .= '<span>'.$i.'</span>';
+					}else{
+						$str .= '<a href="'.$urlpre.$i.$urlsub.$astr.$pro.'">'.$i.'</a>';
+					}
+				}
+			}else{
+				if($pageid=='1'){$str .= '<span>1</span>';}else{$str .= '<a href="'.$urlpre.'1">1</a>';}
+				if(($pageid-4)>1){$str .= ' ... ';}
+				if(($pageid-4)>1){$pstart=($pageid-3);$bc1=0;}else{$pstart=2;$bc1=$pageid-5;}
+				if(($pageid+4)<$pages){$pend=($pageid+3);$bc2=0;}else{$pend=($pages-1);$bc2=($pageid-$pages)+4;}
+				for($j=($pstart-$bc2),$tj=($pend-$bc1);$j<=$tj;$j++){
+					if($j==$pageid){
+						$str .= '<span>'.$j.'</span>';
+					}else{
+						$str .= '<a href="'.$urlpre.$j.$urlsub.$astr.$pro.'">'.$j.'</a>';
+					}
+				}
+				if(($pageid+4)<$pages){$str .= ' ... ';}
+				if($pageid==$pages){$str .= '<span>'.$pages.'</span>';}else{$str .= '<a href="'.$urlpre.$pages.$urlsub.$astr.$pro.'">'.$pages.'</a>';}
+			}
+		}
+		$str .= '(有 '.$artnumb.' '.$txtsub.')';
+		return $str;
+	}
+	
+	static function delList($lists,$dbtb,$p=''){//删除多条数据
+		$db=Conn::getConnect();
+		foreach($lists as $val){
+			$sql1="SELECT `tags` FROM `". DB_PRE .$dbtb."` WHERE `id` = '".$val."';";
+			$arr1=$db->getOnce($sql1);
+			$tagstr=$arr1['tags'];
+			tag_Model::upArtTags($tagstr,$val);
+			self::delFile($val,$dbtb,$p);
+			$sql="delete from `". DB_PRE .$dbtb."` where `id`=".$val;
+			$db->query($sql);
+		}
+	}
+	
 	/**
 	static function fc_comments($site_title){
 		$site_title='回复-'.$site_title;
@@ -196,18 +242,7 @@ class action_Model{
 	
 	
 	
-	static function delList($lists,$dbtb,$p=''){//删除多条数据
-		$db=Conn::getConnect();
-		foreach($lists as $val){
-			$sql1="SELECT `tags` FROM `". DB_PRE .$dbtb."` WHERE `id` = '".$val."';";
-			$arr1=$db->getOnce($sql1);
-			$tagstr=$arr1['tags'];
-			tag_Model::upArtTags($tagstr,$val);
-			self::delFile($val,$dbtb,$p);
-			$sql="delete from `". DB_PRE .$dbtb."` where `id`=".$val;
-			$db->query($sql);
-		}
-	}
+	
 	
 	static function showOrHide($key,$id,$dbtb){//显示和隐藏
 		$db=Conn::getConnect();
@@ -215,42 +250,7 @@ class action_Model{
 		$db->query($sql);
 	}
 	
-	
-	
 
-	
-	static function pagelist($artnumb,$pages,$pageid,$urlpre,$txtsub,$urlsub,$artid='0',$pro=''){
-		//echo $artid;
-		if($artid!='0'){$astr='&artid='.$artid;}else{$astr='';}
-		$str='';
-		if($pages>1){
-			if($pages<10){
-				for($i=1;$i<=$pages;$i++){
-					if($i==$pageid){
-						$str .= '<span>'.$i.'</span>';
-					}else{
-						$str .= '<a href="'.$urlpre.$i.$urlsub.$astr.$pro.'">'.$i.'</a>';
-					}
-				}
-			}else{
-				if($pageid=='1'){$str .= '<span>1</span>';}else{$str .= '<a href="'.$urlpre.'1">1</a>';}
-				if(($pageid-4)>1){$str .= ' ... ';}
-				if(($pageid-4)>1){$pstart=($pageid-3);$bc1=0;}else{$pstart=2;$bc1=$pageid-5;}
-				if(($pageid+4)<$pages){$pend=($pageid+3);$bc2=0;}else{$pend=($pages-1);$bc2=($pageid-$pages)+4;}
-				for($j=($pstart-$bc2),$tj=($pend-$bc1);$j<=$tj;$j++){
-					if($j==$pageid){
-						$str .= '<span>'.$j.'</span>';
-					}else{
-						$str .= '<a href="'.$urlpre.$j.$urlsub.$astr.$pro.'">'.$j.'</a>';
-					}
-				}
-				if(($pageid+4)<$pages){$str .= ' ... ';}
-				if($pageid==$pages){$str .= '<span>'.$pages.'</span>';}else{$str .= '<a href="'.$urlpre.$pages.$urlsub.$astr.$pro.'">'.$pages.'</a>';}
-			}
-		}
-		$str .= '(有 '.$artnumb.' '.$txtsub.')';
-		return $str;
-	}
 **/
 	
 }

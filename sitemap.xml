@@ -2,25 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>http://www.a.com/</loc>
-<lastmod>2021-06-11T02:36:36+00:00</lastmod>
+<lastmod>2021-06-15T07:53:48+00:00</lastmod>
 <changefreq>always</changefreq>
 <priority>1.0</priority>
 </url>
 <url>
-<loc>http://www.a.com/sort/sorl</loc>
-<lastmod>2021-06-11T02:36:36+00:00</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.8</priority>
-</url>
-<url>
-<loc>http://www.a.com/tag/%E6%A0%87%E7%AD%BE%E4%B8%80</loc>
-<lastmod>2021-06-11T02:36:36+00:00</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.8</priority>
-</url>
-<url>
 <loc>http://www.a.com/author/1</loc>
-<lastmod>2021-02-02T03:06:54+00:00</lastmod>
+<lastmod>2021-06-15T07:53:48+00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.8</priority>
 </url>

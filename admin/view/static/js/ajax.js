@@ -11,6 +11,18 @@ function sendHttpPost(_url,_data=""){//post方法发送数据
 	}
 }
 
+function sendHttpUp2(_url,_data){//上传
+	xmlHttp=createXmlHttp();
+	if(!xmlHttp){
+		alert("创建xmlhttprequest对象失败");
+	}else{
+		url=_url;
+		xmlHttp.onreadystatechange = callback3;
+		xmlHttp.open("POST",url,true);
+		xmlHttp.send(_data);
+	}
+}
+
 function createXmlHttp(){
 	if(window.XMLHttpRequest){
 		xmlHttp2 = new XMLHttpRequest(); 
@@ -39,9 +51,23 @@ function callback(){
 			console.log(result);
 			var json = eval("(" + result + ")");
 			switch (json.action){
+				case 'addart':
+					prompt1(json.text);
+					gb(json.id);
+					if(typeof json.pathkey === "undefined"){}else{showFile(json.pathkey);}
+					break;
+				case 'showfile':
+					xsbox(json.txt);
+					break;
 				case 'index':
 				case 'delline':
 				case 'showhide':
+				case 'dellist':
+				case 'draft':
+				case 'release':
+				case 'check':
+				case 'settop':
+				case 'movesort':
 					ts(json.text);
 					break;
 				case 'sendid':
@@ -51,6 +77,29 @@ function callback(){
 			}
 		}
 	}
+}
+
+function ts(str){
+	hint=document.getElementById('hint');
+	hint.innerHTML=str;
+	hint.style.display="block";
+	setTimeout("ts2(hint)",600);
+}
+
+function ts2(hint){
+	location.reload();
+}
+
+function gb(id){
+	aid=document.getElementById('aid');
+	aid.value=id;
+}
+
+function xsbox(str){
+	var imgbox=document.getElementById('imagebox');
+	var imglist=document.getElementById('imagelist');
+	imglist.innerHTML=str;
+	imgbox.style.display='block';
 }
 
 function setnewcode(time,tstext){
@@ -71,49 +120,6 @@ function setnewcode(time,tstext){
 	}else{alert(tstext);}
 }
 
-function ts(str){
-	hint=document.getElementById('hint');
-	hint.innerHTML=str;
-	hint.style.display="block";
-	setTimeout("ts2(hint)",600);
-}
-
-function ts2(hint){
-	location.reload();
-}
-
-/**
-function sendHttpGet(_url,_data=""){//get方法发送数据
-	xmlHttp=createXmlHttp();
-	if(!xmlHttp){
-		alert("创建xmlhttprequest对象失败");
-	}else{
-		url=_url;
-		url=url+"?"+_data;
-		xmlHttp.onreadystatechange = callback2;
-		xmlHttp.open("GET",url,true);
-		xmlHttp.send(null);
-	}
-}
-
-function sendHttpUp2(_url,_data){//上传
-	xmlHttp=createXmlHttp();
-	if(!xmlHttp){
-		alert("创建xmlhttprequest对象失败");
-	}else{
-		url=_url;
-		xmlHttp.onreadystatechange = callback3;
-		xmlHttp.open("POST",url,true);
-		xmlHttp.send(_data);
-	}
-}
-**/
-
-
-
-
-
-/**
 function callback3(){
 	if(xmlHttp.readyState == 4){
 		if(xmlHttp.status == 200){//获取服务器返回的数据//获取纯文本数据
@@ -141,29 +147,19 @@ function changepic(str){
 	userphoto.src=str;
 	userpic.value=str;
 }
-
-function xsbox(str){
-	var imgbox=document.getElementById('imagebox');
-	var imglist=document.getElementById('imagelist');
-	imglist.innerHTML=str;
-	imgbox.style.display='block';
+/**
+function sendHttpGet(_url,_data=""){//get方法发送数据
+	xmlHttp=createXmlHttp();
+	if(!xmlHttp){
+		alert("创建xmlhttprequest对象失败");
+	}else{
+		url=_url;
+		url=url+"?"+_data;
+		xmlHttp.onreadystatechange = callback2;
+		xmlHttp.open("GET",url,true);
+		xmlHttp.send(null);
+	}
 }
 
 
-
-
-function ts3(str){
-	hint=document.getElementById('hint');
-	hint.innerHTML=str;
-	hint.style.display="block";
-	setTimeout("ts4(hint)",1000);
-}
-function ts4(hint){
-	hint.style.display="none";
-}
-
-function gb(id){
-	aid=document.getElementById('aid');
-	aid.value=id;
-}
 **/

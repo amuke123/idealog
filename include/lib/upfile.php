@@ -93,8 +93,8 @@ class Upfile{
 			$filedata['addtime']= time();
 			$filedata['type']= $file["type"];
 			//图片文件获取尺寸
-			$temp_w=0;
-			$temp_h=0;
+			$temp_w=-1;
+			$temp_h=-1;
 			if(in_array($file_ext,$this->img_arr)){
 				$sizearr=getimagesize(IDEA_URL .$file_url);
 				$temp_w=$sizearr[0];
@@ -142,6 +142,7 @@ class Upfile{
 		$_h=$datas['height'];
 		$thum_w=Control::get('thum_imgmaxw');
 		$thum_h=Control::get('thum_imgmaxh');
+		echo $thum_w."-".$thum_h;
 		if(($thum_w*$_h)/$thum_h > $_w){
 			$new_h=$thum_h;
 			$new_w=($new_h*$_w)/$_h;

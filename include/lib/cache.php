@@ -7,8 +7,8 @@ class Cache{
 	
 	function updateCache($cacheDB = null){//更新缓存
 		if(is_string($cacheDB)) {
-            if(method_exists($this, 'ch_'.$cacheDB)){
-                call_user_func(array($this, 'ch_'.$cacheDB));
+            if(method_exists($this,'ch_'.$cacheDB)){
+                call_user_func(array($this,'ch_'.$cacheDB));
             }
             return;
         }
@@ -20,7 +20,7 @@ class Cache{
             }
             return;
         }
-		if($cacheDB == null){
+		if($cacheDB == ''){
             $cacheDB = get_class_methods($this);
             foreach($cacheDB as $method){
                 if(preg_match('/^ch_/',$method)){
@@ -82,8 +82,7 @@ class Cache{
         foreach($hiderow as $hideval){
             $hideAids[] = $hideval['id'];
         }
-		$tagsql="SELECT `id`,`name`,`a_id` FROM `". DB_PRE ."tags`";
-        $tagrow = $this->db->getlist($tagsql);
+        $tagrow = tag_Model::getAllTags();
 		foreach($tagrow as $show_tag){
             foreach ($hideAids as $hval) {
                 $show_tag['a_id'] = str_replace(','.$hval.',', ',' , $show_tag['a_id']);

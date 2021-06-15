@@ -123,7 +123,61 @@ if(isset($_POST['showhide2'])){
 	echo json_encode($data);
 }
 
-/**
+if(isset($_POST['addart'])){
+	$db=Conn::getConnect();
+	$data=array();
+	$arr=array();
+	$data['action']='addart';
+	$id=$_POST['id'];
+	$tp=$_POST['type'];
+
+	if($id==''){
+		$arr['author'] = UID;
+		$arr['show'] = '0';
+		if($tp=='a'){
+			$arr['check'] = Control::get('art_check')=='1'?'0':'1';
+		}else{$arr['check'] = 1;}
+		$arr['filenum'] = $_POST['filenum'];
+	}else{
+		$arr['filenum'] = art_Model::getArtFileNum($id);
+	}
+	
+	$arr['type'] = $tp;
+	$arr['template'] = $_POST['template'];
+	$arr['title'] = htmlspecialchars($_POST['title']);
+	$arr['content'] = $_POST['content'];
+	$getsite = $_POST['getsite'];
+	if($getsite=='网络'){$geturl = htmlspecialchars($_POST['geturl']);}
+	if($getsite=='原创'){$copyrights = $_POST['copyrights'];}
+	$arr['getsite']=$getsite;
+	$arr['geturl']=isset($geturl)?$geturl:'';
+	$arr['copyrights']=isset($copyrights)?$copyrights:'1';
+	$arr['pic'] = htmlspecialchars($_POST['pic']);
+	$arr['excerpt'] = htmlspecialchars($_POST['excerpt']);
+	$arr['saynum'] = $_POST['saynum'];
+	
+	$arr['s_id'] = $_POST['s_id'];
+	$tagstr=htmlspecialchars($_POST['tags']);
+	$arr['date'] = $_POST['date']==''?time():strtotime(htmlspecialchars($_POST['date']));
+	$arr['alias'] = htmlspecialchars($_POST['alias']);
+	$arr['key'] = htmlspecialchars($_POST['key']);
+	$arr['password'] = htmlspecialchars($_POST['password']);
+	$arr['eyes'] = htmlspecialchars($_POST['eyes']);
+	$arr['goodnum'] = htmlspecialchars($_POST['goodnum']);
+	$arr['badnum'] = htmlspecialchars($_POST['badnum']);
+	$arr['sayok'] = $_POST['sayok'];
+	$arr['mark'] = $_POST['mark'];
+	$pathkey = $_POST['pathkey'];
+	if($pathkey=='1'){$data['pathkey']=IDEA_URL;}
+	
+	if($data['id']=art_Model::addArt($arr,$id,$tagstr)){
+		$data['text']='自动保存成功';
+	}else{
+		$data['text']='自动保存失败';
+	}
+	echo json_encode($data);
+}
+
 if(isset($_POST['showfile'])){
 	$data=array();
 	$data['action']='showfile';
@@ -132,42 +186,6 @@ if(isset($_POST['showfile'])){
 	if($ajcode==$_SESSION['ajcode']){
 		$data['txt']=art_Model::setFileList($aid);
 		$data['text']='更改成功';
-	}else{
-		$data['text']='非法操作';
-	}
-	echo json_encode($data);
-}
-
-if(isset($_POST['userpic'])){
-	$data=array();
-	$data['action']='userpic';
-	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
-	$userpic=isset($_POST['userpic'])?$_POST['userpic']:'';
-	$uid=isset($_POST['uid'])?$_POST['uid']:'';
-	if($ajcode==$_SESSION['ajcode']){
-		if($userpic!=''){delFileLine($userpic);}
-		if($uid!=''){user_Model::delUserPhoto($uid);}
-		$data['text']='删测成功';
-	}else{
-		$data['text']='非法操作';
-	}
-	echo json_encode($data);
-}
-
-if(isset($_POST['upfile'])){
-	$data=array();
-	$data['action']='upfile';
-	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
-	$up=isset($_POST['upfile'])?$_POST['upfile']:'';
-	if($ajcode==$_SESSION['ajcode']){
-		$upfile=new Upfile();
-		$files=$upfile->getFileList($_FILES);
-		if(!empty($files)){
-			foreach($files as $key => $val){
-				$data['url'][]=$upfile->upload($val,'',$up);
-			}
-		}
-		$data['text']='上传成功';
 	}else{
 		$data['text']='非法操作';
 	}
@@ -197,66 +215,6 @@ if(isset($_POST['upaid'])){
 	echo json_encode($data);
 }
 
-if(isset($_POST['addart'])){
-	$db=Conn::getConnect();
-	$data=array();
-	$arr=array();
-	$data['action']='addart';
-	$id=$_POST['id'];
-	$tp=$_POST['type'];
-
-	if($id==''){
-		$arr['author'] = UID;
-		$arr['show'] = '0';
-		if($tp=='a'){
-			$arr['checkok'] = Control::get('art_check')=='1'?'0':'1';
-		}else{$arr['checkok'] = 1;}
-		$arr['filenum'] = $_POST['filenum'];
-	}else{
-		$arr['filenum'] = art_Model::getArtFileNum($id);
-	}
-	
-	$arr['type'] = $tp;
-	$arr['template'] = $_POST['template'];
-	$arr['title'] = htmlspecialchars($_POST['title']);
-	$arr['content'] = $_POST['content'];
-	$getsite = $_POST['getsite'];
-	if($getsite=='网络'){$geturl = htmlspecialchars($_POST['geturl']);}
-	if($getsite=='原创'){$copyrights = $_POST['copyrights'];}
-	$arr['getsite']=$getsite;
-	$arr['geturl']=isset($geturl)?$geturl:'';
-	$arr['copyrights']=isset($copyrights)?$copyrights:'1';
-	$arr['pic'] = htmlspecialchars($_POST['pic']);
-	$arr['excerpt'] = htmlspecialchars($_POST['excerpt']);
-	$arr['saynum'] = $_POST['saynum'];
-	
-	
-	$arr['s_id'] = $_POST['s_id'];
-	$tagstr=htmlspecialchars($_POST['tags']);
-	$arr['date'] = $_POST['date']==''?time():strtotime(htmlspecialchars($_POST['date']));
-	$arr['alias'] = htmlspecialchars($_POST['alias']);
-	$arr['key'] = htmlspecialchars($_POST['key']);
-	$arr['password'] = htmlspecialchars($_POST['password']);
-	$arr['eyes'] = htmlspecialchars($_POST['eyes']);
-	$arr['goodnum'] = htmlspecialchars($_POST['goodnum']);
-	$arr['badnum'] = htmlspecialchars($_POST['badnum']);
-	$arr['sayok'] = $_POST['sayok'];
-	$arr['mark'] = $_POST['mark'];
-	$pathkey = $_POST['pathkey'];
-	if($pathkey=='1'){$data['pathkey']=IDEA_URL;}
-	
-	if($data['id']=art_Model::addArt($arr,$id,$tagstr)){
-		$data['text']='自动保存成功';
-	}else{
-		$data['text']='自动保存失败';
-	}
-	echo json_encode($data);
-}
-
-
-
-
-
 if(isset($_POST['dellist'])){
 	$db=Conn::getConnect();
 	$data=array();
@@ -268,6 +226,61 @@ if(isset($_POST['dellist'])){
 		$lists=explode(',',$list);
 		action_Model::delList($lists,$dbtb,'path');
 		$data['text']='删除成功';
+	}else{
+		$data['text']='非法操作';
+	}
+	echo json_encode($data);
+}
+
+if(isset($_POST['draft'])){
+	$db=Conn::getConnect();
+	$data=array();
+	$data['action']='draft';
+	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
+	$dbtb=isset($_POST['db'])?$_POST['db']:'';
+	if($ajcode==$_SESSION['ajcode']){
+		$list=isset($_POST['list'])?$_POST['list']:'';
+		$key=$_POST['draft'];
+		$lists=explode(',',$list);
+		art_Model::setDraft($lists,$dbtb,$key);
+		$data['text']='已放入草稿箱';
+	}else{
+		$data['text']='非法操作';
+	}
+	echo json_encode($data);
+}
+
+
+if(isset($_POST['release'])){
+	$data=array();
+	$data['action']='release';
+	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
+	$dbtb=isset($_POST['db'])?$_POST['db']:'';
+	if($ajcode==$_SESSION['ajcode']){
+		$list=isset($_POST['list'])?$_POST['list']:'';
+		$key=$_POST['release'];
+		$lists=explode(',',$list);
+		art_Model::setRelease($lists,$dbtb,$key);
+		art_Model::setCheck($lists,$dbtb,$key);
+		$data['text']='发布并审核成功';
+	}else{
+		$data['text']='非法操作';
+	}
+	echo json_encode($data);
+}
+
+if(isset($_POST['check'])){
+	$db=Conn::getConnect();
+	$data=array();
+	$data['action']='check';
+	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
+	$dbtb=isset($_POST['db'])?$_POST['db']:'';
+	if($ajcode==$_SESSION['ajcode']){
+		$list=isset($_POST['list'])?$_POST['list']:'';
+		$key=$_POST['check'];
+		$lists=explode(',',$list);
+		art_Model::setCheck($lists,$dbtb,$key);
+		$data['text']='审核成功';
 	}else{
 		$data['text']='非法操作';
 	}
@@ -307,59 +320,60 @@ if(isset($_POST['top'])){
 	echo json_encode($data);
 }
 
-if(isset($_POST['release'])){
+/**
+
+
+if(isset($_POST['userpic'])){
 	$data=array();
-	$data['action']='release';
+	$data['action']='userpic';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
-	$dbtb=isset($_POST['db'])?$_POST['db']:'';
+	$userpic=isset($_POST['userpic'])?$_POST['userpic']:'';
+	$uid=isset($_POST['uid'])?$_POST['uid']:'';
 	if($ajcode==$_SESSION['ajcode']){
-		$list=isset($_POST['list'])?$_POST['list']:'';
-		$key=$_POST['release'];
-		$lists=explode(',',$list);
-		art_Model::setRelease($lists,$dbtb,$key);
-		art_Model::setCheck($lists,$dbtb,$key);
-		$data['text']='发布并审核成功';
+		if($userpic!=''){delFileLine($userpic);}
+		if($uid!=''){user_Model::delUserPhoto($uid);}
+		$data['text']='删测成功';
 	}else{
 		$data['text']='非法操作';
 	}
 	echo json_encode($data);
 }
 
-if(isset($_POST['check'])){
-	$db=Conn::getConnect();
+if(isset($_POST['upfile'])){
 	$data=array();
-	$data['action']='check';
+	$data['action']='upfile';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
-	$dbtb=isset($_POST['db'])?$_POST['db']:'';
+	$up=isset($_POST['upfile'])?$_POST['upfile']:'';
 	if($ajcode==$_SESSION['ajcode']){
-		$list=isset($_POST['list'])?$_POST['list']:'';
-		$key=$_POST['check'];
-		$lists=explode(',',$list);
-		art_Model::setCheck($lists,$dbtb,$key);
-		$data['text']='审核成功';
+		$upfile=new Upfile();
+		$files=$upfile->getFileList($_FILES);
+		if(!empty($files)){
+			foreach($files as $key => $val){
+				$data['url'][]=$upfile->upload($val,'',$up);
+			}
+		}
+		$data['text']='上传成功';
 	}else{
 		$data['text']='非法操作';
 	}
 	echo json_encode($data);
 }
 
-if(isset($_POST['draft'])){
-	$db=Conn::getConnect();
-	$data=array();
-	$data['action']='draft';
-	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
-	$dbtb=isset($_POST['db'])?$_POST['db']:'';
-	if($ajcode==$_SESSION['ajcode']){
-		$list=isset($_POST['list'])?$_POST['list']:'';
-		$key=$_POST['draft'];
-		$lists=explode(',',$list);
-		art_Model::setDraft($lists,$dbtb,$key);
-		$data['text']='已放入草稿箱';
-	}else{
-		$data['text']='非法操作';
-	}
-	echo json_encode($data);
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 if(isset($_POST['goodsay'])){

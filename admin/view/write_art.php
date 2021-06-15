@@ -56,9 +56,9 @@
 					<span class="m_tags_style"><a href="javascript:showTags('m_data');">初始化数据+</a></span>
 					<span id="m_data">
 						<p>
-							<input type="text" name="eyes" value="<?php echo $aid?$art['eyes']:'0';?>" class="formshort2" placeholder="阅读量" />
-							<input type="text" name="goodnum" value="<?php echo $aid?$art['goodnum']:'0';?>" class="formshort2" placeholder="点赞数" />
-							<input type="text" name="badnum" value="<?php echo $aid?$art['badnum']:'0';?>" class="formshort2" placeholder="拍砖数" />
+							<input type="text" name="eyes" value="<?php echo $aid?$art['eyes']:'0';?>" class="formshort2" title="阅读量" placeholder="阅读量" />
+							<input type="text" name="goodnum" value="<?php echo $aid?$art['goodnum']:'0';?>" class="formshort2" title="点赞数" placeholder="点赞数" />
+							<input type="text" name="badnum" value="<?php echo $aid?$art['badnum']:'0';?>" class="formshort2" title="反对数" placeholder="反对数" />
 						</p>
 					</span>
 				</div>

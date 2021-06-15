@@ -1,4 +1,2 @@
 http://www.a.com/
-http://www.a.com/sort/sorl
-http://www.a.com/tag/%E6%A0%87%E7%AD%BE%E4%B8%80
 http://www.a.com/author/1

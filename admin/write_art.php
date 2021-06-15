@@ -5,7 +5,6 @@ $sorts = $cache->readCache('sort');
 $tags = $cache->readCache('tags');
 
 
-
 if(isset($_POST['id'])){
 	$data=array();
 	$id = isset($_POST['id']) ? $_POST['id'] : '';
@@ -13,13 +12,13 @@ if(isset($_POST['id'])){
 	if($id==''){
 		$data['author'] = UID;
 		$data['type'] = 'a';
-		$data['checkok'] = Control::get('art_check')=='1'?'0':'1';
+		$data['check'] = Control::get('art_check')=='1'?'0':'1';
 		$data['template'] = '';
 		$data['filenum'] = isset($_POST['filenum']) ? $_POST['filenum'] : '0';
 	}else{
 		$arr['filenum'] = art_Model::getArtFileNum($id);
 	}
-	if($fb==''){$data['show'] = '1';ROLE==ROLE_ADMIN?$data['checkok'] = '1':'';}
+	if($fb==''){$data['show'] = '1';ROLE==ROLE_ADMIN?$data['check'] = '1':'';}
 	$data['title'] = isset($_POST['title']) ? htmlspecialchars($_POST['title']): '';//addslashes//htmlspecialchars
 	if($data['title']==''){echo "<script>alert('标题不能为空');window.history.go(-1);</script>";exit();}
 	$data['content'] = isset($_POST['content']) ? htmlspecialchars(addslashes($_POST['content'])):'';
@@ -53,7 +52,7 @@ if(isset($_POST['id'])){
 	$data['mark']=$mark;
 
 	if(art_Model::addArt($data,$id,$tagstr)){
-		echo "<script>location.href='".ADMIN_URL ."article.php';</script>";
+		mkDirect(ADMIN_URL .'article.php');
 	}else{
 		echo "<script>alert('保存错误');window.history.go(-1);</script>";
 	}

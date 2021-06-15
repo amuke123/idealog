@@ -281,8 +281,11 @@
 .sidehide{width:0px;}
 .leftall{left:0px;}
 
-@media(max-width:1200px){
-	.m_info{width:100%;}
+@media(max-width:1360px){
 	.m_contents{width:100%;}
 	.m_side{width:100%;}
+}
+
+@media(max-width:1200px){
+	.m_info{width:100%;}
 }

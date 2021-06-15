@@ -64,6 +64,25 @@ function mkDirect($directUrl){
 	exit;
 }
 
+function getImgPath($tempath){//获取原始附件
+	$db=Conn::getConnect();
+	$topid=getPathTopid($tempath);
+	if($topid==0){
+		return $tempath;
+	}else{
+		$sql="SELECT `path` FROM `". DB_PRE ."file` WHERE `id` = '".$topid."';";
+		$row=$db->getOnce($sql);
+		return $row['path'];
+	}
+}
+
+function getPathTopid($tempath){//获取附件的主附件id
+	$db=Conn::getConnect();
+	$sql="SELECT `top_id` FROM `". DB_PRE ."file` WHERE `path` = '".$tempath."';";
+	$row=$db->getOnce($sql);
+	return $row['top_id'];
+}
+
 function delFileLine($path){//删除操作
 	$db=Conn::getConnect();
 	delThem($path);
@@ -135,24 +154,9 @@ function get_addr($key){//获取所在城市
 
 
 
-function getImgPath($tempath){
-	$db=Conn::getConnect();
-	$topid=getPathTopid($tempath);
-	if($topid==0){
-		return $tempath;
-	}else{
-		$sql="SELECT `path` FROM `". DB_PRE ."file` WHERE `id` = '".$topid."';";
-		$row=$db->getOnce($sql);
-		return $row['path'];
-	}
-}
 
-function getPathTopid($tempath){
-	$db=Conn::getConnect();
-	$sql="SELECT `top_id` FROM `". DB_PRE ."file` WHERE `path` = '".$tempath."';";
-	$row=$db->getOnce($sql);
-	return $row['top_id'];
-}
+
+
 
 function delAllDirAndFile($path){//删除目录下的所有文件和文件夹
 	if(is_dir($path)){

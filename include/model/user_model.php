@@ -15,6 +15,11 @@ class user_Model{
 		$data['name']=$name;
 		return $data;
 	}
+	public static function setLastdate($uid){
+		$mysql = Conn::getConnect();
+		$sqlst="UPDATE `". DB_PRE ."user` SET `lastdate`='".time()."' WHERE `id`=".$uid;
+		$mysql->query($sqlst);
+	}
 /**
 	public static function getUsersNum($examine,$state){//获取所有用户数
 		$mysql = Conn::getConnect();
@@ -71,12 +76,6 @@ class user_Model{
 	public static function delUserPhoto($uid=''){
 		$mysql = Conn::getConnect();
 		$sqlst="UPDATE `". DB_PRE ."user` SET `photo`='' WHERE `id`=".$uid;
-		$mysql->query($sqlst);
-	}
-	
-	public static function setLastdate($uid){
-		$mysql = Conn::getConnect();
-		$sqlst="UPDATE `". DB_PRE ."user` SET `lastdate`='".time()."' WHERE `id`=".$uid;
 		$mysql->query($sqlst);
 	}
 	

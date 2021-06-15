@@ -67,6 +67,56 @@ function sub(formid,boxid){
 	}
 }
 
+function showTags(box){
+	var m_tags = document.getElementById(box);
+	m_tags.style.display = m_tags.style.display!="block"?'block':'none';
+}
+
+function addTags(el){
+	var tags = document.getElementById('tags');
+	tags.value = tags.value!=""? tags.value+','+el : el;
+}
+
+function fb_art(formid){
+	var fb=document.getElementById('fb');
+	fb.value='';
+	formid.submit();
+}
+
+function ycbox(){
+	var imgbox=document.getElementById('imagebox');
+	imgbox.style.display='none';
+}
+
+function setImages(path,pathsite){
+	var m_pic = document.getElementById('m_pic');
+	var pic = document.getElementById('pic');
+	m_pic.innerHTML='<img src="'+path+'" /><a href="'+path+'" title="点击查看原图" target="_blank">查看原图</a><a href="javascript:autoSave(\''+pathsite+'\',\'1\');" title="点击更改图片">更改图片</a>';
+	pic.value=path;
+	ycbox();
+}
+
+function jumpMenu(targ,selObj,restore){ //v3.0
+	eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+	if (restore) selObj.selectedIndex=0;
+}
+
+function allSelect(el){
+	var artcks = document.getElementsByName("artck[]");
+	var allsele=document.getElementById(el);
+	if(allsele.innerText=='全选'){
+		for(i=0;i<artcks.length;i++){
+			artcks[i]['checked']=true;
+		}
+		allsele.innerText='取消选择';
+	}else{
+		for(i=0;i<artcks.length;i++){
+			artcks[i]['checked']=false;
+		}
+		allsele.innerText='全选';
+	}
+}
+
 function yzBannAdd2(){
 	if(bannadd.pic2.value==""){
 		if(bannadd.pic.value==""){
