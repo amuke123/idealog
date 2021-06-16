@@ -117,6 +117,74 @@ function allSelect(el){
 	}
 }
 
+
+function navbh(el){
+	var navlist = document.getElementById('addk').getElementsByTagName('li');
+	for(i=0;i<navlist.length;i++){
+		if(el==(i+1)){
+			navlist[i].className='active2';
+			document.getElementById('nav' + (i+1)).style.display = 'block';
+		}else{
+			navlist[i].className='';
+			document.getElementById('nav' + (i+1)).style.display = 'none';
+		}
+	}
+}
+
+function anavshow(el){
+	var addnav = document.getElementById('addnav');
+	if(el=='0'){
+		addnav.style.display="none";
+	}else{
+		addnav.style.display="block";
+	}
+}
+
+function deluser(url){
+	if(confirm('确定删除?')){
+		location.href=url;
+	}
+}
+
+function yzNavAdd(){
+	if(navadddiy.name.value==""){
+		prompt1('导航名称不能为空');
+		navadddiy.name.focus();
+		return false;
+	}
+	if(navadddiy.url.value==""){
+		prompt1('链接不能为空');
+		navadddiy.url.focus();
+		return false;
+	}
+}
+function yzNavAdd2(){
+	var sck = document.getElementsByName("sck[]");
+	var arr1=new Array();
+	for(i=0;i<sck.length;i++){
+		if(sck[i]['checked']==true){
+			arr1.push(sck[i]['value']);
+		}
+	}
+	if(arr1.length<1){
+		prompt1('请选择添加到导航的分类');
+		return false;
+	}
+}
+function yzNavAdd3(){
+	var pck = document.getElementsByName("pck[]");
+	var arr1=new Array();
+	for(i=0;i<pck.length;i++){
+		if(pck[i]['checked']==true){
+			arr1.push(pck[i]['value']);
+		}
+	}
+	if(arr1.length<1){
+		prompt1('请选择添加到导航的单页');
+		return false;
+	}
+}
+
 function yzBannAdd2(){
 	if(bannadd.pic2.value==""){
 		if(bannadd.pic.value==""){
@@ -131,6 +199,21 @@ function yzBannAdd(){
 		prompt1('请选择图片');
 		bannadd.pic.focus();
 		return false;
+	}
+}
+
+function yzUserAdd(){
+	if(useradd.username.value==""){
+		prompt1('请输入登录名');
+		useradd.username.focus();
+		return false;
+	}
+	if(useradd.password1.value!=""){
+		if(useradd.password1.value!=useradd.password2.value){
+			prompt1('确认密码与密码不一致');
+			useradd.password2.focus();
+			return false;
+		}
 	}
 }
 

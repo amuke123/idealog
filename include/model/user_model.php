@@ -20,29 +20,68 @@ class user_Model{
 		$sqlst="UPDATE `". DB_PRE ."user` SET `lastdate`='".time()."' WHERE `id`=".$uid;
 		$mysql->query($sqlst);
 	}
-/**
-	public static function getUsersNum($examine,$state){//获取所有用户数
-		$mysql = Conn::getConnect();
-		$sql = "SELECT COUNT(*) AS total FROM `". DB_PRE ."user` WHERE `username` != '' ";
-		if($examine=='0'){$sql .= " AND `ischeck`='0' ";}
-		if($state=='0'){$sql .= " AND `ischeck`='1' AND `state` != '0'";}
-		$row = $mysql->getOnce($sql);
-		return $row['total'];
-	}
 	
 	public static function getUsersIofo($startnum,$pagenum,$examine,$state){//获取指定用户的用户信息
 		$mysql = Conn::getConnect();
 		$sql = "SELECT `id` FROM `". DB_PRE ."user` WHERE `username`!='' ";
-		if($examine=='0'){$sql .= " AND `ischeck`='0' ";}
-		if($state=='0'){$sql .= " AND `ischeck`='1' AND `state` != '0' ";}
+		if($examine=='0'){$sql .= " AND `check`='0' ";}
+		if($state=='0'){$sql .= " AND `check`='1' AND `state` != '0' ";}
 		$sql .= " LIMIT ".$startnum.",".$pagenum;
 		$row = $mysql->getlist($sql);
 		return $row;
 	}
 	
+	public static function getUsersNum($examine,$state){//获取所有用户数
+		$mysql = Conn::getConnect();
+		$sql = "SELECT COUNT(*) AS total FROM `". DB_PRE ."user` WHERE `username` != '' ";
+		if($examine=='0'){$sql .= " AND `check`='0' ";}
+		if($state=='0'){$sql .= " AND `check`='1' AND `state` != '0'";}
+		$row = $mysql->getOnce($sql);
+		return $row['total'];
+	}
+	
+	public static function delUserPhoto($uid=''){
+		$mysql = Conn::getConnect();
+		$sqlst="UPDATE `". DB_PRE ."user` SET `photo`='' WHERE `id`=".$uid;
+		$mysql->query($sqlst);
+	}
+	
+	static function addLine($adddata,$dbtb,$sid=''){//创建
+		$db=Conn::getConnect();
+		$keystr='';
+		$valstr='';
+		$upstr='';
+		foreach($adddata as $keys => $vals){
+			$keystr.="`".$keys."`,";
+			$valstr.="'".$vals."',";
+			$upstr.="`".$keys."`='".$vals."',";
+		}
+		$keystr=trim($keystr,',');
+		$valstr=trim($valstr,',');
+		$upstr=trim($upstr,',');
+		if($sid==''){
+			$sqladd="INSERT INTO `". DB_PRE .$dbtb."` (`id`,`check`,`role`,".$keystr.") VALUES (NULL,'1','writer',".$valstr.");";
+			$text="创建失败";
+		}else{
+			$sqladd="UPDATE `". DB_PRE .$dbtb."` SET ".$upstr." WHERE `id`=".$sid;
+			$text="修改失败";
+		}
+		if(!$db->query($sqladd)){
+			echo "<script>alert('".$text."');</script>";
+			return 0;
+		}else{
+			updateCacheAll();return 1;
+		}
+	}
+	
+/**
+	
+	
+	
+	
 	public static function getUserList($num=9){//获取指定个数的正常用户信息
 		$mysql = Conn::getConnect();
-		$sql = "SELECT * FROM `". DB_PRE ."user` WHERE `username`!='' AND `ischeck`='1' AND `state`='0' ORDER BY `lastdate` DESC LIMIT 0,".$num;
+		$sql = "SELECT * FROM `". DB_PRE ."user` WHERE `username`!='' AND `check`='1' AND `state`='0' ORDER BY `lastdate` DESC LIMIT 0,".$num;
 		$row = $mysql->getlist($sql);
 		return $row;
 	}
@@ -73,11 +112,7 @@ class user_Model{
 		}
 	}
 	
-	public static function delUserPhoto($uid=''){
-		$mysql = Conn::getConnect();
-		$sqlst="UPDATE `". DB_PRE ."user` SET `photo`='' WHERE `id`=".$uid;
-		$mysql->query($sqlst);
-	}
+	
 	
 	public static function getCollect($pagenum,$startnum,$ids=''){//获取收藏列表
 		$lists="";
@@ -154,33 +189,7 @@ class user_Model{
 		if($data['total']>0){return false;}else{return true;}
     }
 	
-	static function addLine($adddata,$dbtb,$sid=''){//创建
-		$db=Conn::getConnect();
-		$keystr='';
-		$valstr='';
-		$upstr='';
-		foreach($adddata as $keys => $vals){
-			$keystr.="`".$keys."`,";
-			$valstr.="'".$vals."',";
-			$upstr.="`".$keys."`='".$vals."',";
-		}
-		$keystr=trim($keystr,',');
-		$valstr=trim($valstr,',');
-		$upstr=trim($upstr,',');
-		if($sid==''){
-			$sqladd="INSERT INTO `". DB_PRE .$dbtb."` (`id`,`ischeck`,`role`,".$keystr.") VALUES (NULL,'1','writer',".$valstr.");";
-			$text="创建失败";
-		}else{
-			$sqladd="UPDATE `". DB_PRE .$dbtb."` SET ".$upstr." WHERE `id`=".$sid;
-			$text="修改失败";
-		}
-		if(!$db->query($sqladd)){
-			echo "<script>alert('".$text."');</script>";
-			return 0;
-		}else{
-			updateCacheAll(array('sta','newArts','wishlist'));return 1;
-		}
-	}
+	
 	**/
 	
 	

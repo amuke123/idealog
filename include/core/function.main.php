@@ -106,6 +106,16 @@ function delThem($path){//删除文件
 	if(file_exists($tem_path)){unlink($tem_path);}
 }
 
+
+function getIp(){//获取用户ip地址
+    $ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '';
+    if (!filter_var($ip, FILTER_VALIDATE_IP)) {
+        $ip = '';
+    }
+    return $ip;
+}
+
+
 /**
 function doStripslashes(){//去除多余的转义字符
     if (get_magic_quotes_gpc()) {
@@ -252,13 +262,7 @@ function getToNowDays($date){//获取注册天数
 	return $txt;
 }
 
-function getIp(){//获取用户ip地址
-    $ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '';
-    if (!filter_var($ip, FILTER_VALIDATE_IP)) {
-        $ip = '';
-    }
-    return $ip;
-}
+
 **/
 
 ?>

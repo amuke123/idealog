@@ -42,15 +42,15 @@
 						<span><input type="checkbox" name="artck[]" value="<?php echo $value['id'];?>" /></span>
 						<span class="tleft">
 							<a title="点击标题编辑笔记" href="<?php echo  ADMIN_URL ."write_art.php?artid=".$value['id'];?>"><?php echo $value['title']==''?'无标题':$value['title'];?></a>
-							<?php echo in_array('T',$marks)?'<img src="'. ADMIN_URL .'view/static/images/top.png" title="首页置顶" />':'';?>
-							<?php echo in_array('ST',$marks)?'<img src="'. ADMIN_URL .'view/static/images/sortop.png" title="分类置顶" />':'';?>
-							<?php echo $value['filenum']!=0?'<img src="'. ADMIN_URL .'view/static/images/att.gif" title="附件数：'.$value['filenum'].'" />':'';?>
+							<?php echo in_array('T',$marks)?'<img src="'. TEMPLATE_URLA .'static/images/top.png" title="首页置顶" />':'';?>
+							<?php echo in_array('ST',$marks)?'<img src="'. TEMPLATE_URLA .'static/images/sortop.png" title="分类置顶" />':'';?>
+							<?php echo $value['filenum']!=0?'<img src="'. TEMPLATE_URLA .'static/images/att.gif" title="附件数：'.$value['filenum'].'" />':'';?>
 						</span>
 						<?php if($value['author']!='0'){$authors=user_Model::getInfo($value['author']);};$userid=$value['author']!='0'?$authors['id']:'0';?>
 						<span><a href="<?php echo ADMIN_URL ."article.php?author=".$userid.$urlsub;?>"><?php echo $value['author']!='0'?$authors['name']:'佚名';?></a></span>
 						<?php $sortid=$value['s_id']>0?$sorts[$value['s_id']]['id']:'0';?>
 						<span><a href="<?php echo ADMIN_URL ."article.php?sortid=".$sortid.$urlsub;?>"><?php echo $value['s_id']>0?$sorts[$value['s_id']]['sortname']:'未分类';?></a></span>
-						<span><a target="_blank" href="<?php echo Url::log($value['id']);?>"><img title='查看' src='<?php echo ADMIN_URL . "/view/static/images/eye.png";?>' /></a></span>
+						<span><a target="_blank" href="<?php echo Url::log($value['id']);?>"><img title='查看' src='<?php echo TEMPLATE_URLA . "static/images/eye.png";?>' /></a></span>
 						<span><?php echo $value['date']!=''?date("Y-m-d H:i:s",$value['date']):'';?></span>
 						<span><a href="<?php echo  ADMIN_URL ."say.php?artid=".$value['id'];?>"><?php echo $value['saynum'];?></a></span>
 						<span><?php echo $value['eyes'];?></span>

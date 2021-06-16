@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2021-06-15 09:52:47
+-- Generation Time: 2021-06-16 11:06:02
 -- 服务器版本： 5.6.17
 -- PHP Version: 5.5.12
 
@@ -79,6 +79,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `mark` int(1) NOT NULL COMMENT '评论标签 默认 0 无标签，1 加精，2神评',
   `good` int(10) NOT NULL COMMENT '好评 ',
   `bad` int(10) NOT NULL COMMENT '差评 ',
+  `del` int(1) NOT NULL DEFAULT '1' COMMENT '删除',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='评论' AUTO_INCREMENT=1 ;
 
@@ -129,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `nav` (
 --
 
 INSERT INTO `nav` (`id`, `name`, `url`, `pic`, `blank`, `show`, `top_id`, `index`, `change`, `type`, `type_id`, `group`) VALUES
-(1, '主页', '', '', 0, 1, 0, 1, 0, 1, 0, 0),
+(1, '首页', '', '', 0, 1, 0, 1, 0, 1, 0, 0),
 (2, '登录', 'login', '', 1, 0, 0, 99, 0, 3, 0, 0);
 
 -- --------------------------------------------------------
@@ -284,7 +285,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `nickname`, `role`, `check`, `photo`, `email`, `emailok`, `tel`, `telok`, `description`, `date`, `lastdate`, `sex`, `birthday`, `diyurl`, `order`, `state`) VALUES
-(1, 'amuke123', '$2y$10$djWbLuaPbFBVHmhg6iyW0Ob.SMLWklKtIIVfy2KtZNuKJ4cKwBUFO', 'amuke123', 'admin', 1, '', '', 0, '', 0, '', '', '', 0, '', '', 0, 0);
+(1, 'amuke123', '$2y$10$djWbLuaPbFBVHmhg6iyW0Ob.SMLWklKtIIVfy2KtZNuKJ4cKwBUFO', 'amuke123', 'admin', 1, '', '', 0, '', 0, '', '', '1623822719', 0, '', '', 0, 0);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

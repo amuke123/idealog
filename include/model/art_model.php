@@ -186,6 +186,19 @@ class art_Model{
 		return $pages=$db->getlist($sql1);
 	}
 	
+	static function getArtName($aid){//获取笔记名称
+		$art=self::getOnceArt($aid);
+		return $art['title'];
+	}
+	
+	static function setComment($aid,$dbtb){//更换笔记评论数
+		$db=Conn::getConnect();
+		$sql1="SELECT count(*) as sumnum FROM `". DB_PRE .$dbtb."` WHERE `del`='1' and `a_id` = ".$aid.";";
+		$arr=$db->getOnce($sql1);
+		$sql2="UPDATE `". DB_PRE ."article` SET `saynum`='".$arr['sumnum']."' WHERE `id` = ".$aid.";";
+		$db->query($sql2);
+	}
+	
 	/**
 	
 	
@@ -203,23 +216,14 @@ class art_Model{
 	
 	
 	
-	static function setComment($aid,$dbtb){//更换笔记评论数
-		$db=Conn::getConnect();
-		$sql1="SELECT count(*) as sumnum FROM `". DB_PRE .$dbtb."` WHERE `del`='1' and `a_id` = ".$aid.";";
-		$arr=$db->getOnce($sql1);
-		$sql2="UPDATE `". DB_PRE ."article` SET `saynum`='".$arr['sumnum']."' WHERE `id` = ".$aid.";";
-		$db->query($sql2);
-	}
 	
 	
 	
 	
 	
 	
-	static function getArtName($aid){//获取笔记名称
-		$art=self::getOnceArt($aid);
-		return $art['title'];
-	}
+	
+	
 	
 	static function getArtTags($aid,$tags='id'){//获取笔记指定的属性
 		$art=self::getOnceArt($aid);

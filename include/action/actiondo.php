@@ -94,7 +94,7 @@ if(isset($_POST['showhide'])){
 	if($ajcode==$_SESSION['ajcode']){
 		if($dbtb=='say'){art_Model::setComment($aid,$dbtb);}
 		action_Model::showOrHide($key,$id,$dbtb);
-		updateCacheAll(array('sta','sort','tags','nav','link','wishlist','banner'));
+		updateCacheAll();
 		$data['text']='更改成功';
 	}else{
 		$data['text']='非法操作';
@@ -320,9 +320,6 @@ if(isset($_POST['top'])){
 	echo json_encode($data);
 }
 
-/**
-
-
 if(isset($_POST['userpic'])){
 	$data=array();
 	$data['action']='userpic';
@@ -332,7 +329,7 @@ if(isset($_POST['userpic'])){
 	if($ajcode==$_SESSION['ajcode']){
 		if($userpic!=''){delFileLine($userpic);}
 		if($uid!=''){user_Model::delUserPhoto($uid);}
-		$data['text']='删测成功';
+		$data['text']='删除成功';
 	}else{
 		$data['text']='非法操作';
 	}
@@ -360,36 +357,27 @@ if(isset($_POST['upfile'])){
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-if(isset($_POST['goodsay'])){
+if(isset($_POST['delsay'])){
 	$db=Conn::getConnect();
 	$data=array();
-	$data['action']='goodsay';
+	$data['action']='delsay';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
 	if($ajcode==$_SESSION['ajcode']){
 		$list=isset($_POST['list'])?$_POST['list']:0;
-		$sortid=$_POST['goodsay'];
 		$lists=explode(',',$list);
 		foreach($lists as $val){
-			$sql="UPDATE `". DB_PRE ."say` SET `mark`='".$sortid."' WHERE `id`=".$val.";";
+			$sql1="SELECT `a_id` FROM `" . DB_PRE . "comment`  WHERE `id` = ".$val;
+			$arr2=$db->getOnce($sql1);
+			$sql="UPDATE `" . DB_PRE . "comment` SET `del`='0' WHERE `id`=".$val;
 			$db->query($sql);
+			if(!empty($arr2['a_id'])){
+				$sql7="SELECT count(*) as sumnum FROM `". DB_PRE ."comment` WHERE `del`='1' and `a_id` = ".$arr2['a_id'].";";
+				$arr=$db->getOnce($sql7);
+				$sql8="UPDATE `". DB_PRE ."article` SET `saynum`='".$arr['sumnum']."' WHERE `id` = ".$arr2['a_id'].";";
+				$db->query($sql8);
+			}
 		}
-		$data['text']='修改成功';
+		$data['text']='删除成功';
 	}else{
 		$data['text']='非法操作';
 	}
@@ -403,10 +391,10 @@ if(isset($_POST['checksay'])){
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
 	if($ajcode==$_SESSION['ajcode']){
 		$list=isset($_POST['list'])?$_POST['list']:0;
-		$sortid=$_POST['checksay'];
+		$checkid=$_POST['checksay'];
 		$lists=explode(',',$list);
 		foreach($lists as $val){
-			$sql="UPDATE `" . DB_PRE . "say` SET `show`='".$sortid."',`ischeck`='".$sortid."' WHERE `id`=".$val.";";
+			$sql="UPDATE `" . DB_PRE . "comment` SET `show`='".$checkid."',`check`='".$checkid."' WHERE `id`=".$val.";";
 			$db->query($sql);
 		}
 		$data['text']='审核成功';
@@ -416,31 +404,25 @@ if(isset($_POST['checksay'])){
 	echo json_encode($data);
 }
 
-if(isset($_POST['delsay'])){
+if(isset($_POST['goodsay'])){
 	$db=Conn::getConnect();
 	$data=array();
-	$data['action']='delsay';
+	$data['action']='goodsay';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
 	if($ajcode==$_SESSION['ajcode']){
 		$list=isset($_POST['list'])?$_POST['list']:0;
+		$goodid=$_POST['goodsay'];
 		$lists=explode(',',$list);
 		foreach($lists as $val){
-			$sql1="SELECT `a_id` FROM `" . DB_PRE . "say`  WHERE `id` = ".$val;
-			$arr2=$db->getOnce($sql1);
-			$sql="UPDATE `" . DB_PRE . "say` SET `del`='0' WHERE `id`=".$val;
+			$sql="UPDATE `". DB_PRE ."comment` SET `mark`='".$goodid."' WHERE `id`=".$val.";";
 			$db->query($sql);
-			if(!empty($arr2['a_id'])){
-				$sql7="SELECT count(*) as sumnum FROM `". DB_PRE ."say` WHERE `del`='1' and `a_id` = ".$arr2['a_id'].";";
-				$arr=$db->getOnce($sql7);
-				$sql8="UPDATE `". DB_PRE ."article` SET `saynum`='".$arr['sumnum']."' WHERE `id` = ".$arr2['a_id'].";";
-				$db->query($sql8);
-			}
 		}
-		$data['text']='删除成功';
+		$data['text']='修改成功';
 	}else{
 		$data['text']='非法操作';
 	}
 	echo json_encode($data);
 }
-**/
+
+
 ?>

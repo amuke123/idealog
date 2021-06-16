@@ -345,102 +345,6 @@ function setTop(el,path){//设置置顶
 	sendHttpPost(url,data);
 }
 
-/**
-
-
-function delSay(path){//删除评论
-	var artcks = document.getElementsByName("artck[]");
-	var ajcode=document.getElementById("ajcode").value;
-	var arr=new Array();
-	for(i=0;i<artcks.length;i++){
-		if(artcks[i]['checked']==true){
-			arr.push(artcks[i]['value']);
-		}
-	}
-	if(arr.length<1){
-		alert('请选择要操作的评论');
-		return;
-	}
-	if(confirm('确定删除?')){
-		url = path + 'include/action/actiondo.php';
-		data = "list="+arr;
-		data+="&ajcode="+ajcode;
-		data+="&delsay=del";
-		data+="&path="+path+"include/action/";
-		//console.log(data);
-		sendHttpPost(url,data);
-	}
-}
-
-function setSayCheck(path){//评论审核
-	var artcks = document.getElementsByName("artck[]");
-	var ajcode=document.getElementById("ajcode").value;
-	var arr=new Array();
-	for(i=0;i<artcks.length;i++){
-		if(artcks[i]['checked']==true){
-			arr.push(artcks[i]['value']);
-		}
-	}
-	if(arr.length<1){
-		alert('请选择要操作的评论');
-		return;
-	}
-	if(confirm('确定选中项通过审核?')){
-		url = path + 'include/action/actiondo.php';
-		data = "list="+arr;
-		data+="&ajcode="+ajcode;
-		data+="&checksay=1";
-		data+="&path="+path+"include/action/";
-		//console.log(data);
-		sendHttpPost(url,data);
-	}
-}
-
-//template
-function usertem(tem,path){//更换模板
-	var ajcode=document.getElementById("ajcode").value;
-	url = path + 'include/action/action.php';
-	data="ajcode="+ajcode;
-	data+="&usertem="+tem;
-	data+="&db=template";
-	sendHttpPost(url,data);
-}
-
-//template
-function deltem(tem,path){//删除模板
-	if(confirm('你确定要删除该模板吗?')){
-		var ajcode=document.getElementById("ajcode").value;
-		url = path + 'include/action/action.php';
-		data="ajcode="+ajcode;
-		data+="&deltem="+tem;
-		data+="&db=template";
-		sendHttpPost(url,data);
-	}
-}
-
-function setSayGood(path,good){//加精和神评
-	var artcks = document.getElementsByName("artck[]");
-	var ajcode=document.getElementById("ajcode").value;
-	var arr=new Array();
-	for(i=0;i<artcks.length;i++){
-		if(artcks[i]['checked']==true){
-			arr.push(artcks[i]['value']);
-		}
-	}
-	if(arr.length<1){
-		alert('请选择要操作的评论');
-		return;
-	}
-	if(confirm('确定当前操作?')){
-		url = path + 'include/action/actiondo.php';
-		data = "list="+arr;
-		data+="&ajcode="+ajcode;
-		data+="&goodsay="+good;
-		data+="&path="+path+"include/action/";
-		sendHttpPost(url,data);
-	}
-}
-
 function delphoto(path,uid){//删除头像
 	var ajcode=document.getElementById("ajcode").value;
 	var userpic=document.getElementById("userpic").value;
@@ -468,6 +372,112 @@ function upfile(path,avatar){//上传文件
 	data.append("ajcode",ajcode);
 	sendHttpUp2(url,data);
 }
+
+function delSay(path){//删除评论
+	var artcks = document.getElementsByName("artck[]");
+	var ajcode=document.getElementById("ajcode").value;
+	var arr=new Array();
+	for(i=0;i<artcks.length;i++){
+		if(artcks[i]['checked']==true){
+			arr.push(artcks[i]['value']);
+		}
+	}
+	if(arr.length<1){
+		alert('请选择要操作的评论');
+		return;
+	}
+	if(confirm('确定删除?')){
+		url = path + 'include/action/actiondo.php';
+		data = "list="+arr;
+		data+="&ajcode="+ajcode;
+		data+="&delsay=del";
+		data+="&path="+path+"include/action/";
+		//console.log(data);
+		sendHttpPost(url,data);
+	}
+}
+
+
+function setSayCheck(path){//评论审核
+	var artcks = document.getElementsByName("artck[]");
+	var ajcode=document.getElementById("ajcode").value;
+	var arr=new Array();
+	for(i=0;i<artcks.length;i++){
+		if(artcks[i]['checked']==true){
+			arr.push(artcks[i]['value']);
+		}
+	}
+	if(arr.length<1){
+		alert('请选择要操作的评论');
+		return;
+	}
+	if(confirm('确定选中项通过审核?')){
+		url = path + 'include/action/actiondo.php';
+		data = "list="+arr;
+		data+="&ajcode="+ajcode;
+		data+="&checksay=1";
+		data+="&path="+path+"include/action/";
+		//console.log(data);
+		sendHttpPost(url,data);
+	}
+}
+
+function setSayGood(path,good){//加精和神评
+	var artcks = document.getElementsByName("artck[]");
+	var ajcode=document.getElementById("ajcode").value;
+	var arr=new Array();
+	for(i=0;i<artcks.length;i++){
+		if(artcks[i]['checked']==true){
+			arr.push(artcks[i]['value']);
+		}
+	}
+	if(arr.length<1){
+		alert('请选择要操作的评论');
+		return;
+	}
+	if(confirm('确定当前操作?')){
+		url = path + 'include/action/actiondo.php';
+		data = "list="+arr;
+		data+="&ajcode="+ajcode;
+		data+="&goodsay="+good;
+		data+="&path="+path+"include/action/";
+		sendHttpPost(url,data);
+	}
+}
+
+/**
+
+
+
+
+
+//template
+function usertem(tem,path){//更换模板
+	var ajcode=document.getElementById("ajcode").value;
+	url = path + 'include/action/action.php';
+	data="ajcode="+ajcode;
+	data+="&usertem="+tem;
+	data+="&db=template";
+	sendHttpPost(url,data);
+}
+
+//template
+function deltem(tem,path){//删除模板
+	if(confirm('你确定要删除该模板吗?')){
+		var ajcode=document.getElementById("ajcode").value;
+		url = path + 'include/action/action.php';
+		data="ajcode="+ajcode;
+		data+="&deltem="+tem;
+		data+="&db=template";
+		sendHttpPost(url,data);
+	}
+}
+
+
+
+
+
+
 
 
 

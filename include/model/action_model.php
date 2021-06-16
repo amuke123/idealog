@@ -179,6 +179,12 @@ class action_Model{
 		}
 	}
 	
+	static function showOrHide($key,$id,$dbtb){//显示和隐藏
+		$db=Conn::getConnect();
+		$sql="UPDATE `". DB_PRE .$dbtb."` SET `show`='".$key."' WHERE `id` = ".$id.";";
+		$db->query($sql);
+	}
+	
 	/**
 	static function fc_comments($site_title){
 		$site_title='回复-'.$site_title;
@@ -244,11 +250,7 @@ class action_Model{
 	
 	
 	
-	static function showOrHide($key,$id,$dbtb){//显示和隐藏
-		$db=Conn::getConnect();
-		$sql="UPDATE `". DB_PRE .$dbtb."` SET `show`='".$key."' WHERE `id` = ".$id.";";
-		$db->query($sql);
-	}
+	
 	
 
 **/

@@ -1,2 +1,7 @@
 http://www.a.com/
+http://www.a.com/sort/fl
+http://www.a.com/sort/fl2
+http://www.a.com/sort/zfl1
+http://www.a.com/sort/zfl2
+http://www.a.com/sort/zfl22
 http://www.a.com/author/1

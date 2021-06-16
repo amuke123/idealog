@@ -67,11 +67,18 @@ function callback(){
 				case 'release':
 				case 'check':
 				case 'settop':
+				case 'delsay':
+				case 'checksay':
+				case 'goodsay':
 				case 'movesort':
 					ts(json.text);
 					break;
 				case 'sendid':
 					setnewcode(60,json.text);
+					break;
+				case 'userpic':
+					prompt1(json.text);
+					changepic('');
 					break;
 				default:break;
 			}
@@ -132,7 +139,7 @@ function callback3(){
 					xsbox(json.txt);
 					break;
 				case 'upfile':
-					ts3(json.text);
+					prompt1(json.text);
 					changepic(json.url[0]);
 					break;
 				default:break;

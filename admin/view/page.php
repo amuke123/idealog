@@ -12,12 +12,12 @@
 						<span><input type="checkbox" name="artck[]" value="<?php echo $value['id'];?>" /></span>
 						<span class="tleft">
 							<a title="点击标题编辑文章" href="<?php echo  ADMIN_URL ."page.php?action=edit&id=".$value['id'];?>"><?php echo $value['title']==''?'无标题':$value['title'];?></a>
-							<?php echo $value['filenum']!=0?'<img src="'. ADMIN_URL .'view/static/images/att.gif" title="附件数：'.$value['filenum'].'" />':'';?>
+							<?php echo $value['filenum']!=0?'<img src="'. TEMPLATE_URLA .'static/images/att.gif" title="附件数：'.$value['filenum'].'" />':'';?>
 							<?php echo $value['show']==0?'<strong class="red"> - 草稿 </strong>':'';?>
 						</span>
 						<span><?php echo $value['alias']==''?'':$value['alias'];?></span>
 						<span><?php echo $value['template']==''?'page':$value['template'];?></span>
-						<span><a target="_blank" href="<?php echo Url::log($value['id']);?>"><img title='查看' src='<?php echo ADMIN_URL . "/view/static/images/eye.png";?>' /></a></span>
+						<span><a target="_blank" href="<?php echo Url::log($value['id']);?>"><img title='查看' src='<?php echo TEMPLATE_URLA . "static/images/eye.png";?>' /></a></span>
 						<span><a href="<?php echo  ADMIN_URL ."say.php?artid=".$value['id'];?>"><?php echo $value['saynum'];?></a></span>
 						<span><?php echo $value['date']!=''?date("Y-m-d H:i:s",$value['date']):'';?></span>
 						</p>
