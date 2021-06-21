@@ -115,6 +115,63 @@ function getIp(){//获取用户ip地址
     return $ip;
 }
 
+function getDir($path){//获取主题
+	$dirs=array();
+	if(is_dir($path)){
+		$data = scandir($path,1);
+		foreach($data as $value){
+			$newdir=$path.$value;
+			if($value!='..'&&$value!='.'){
+				if(is_dir($newdir)){$dirs[]=$value;}
+			}
+		}
+	}
+	return $dirs;
+}
+
+function getList($path){
+	$temlist=getDir($path);
+	$templist=array();
+	foreach($temlist as $val){
+		$purl = $path.$val.'/header.php';
+		$nonceTplData = @implode('', @file($purl));
+		preg_match("/TemplateName:(.*)/i", $nonceTplData, $name);//模板名称（缺省文件名命名）
+		preg_match("/Description:(.*)/i", $nonceTplData, $tplDes);//模板描述
+		preg_match("/Author:(.*)/i", $nonceTplData, $author);//模板作者
+		preg_match("/AuthorUrl:(.*)/i", $nonceTplData, $tplUrl);//作者URL
+		preg_match("/Version:(.*)/i", $nonceTplData, $tplVersion);//模板版本
+		preg_match("/ForIdeashu:(.*)/i", $nonceTplData, $tplForLog);//适用程序版本
+
+		$pinfo['name'] = !empty($name[1]) ? trim($name[1]) : $val;
+		$pinfo['author'] = !empty($author[1]) ? trim($author[1]) : 'IDEASHU用户';
+		
+		$pinfo['des'] = !empty($tplDes[1]) ? trim($tplDes[1]) : '';
+		$pinfo['authorUrl'] = !empty($tplUrl[1]) ? trim($tplUrl[1]) : IDEA_URL;
+		$pinfo['version'] = !empty($tplVersion[1]) ? trim($tplVersion[1]) : '';
+		$pinfo['forIdeashu'] = !empty($tplForLog[1]) ? '适用于IDEASHU:'.$tplForLog[1] : '';
+		$pinfo['file'] = $val;
+		$templist[]=$pinfo;
+	}
+	return $templist;
+}
+
+
+function delAllDirAndFile($path){//删除目录下的所有文件和文件夹
+	if(is_dir($path)){
+		$p = scandir($path);
+		foreach($p as $val){
+			if($val !="." && $val !=".."){
+				if(is_dir($path.$val)){
+					delAllDirAndFile($path.$val.'/');
+					@rmdir($path.$val.'/');
+				}else{
+					unlink($path.$val);
+				}
+			}
+		}
+		@rmdir($path);
+	}
+}
 
 /**
 function doStripslashes(){//去除多余的转义字符
@@ -168,38 +225,10 @@ function get_addr($key){//获取所在城市
 
 
 
-function delAllDirAndFile($path){//删除目录下的所有文件和文件夹
-	if(is_dir($path)){
-		$p = scandir($path);
-		foreach($p as $val){
-			if($val !="." && $val !=".."){
-				if(is_dir($path.$val)){
-					delAllDirAndFile($path.$val.'/');
-					@rmdir($path.$val.'/');
-				}else{
-					unlink($path.$val);
-				}
-			}
-		}
-		@rmdir($path);
-	}
-}
 
 
 
-function getDir($path){//获取主题
-	$dirs=array();
-	if(is_dir($path)){
-		$data = scandir($path,1);
-		foreach($data as $value){
-			$newdir=$path.$value;
-			if($value!='..'&&$value!='.'){
-				if(is_dir($newdir)){$dirs[]=$value;}
-			}
-		}
-	}
-	return $dirs;
-}
+
 
 
 

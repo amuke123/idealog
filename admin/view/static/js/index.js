@@ -146,6 +146,19 @@ function deluser(url){
 	}
 }
 
+function changeSet(num){//设置选项卡切换
+	var idn="cont"+num;
+	var evul=document.getElementById('navlist');
+	var evli=evul.getElementsByTagName("li");
+	log=evli.length;
+	for(i=0;i<log;){
+		evli[i].className="";i++;
+		document.getElementById('cont'+i).style.display="none";
+	}
+	evli[num-1].className="active";
+	document.getElementById(idn).style.display="block";
+}
+
 function yzNavAdd(){
 	if(navadddiy.name.value==""){
 		prompt1('导航名称不能为空');

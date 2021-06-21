@@ -71,6 +71,8 @@ function callback(){
 				case 'checksay':
 				case 'goodsay':
 				case 'movesort':
+				case 'usertem':
+				case 'deltem':
 					ts(json.text);
 					break;
 				case 'sendid':

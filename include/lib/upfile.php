@@ -39,7 +39,7 @@ class Upfile{
 		return $files;
 	}
 	
-	function upload($file,$aid='',$dir_name='',$tem = 0,$fhtem=0){//file 文件，aid 所属文章，dir_name 非文章分类,$tem 是否生成缩略图,$fhtem 返回缩略图开关
+	function upload($file,$aid='',$dir_name='',$tem = 0,$fhtem=0){//file 文件，aid 所属文章，dir_name 非文章分类,$tem 保存到附件库,$fhtem 返回缩略图开关
 		$this->save_path = IDEA_ROOT . '/content/uploadfile/';
 		$this->save_url =  'content/uploadfile/';
 		
@@ -111,7 +111,6 @@ class Upfile{
 		return $fhtem=='0'?"../".$file_url:$fhz;//返回原图，$fhz 缩略图
 	}
 	function set_db($datas,$new_path='',$new_url='',$file_ext='',$tmp_pre=''){
-		//print_r($datas);
 		$tags='';
 		$values='';
 		foreach($datas as $key => $val){
@@ -121,19 +120,17 @@ class Upfile{
 		$tags=trim($tags,',');
 		$values=trim($values,',');
 		$sql="INSERT INTO `". DB_PRE ."file` (`id`,".$tags.") VALUES (NULL,".$values.")";
-		//echo $sql;
-		//$sql=sprintf($sql,);%s
 		$this->db->query($sql);
-		if($datas['top_id']==0){
+		$fhz='';
+		if(Control::get('thumbnailok')&&$datas['top_id']==0){
 			$czid=$this->db->last_insert_id();
 			$_w=$datas['width'];
 			$_h=$datas['height'];
-			$fhz='';
 			if($this->checkImg($_w,$_h)){
 				$fhz=$this->setThem($datas,$new_path,$new_url,$file_ext,$tmp_pre,$czid);
 			}
-			return $fhz;
 		}
+		return $fhz;
 	}
 	
 	function setThem($datas,$new_path,$new_url,$file_ext,$tmp_pre,$czid){

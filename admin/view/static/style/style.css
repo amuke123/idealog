@@ -213,10 +213,12 @@
 .navlist ul li a{display:block;padding:0px 15px;margin-right:3px;border-radius:5px 5px 0px 0px;}
 .navlist ul li a:hover{background:#ddd;}
 .navlist ul li.active a{border:#eee solid 1px;margin-bottom:-1px;border-bottom:none;background:#fff;}
+.cont .group{margin:5px 5px;}
 .cont p{line-height:30px;padding:5px 0px;}
 .cont p select{height:30px;}
 .cont p textarea{font-size:13px;}
 .cont p b,.cont p input,.cont p span,.cont p a,.cont h3,.cont p textarea,.cont p select{line-height:30px;margin:auto 5px;}
+.cont h3{color:#2a6496;}
 .cont p input,.cont p textarea,.cont p select{border-radius:5px;border:#ccc solid 1px;}
 .cont p input,.cont p textarea,.cont p select{padding:0px 10px;}
 .cont p a input{height:35px;line-height:35px;padding:0px 20px;border-radius:5px;border:var(--cl2) solid 1px;background:var(--cl3);color:#fff;}
@@ -226,8 +228,9 @@
 .cont p .long{width:300px;}
 .cont p .long2{width:220px;}
 .cont p .long3{width:400px;}
-.cont p .long4{width:460px;line-height:20px;height:80px;background:#f3f5f4;}
+.cont p .long4{width:460px;line-height:20px;height:80px;background:#f3f5f4;padding:5px 10px;}
 .cont p .nonebor{border:none;padding:0px;}
+.cont p .formfile{border:none;}
 .cont p a:hover input{background:var(--cl1);-moz-box-shadow:1px 1px 5px var(--cl2); -webkit-box-shadow:1px 1px 5px var(--cl2); box-shadow:1px 1px 5px var(--cl2);}
 .cont1,.cont2,.cont3{background:#fff;padding:40px;}
 .cont2,.cont3,.cont4{display:none;}

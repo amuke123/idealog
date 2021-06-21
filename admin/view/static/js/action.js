@@ -445,27 +445,24 @@ function setSayGood(path,good){//加精和神评
 	}
 }
 
-/**
-
-
-
-
-
 //template
+
 function usertem(tem,path){//更换模板
-	var ajcode=document.getElementById("ajcode").value;
-	url = path + 'include/action/action.php';
-	data="ajcode="+ajcode;
-	data+="&usertem="+tem;
-	data+="&db=template";
-	sendHttpPost(url,data);
+	if(confirm('你确定要更换模板吗?')){
+		var ajcode=document.getElementById("ajcode").value;
+		url = path + 'include/action/actiondo.php';
+		data="ajcode="+ajcode;
+		data+="&usertem="+tem;
+		data+="&key=template";
+		sendHttpPost(url,data);
+	}
 }
 
-//template
+
 function deltem(tem,path){//删除模板
 	if(confirm('你确定要删除该模板吗?')){
 		var ajcode=document.getElementById("ajcode").value;
-		url = path + 'include/action/action.php';
+		url = path + 'include/action/actiondo.php';
 		data="ajcode="+ajcode;
 		data+="&deltem="+tem;
 		data+="&db=template";
@@ -473,19 +470,3 @@ function deltem(tem,path){//删除模板
 	}
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-**/

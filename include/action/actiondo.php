@@ -424,5 +424,73 @@ if(isset($_POST['goodsay'])){
 	echo json_encode($data);
 }
 
+if(isset($_POST['usertem'])){
+	$db=Conn::getConnect();
+	$data=array();
+	$data['action']='usertem';
+	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
+	$key=isset($_POST['key'])?$_POST['key']:'';
+	if($ajcode==$_SESSION['ajcode']){
+		$tem=$_POST['usertem'];
+		$path = IDEA_ROOT .'/content/template/'.$tem.'/';
+		if(is_dir($path)){
+			$p = scandir($path);
+			$fkey = 1;
+			$filearr=array('404','function','header','footer','article','index','list','page');
+			foreach($filearr as $val){
+				$v = $val.".php";
+				if(!in_array($v,$p)){$fkey = 0;}
+			}
+			if(!in_array('idea.jpg',$p)){$fkey = 0;}
+			if($fkey == 1){
+				$sql="UPDATE `" . DB_PRE ."options` SET `value` = '".$tem."' WHERE `key` = '".$key."';";
+				$db->query($sql);
+				updateCacheAll();
+				$data['text']='模板更换成功';
+			}else{
+				$data['text']='更换失败，模板不完整或已损坏';
+			}
+		}else{
+			$data['text']='更换失败，模板不存在';
+		}
+	}else{
+		$data['text']='非法操作';
+	}
+	echo json_encode($data);
+}
+
+if(isset($_POST['deltem'])){
+	$db=Conn::getConnect();
+	$data=array();
+	$data['action']='deltem';
+	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
+	$key=isset($_POST['db'])?$_POST['db']:'';
+	if($ajcode==$_SESSION['ajcode']){
+		$tem=$_POST['deltem'];
+		$sql="SELECT * FROM `" . DB_PRE ."options` WHERE `key` = '".$key."';";
+		$arr=$db->getlist($sql);
+		if($arr[0]['value']==$tem){
+			$data['text']='删除失败，模板正在使用';
+		}else{
+			$path = IDEA_ROOT .'/content/template/';
+			$temlist=getDir($path);
+			if(count($temlist)<2){
+				$data['text']='删除失败，已经是最后一个模板了';
+			}else{
+				if(in_array($tem,$temlist)){
+					$path2=$path.$tem.'/';
+					delAllDirAndFile($path2);
+					$data['text']='模板删除成功';
+					updateCacheAll('options');
+				}else{
+					$data['text']='删除失败，模板不存在，请刷新缓存后重试';
+				}
+			}
+		}
+	}else{
+		$data['text']='非法操作';
+	}
+	echo json_encode($data);
+}
 
 ?>
