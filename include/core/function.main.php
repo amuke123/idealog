@@ -118,7 +118,7 @@ function getIp(){//获取用户ip地址
 function getDir($path){//获取主题
 	$dirs=array();
 	if(is_dir($path)){
-		$data = scandir($path,1);
+		$data = scandir($path);
 		foreach($data as $value){
 			$newdir=$path.$value;
 			if($value!='..'&&$value!='.'){
@@ -129,7 +129,7 @@ function getDir($path){//获取主题
 	return $dirs;
 }
 
-function getList($path){
+function getList($path){//获取模板目录
 	$temlist=getDir($path);
 	$templist=array();
 	foreach($temlist as $val){
@@ -155,6 +155,26 @@ function getList($path){
 	return $templist;
 }
 
+function getBakDir($path){//获取备份目录
+	if(is_dir($path)){
+		$data = scandir($path);
+		$dirs = array();
+		foreach($data as $value){
+			$newdir=$path.$value;
+			if($value!='..'&&$value!='.'){
+				$extension=pathinfo($newdir,PATHINFO_EXTENSION);
+				if(is_file($newdir)&&$extension=='sql'){
+					$pinfo['size']=filesize($newdir);
+					$pinfo['date']=date("Y-m-d H:i:s",filemtime($newdir));
+					$pinfo['name']=pathinfo($newdir,PATHINFO_BASENAME);
+					$pinfo['url'] = IDEA_URL .'content/backup/';
+					$dirs[]=$pinfo;
+				}
+			}
+		}
+	}
+	return $dirs;
+}
 
 function delAllDirAndFile($path){//删除目录下的所有文件和文件夹
 	if(is_dir($path)){

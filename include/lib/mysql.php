@@ -40,6 +40,10 @@ class Mysql{
 		return $arr;
 	}
 	
+	public static function fetch_row($query) {
+        return $query->fetch_row();
+    }
+	
 	public static function close() {
         return self::$conn->close();
     }
@@ -52,5 +56,8 @@ class Mysql{
 		return self::$conn->insert_id;
 	}
 	
+	public static function escape_string($sql) {
+        return self::$conn->real_escape_string($sql);
+    }
 }
 ?>

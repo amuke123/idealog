@@ -4,6 +4,6 @@ include_once 'include/core/amuker.php';
 
 Router::dispatch();
 
-//echo Checking::getUserName();
+
 
 ?>

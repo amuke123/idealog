@@ -493,4 +493,22 @@ if(isset($_POST['deltem'])){
 	echo json_encode($data);
 }
 
+if(isset($_POST['delbak'])){
+	$db=Conn::getConnect();
+	$data=array();
+	$data['action']='delbak';
+	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
+	if($ajcode==$_SESSION['ajcode']){
+		$list=isset($_POST['delbak'])?$_POST['delbak']:'';
+		$lists=explode(',',$list);
+		foreach($lists as $vel){
+			delThem(IDEA_ROOT .'/content/backup/'.urldecode($vel));
+		}
+		$data['text']='删除成功';
+	}else{
+		$data['text']='非法操作';
+	}
+	echo json_encode($data);
+}
+
 ?>

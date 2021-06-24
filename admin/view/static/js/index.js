@@ -159,6 +159,13 @@ function changeSet(num){//设置选项卡切换
 	document.getElementById(idn).style.display="block";
 }
 
+function setdbname(el){
+	var dbname=document.getElementById('dbname');
+	var inname=el.parentNode.parentNode.getElementsByTagName('input')[0].value;
+	dbname.value=inname;
+	myimport.submit();
+}
+
 function yzNavAdd(){
 	if(navadddiy.name.value==""){
 		prompt1('导航名称不能为空');

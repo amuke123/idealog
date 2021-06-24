@@ -3,6 +3,7 @@ define('ROOT', dirname(dirname(dirname(__FILE__))));
 include_once ROOT.'/include/core/amuker.php';
 Checking::setSession();
 
+/**
 if(isset($_POST['type'])){
 	$db=Conn::getConnect();
 	$data=array();
@@ -145,7 +146,7 @@ if(isset($_POST['readmore'])){
 	}
 	echo json_encode($data);
 }
-
+**/
 
 
 

@@ -47,6 +47,8 @@ class Upfile{
 		$tmp_name = $file['tmp_name'];//服务器上临时文件名
 		$file_size = $file['size'];//文件大小
 		
+		if($file['error'] == 1){return "上传文件大小超过系统".ini_get('upload_max_filesize')."限制。";}
+		
 		if(!$file_name){return $file_name."请选择文件。";}//检查文件名
 		if(@is_dir($this->save_path) === false){return $file_name."上传目录不存在。";}//检查目录
 		if(@is_writable($this->save_path) === false){return $file_name."上传目录没有写权限。";}//检查目录写权限

@@ -1,31 +1,48 @@
 <?php
 include_once 'global.php';
+Checking::setSession();
 
 $path = IDEA_ROOT .'/content/backup/';
-$dblist=getDir2($path);
+$dblist=getBakDir($path);
+$action=isset($_GET['action'])?$_GET['action']:'';
 
-function getDir2($path){
-	if(is_dir($path)){
-		$data = scandir($path,1);
-		$dirs = array();
-		foreach($data as $value){
-			$newdir=$path.$value;
-			if($value!='..'&&$value!='.'){
-				$extension=pathinfo($newdir,PATHINFO_EXTENSION);
-				if(is_file($newdir)&&$extension=='sql'){
-					$pinfo['size']=filesize($newdir);
-					$pinfo['date']=date("Y-m-d H:i:s",filemtime($newdir));
-					$pinfo['name']=pathinfo($newdir,PATHINFO_BASENAME);
-					$pinfo['url'] = IDEA_URL .'content/backup/';
-					$dirs[]=$pinfo;
-				}
-			}
-		}
+if($action=='databak'){
+	$ajcode=isset($_GET['code'])?$_GET['code']:'';
+	if($ajcode==$_SESSION['ajcode']){
+		$_SESSION['ajcode']='';
+		Database::setBak();
+		$text='备份成功';
+	}else{
+		$text='非法操作';
 	}
-	return $dirs;
+	echo "<script>alert('".$text."');location.href='". ADMIN_URL ."data.php';</script>";
 }
 
-
+if($action=='import'){
+	$ajcode=isset($_POST['token'])?$_POST['token']:'';
+	if($ajcode==$_SESSION['ajcode']){
+		$_SESSION['ajcode']='';
+		$dbname=isset($_POST['dbname'])?$_POST['dbname']:'';
+		$pathname='';
+		if(!empty($dbname)){
+			$pathname=$path.$dbname;
+			Database::importDb($pathname);
+			$text='成功导入数据';
+		}else{
+			$temname=Database::upload($_FILES['file']);
+			if(is_file($path.$temname)){
+				$pathname=$path.$temname;
+				$text='成功导入数据';
+			}else{
+				$text=$temname;
+			}
+		}
+	}else{
+		$text='非法操作';
+	}
+	exit();
+	//echo "<script>alert('".$text."');location.href='". ADMIN_URL ."data.php';</script>";
+}
 
 include View::getViewA('header');
 require_once(View::getViewA('data'));

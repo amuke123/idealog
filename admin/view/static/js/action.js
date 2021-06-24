@@ -470,3 +470,23 @@ function deltem(tem,path){//删除模板
 	}
 }
 
+function delbak(path){//删除模板
+	var artcks = document.getElementsByName("artck[]");
+	var ajcode=document.getElementById("ajcode").value;
+	var arr=new Array();
+	for(i=0;i<artcks.length;i++){
+		if(artcks[i]['checked']==true){
+			arr.push(artcks[i]['value']);
+		}
+	}
+	if(arr.length<1){
+		alert('请选择要操作的文件');
+		return;
+	}
+	if(confirm('你确定要删除该模板吗?')){
+		url = path + 'include/action/actiondo.php';
+		data="ajcode="+ajcode;
+		data+="&delbak="+arr;
+		sendHttpPost(url,data);
+	}
+}
