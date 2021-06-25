@@ -22,17 +22,17 @@ if($action=='import'){
 	$ajcode=isset($_POST['token'])?$_POST['token']:'';
 	if($ajcode==$_SESSION['ajcode']){
 		$_SESSION['ajcode']='';
-		$dbname=isset($_POST['dbname'])?$_POST['dbname']:'';
+		$dbname=isset($_POST['dbname'])?urldecode($_POST['dbname']):'';
 		$pathname='';
 		if(!empty($dbname)){
 			$pathname=$path.$dbname;
-			Database::importDb($pathname);
-			$text='成功导入数据';
+			$text=Database::importDb($pathname);
 		}else{
 			$temname=Database::upload($_FILES['file']);
 			if(is_file($path.$temname)){
 				$pathname=$path.$temname;
-				$text='成功导入数据';
+				$text=Database::importDb($pathname);
+				delThem($pathname);
 			}else{
 				$text=$temname;
 			}
@@ -40,8 +40,8 @@ if($action=='import'){
 	}else{
 		$text='非法操作';
 	}
+	echo "<script>alert('".$text."');location.href='". ADMIN_URL ."data.php';</script>";
 	exit();
-	//echo "<script>alert('".$text."');location.href='". ADMIN_URL ."data.php';</script>";
 }
 
 include View::getViewA('header');

@@ -99,6 +99,6 @@ var editor = MK.getEditor('editor',{
 <script>
 window.onload=function(){
 	autoShow('write_art');
-	showurl("0");
+	showurl("<?php echo $getsitestr;?>");
 }
 </script>

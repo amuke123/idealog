@@ -63,6 +63,5 @@
 <script>
 window.onload=function(){
 	autoShow('bookmark','link');
-	showurl("0");
 }
 </script>

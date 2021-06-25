@@ -30,6 +30,5 @@
 <script>
 window.onload=function(){
 	autoShow('bookmark','tag');
-	showurl("0");
 }
 </script>

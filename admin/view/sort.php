@@ -105,6 +105,5 @@
 <script>
 window.onload=function(){
 	autoShow('sort');
-	showurl("0");
 }
 </script>

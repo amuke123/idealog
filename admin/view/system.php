@@ -159,6 +159,5 @@ if($action=='pay'){echo "<script>changeSet(5)</script>";}
 <script>
 window.onload=function(){
 	autoShow('sys','system');
-	showurl("0");
 }
 </script>

@@ -8,6 +8,5 @@
 <script>
 window.onload=function(){
 	autoShow(<?php echo $plugin?"'extend','more_".$plugin."'":"'sys','plugin'";?>);
-	showurl("0");
 }
 </script>

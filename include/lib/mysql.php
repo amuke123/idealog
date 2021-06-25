@@ -2,10 +2,10 @@
 class Mysql{
 	private static $conn;
 	public function __construct(){
-		if(!class_exists('mysqli')){emMsg('服务器空间PHP不支持MySqli函数');}
-		self::$conn=new mysqli(DB_HOST,DB_USER,DB_PASSWD,DB_NAME);
-		self::$conn->set_charset('utf8');
-		if(mysqli_connect_errno()){echo '连接错误:'.iconv('gbk','UTF-8',mysqli_connect_error());exit;}
+		if(!class_exists('mysqli')){mkMsg('服务器空间PHP不支持MySqli函数');exit;}
+		self::$conn=@new mysqli(DB_HOST,DB_USER,DB_PASSWD,DB_NAME);
+		@self::$conn->set_charset('utf8');
+		if(mysqli_connect_errno()){mkMsg('连接错误:'.iconv('gbk','UTF-8',mysqli_connect_error()));exit;}
 	}
 	public static function query($sql=''){
 		$result="";

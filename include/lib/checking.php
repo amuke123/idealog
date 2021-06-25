@@ -175,14 +175,7 @@ class Checking{
 		}else{$key = '0';}
 		return $key;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 }
 ?>

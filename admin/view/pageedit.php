@@ -40,6 +40,5 @@ var editor = MK.getEditor('editor',{
 <script>
 window.onload=function(){
 	autoShow('bookmark','page');
-	showurl("0");
 }
 </script>

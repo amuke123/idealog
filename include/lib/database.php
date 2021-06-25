@@ -7,15 +7,47 @@ class Database{
 	static function importDb($pathname){
 		$restr = self::checkDb($pathname);
 		if($restr=='ok'){
-			$text=self::inDb($pathname);
+			self::inDb($pathname);
+			$text="数据导入成功！";
 		}else{
 			$text=$restr;
 		}
-		echo $text;
+		return $text;
 	}
 	
 	static function inDb($pathname){
-		return "成功！";
+		$db=Conn::getConnect();
+		$setchar = $db->getMysqlVersion()>'4.1'?"ALTER DATABASE `" . DB_NAME . "` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;":'';
+		
+		$list=file($pathname);
+		if(isset($list[0])&&!empty($list[0])&&self::checkBOM($list[0])){
+			$list[0]=substr($list[0],3);
+		}
+		array_unshift($list,$setchar);
+		$sql='';
+		$key=true;
+		foreach($list as $val){
+			$val=trim($val);
+			if($val!=''&&substr($val,0,2)=='/*'){
+				$key=false;
+				if(preg_match("/\*\/$/i",$val)){$key=true;continue;}
+			}
+			if($key){
+				if(!$val||substr($val,0,1)=='#'||substr($val,0,3)=='-- '){continue;}
+				if(preg_match("/\;$/i",$val)){
+					$sql.=$val;
+					if(preg_match("/^CREATE/i",$sql)){
+						$sql=preg_replace("/\DEFAULT CHARSET=([a-z0-9]+)/is",'',$sql);
+					}
+					$db->query($sql);
+					$sql='';
+				}else{
+					$sql.=$val;
+				}
+			}else{
+				if(preg_match("/\*\/$/i",$val)){$key=true;}
+			}
+		}
 	}
 	
 	static function checkDb($pathname){
@@ -32,7 +64,7 @@ class Database{
 			if(!preg_match('/-- version:ideaLog '. Control::IDEA_VERSION .'/',$info[0])){
 				$text='导入失败！该备份文件不是ideaLog' . Control::IDEA_VERSION . '生成的备份!';
 			}else if(preg_match('/-- prefix:'. DB_PRE .'/',$info[2])===0){
-				$text='导入失败！备份文件中的数据库表前缀与当前系统数据库表前缀不匹配'. $info[2];
+				$text='导入失败！导入的数据库表前缀与当前系统数据库表前缀不匹配'. $info[2];
 			}
 		}else{
 			$text='导入失败！数据文件损坏';
@@ -140,6 +172,13 @@ class Database{
 			if(empty(DB_PRE)||stripos($tmpname,DB_PRE)!=FALSE){$tbarr[]=$tmpname;}
 		}
 		return $tbarr;
+	}
+	
+	static function checkBOM($contents) {
+		$charset1 = substr($contents,0,1);
+		$charset2 = substr($contents,1,1);
+		$charset3 = substr($contents,2,1);
+		return (ord($charset1)==239 && ord($charset2)==187 && ord($charset3)==191)?true:false;
 	}
 	
 }

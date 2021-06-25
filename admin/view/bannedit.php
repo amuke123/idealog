@@ -27,6 +27,5 @@
 <script>
 window.onload=function(){
 	autoShow('bookmark','banner');
-	showurl("0");
 }
 </script>

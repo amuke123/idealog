@@ -166,6 +166,12 @@ function setdbname(el){
 	myimport.submit();
 }
 
+function databak(code){
+	if(confirm('确定备份网站数据?')){
+		location.href='?action=databak&code='+code;
+	}
+}
+
 function yzNavAdd(){
 	if(navadddiy.name.value==""){
 		prompt1('导航名称不能为空');

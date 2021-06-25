@@ -38,6 +38,5 @@
 <script>
 window.onload=function(){
 	autoShow('eye','template');
-	showurl("0");
 }
 </script>

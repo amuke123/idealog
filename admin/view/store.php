@@ -8,6 +8,5 @@
 <script>
 window.onload=function(){
 	autoShow('sys','store');
-	showurl("0");
 }
 </script>

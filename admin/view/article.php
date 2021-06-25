@@ -88,6 +88,5 @@
 <script>
 window.onload=function(){
 	autoShow('article');
-	showurl("0");
 }
 </script>

@@ -6,13 +6,13 @@
 			<form action="" method="post" name="myform">
 				<input type="hidden" name='ajcode' id='ajcode' value="<?php echo $code;?>" />
 				<div class="m_list" id="m_list">
-					<p><b></b><b>备份文件</b><b>备份时间</b><b>文件大小</b><b></b></p>
+					<p><b></b><b>备份文件</b><b>备份时间</b><b>文件大小</b><b>操作</b></p>
 					<?php foreach($dblist as $value){?>
 						<p>
 						<span><input type="checkbox" name="artck[]" value="<?php echo urlencode($value['name']);?>" /></span>
 						<span class="tleft"><?php echo $value['name'];?></span>
 						<span><?php echo $value['date'];?></span>
-						<span><?php echo $value['size']/1024 ." KB";?></span>
+						<span><?php echo round($value['size']/1024,2) ." KB";?></span>
 						<span><a href="<?php echo $value['url'].$value['name'];?>">下载</a> <a href="javascript:void(0);" onclick="setdbname(this)">导入</a></span>
 						</p>
 					<?php }?>
@@ -35,7 +35,7 @@
 				<div class="cont3" id="cont1">
 					<p><span>将站点所使用的数据表备份到服务器空间，备份时将会通过表前缀过滤掉无当前表前缀的数据表（表前缀为空时备份整个数据库）。</span></p>
 					<p><span>当前数据库表前缀：<?php echo DB_PRE;?></span></p><p></p>
-					<p><a href="?action=databak&code=<?php echo $code;?>">开始备份</a></p>
+					<p><a href="javascript:databak('<?php echo $code;?>');">开始备份</a></p>
 				</div>
 				<div class="cont3" id="cont2">
 					<p><span>仅可导入同版本ideslog导出的数据库备份文件，且数据库表前缀需保持一致。</span></p>
@@ -59,6 +59,6 @@
 <script>
 window.onload=function(){
 	autoShow('sys','data');
-	showurl("0");
+	changeSet(1);
 }
 </script>

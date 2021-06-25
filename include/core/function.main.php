@@ -157,7 +157,7 @@ function getList($path){//获取模板目录
 
 function getBakDir($path){//获取备份目录
 	if(is_dir($path)){
-		$data = scandir($path);
+		$data = scandir($path,1);
 		$dirs = array();
 		foreach($data as $value){
 			$newdir=$path.$value;
@@ -194,63 +194,6 @@ function delAllDirAndFile($path){//删除目录下的所有文件和文件夹
 }
 
 /**
-function doStripslashes(){//去除多余的转义字符
-    if (get_magic_quotes_gpc()) {
-        $_GET = stripslashesDeep($_GET);
-        $_POST = stripslashesDeep($_POST);
-        $_COOKIE = stripslashesDeep($_COOKIE);
-        $_REQUEST = stripslashesDeep($_REQUEST);
-    }
-}
-
-function stripslashesDeep($value){//递归去除转义字符
-    $value = is_array($value) ? array_map('stripslashesDeep', $value) : stripslashes($value);
-    return $value;
-}
-
-
-
-function getGravatar($email,$s =40,$d='mm',$g ='g'){
-    $hash = md5($email);
-    $avatar = "http://cn.gravatar.com/avatar/$hash?s=$s&d=$d&r=$g";
-    return $avatar;
-}
-
-
-
-
-
-
-
-function get_tq(){//获取天气
-	$key='fc7594454747806f7fc523c2ed3df754';
-	$city=get_addr($key);
-	$cityid=$city['adcode'];
-	$weatherURL = "https://restapi.amap.com/v3/weather/weatherInfo?city=$cityid&key=$key";
-	$content=file_get_contents($weatherURL);
-	$result = json_decode($content,true);
-	return $result;
-}
-function get_addr($key){//获取所在城市
-	$weatherURL = "https://restapi.amap.com/v3/ip?key=$key";
-	$content=file_get_contents($weatherURL);
-	$result = json_decode($content,true);
-	return $result;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function checkMail($email){
     if(preg_match("/^[\w\.\-]+@\w+([\.\-]\w+)*\.\w+$/",$email)&&strlen($email)<=80){return true;}else{return false;}
