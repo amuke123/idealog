@@ -66,7 +66,7 @@ if($action=='install'){
     $adminpw = isset($_POST['adminpw'])?addslashes(trim($_POST['adminpw'])):'';
     $adminpw2 = isset($_POST['adminpw2'])?addslashes(trim($_POST['adminpw2'])):'';
 	
-	$txt='';$result = '';
+	$txt='';$txt2='';$result = '';
 	if($db_prefix==''){
 		$txt='数据库表前缀不能为空!';
 	}else if(!preg_match("/^[\w_]+_$/",$db_prefix)){
@@ -79,6 +79,11 @@ if($action=='install'){
 		$txt='两次输入的密码不一致!';
 	}
 	if($txt!=""){mkMsg($txt);exit;}
+	
+	if($db_host==""){$txt2='数据库链接地址不能为空!';
+	}else if($db_user==""){$txt2='请输入数据库用户名!';
+	}else if($db_name==""){$txt2='不能使用空数据库!';}
+	if($txt2!=""){mkMsg($txt2);exit;}
 	
 	define('DB_HOST',$db_host);
 	define('DB_USER',$db_user);

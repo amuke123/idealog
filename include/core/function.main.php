@@ -140,7 +140,7 @@ function getList($path){//获取模板目录
 		preg_match("/Author:(.*)/i", $nonceTplData, $author);//模板作者
 		preg_match("/AuthorUrl:(.*)/i", $nonceTplData, $tplUrl);//作者URL
 		preg_match("/Version:(.*)/i", $nonceTplData, $tplVersion);//模板版本
-		preg_match("/ForIdeashu:(.*)/i", $nonceTplData, $tplForLog);//适用程序版本
+		preg_match("/ForIdealog:(.*)/i", $nonceTplData, $tplForLog);//适用程序版本
 
 		$pinfo['name'] = !empty($name[1]) ? trim($name[1]) : $val;
 		$pinfo['author'] = !empty($author[1]) ? trim($author[1]) : 'IDEASHU用户';
@@ -148,7 +148,7 @@ function getList($path){//获取模板目录
 		$pinfo['des'] = !empty($tplDes[1]) ? trim($tplDes[1]) : '';
 		$pinfo['authorUrl'] = !empty($tplUrl[1]) ? trim($tplUrl[1]) : IDEA_URL;
 		$pinfo['version'] = !empty($tplVersion[1]) ? trim($tplVersion[1]) : '';
-		$pinfo['forIdeashu'] = !empty($tplForLog[1]) ? '适用于IDEASHU:'.$tplForLog[1] : '';
+		$pinfo['forIdealog'] = !empty($tplForLog[1]) ? '适用于ideaLog:'.$tplForLog[1] : '';
 		$pinfo['file'] = $val;
 		$templist[]=$pinfo;
 	}
@@ -174,6 +174,47 @@ function getBakDir($path){//获取备份目录
 		}
 	}
 	return $dirs;
+}
+
+/*
+PluginName: sitemap
+Version: 2.0
+PluginUrl: http://www.qiyuuu.com/for-emlog/emlog-plugin-sitemap
+Description: 生成sitemap，供搜索引擎抓取
+Author: 奇遇
+AuthorEmail: qiyuuu@gmail.com
+AuthorUrl: http://www.qiyuuu.com
+*/
+
+function getPlugDir($path){//获取插件目录
+	$temlist=getDir($path);
+	$pluglist=array();
+	foreach($temlist as $val){
+		$purl = $path.$val.'/'.$val.'.php';
+		if(file_exists($purl)){
+			$nonceTplData = @implode('', @file($purl));
+			preg_match("/PluginName:(.*)/i", $nonceTplData, $name);//模板名称（缺省文件名命名）
+			preg_match("/Version:(.*)/i", $nonceTplData, $tplVersion);//模板版本
+			preg_match("/PluginUrl:(.*)/i", $nonceTplData, $tplPlugUrl);//模板地址
+			preg_match("/Description:(.*)/i", $nonceTplData, $tplDes);//模板描述
+			preg_match("/Author:(.*)/i", $nonceTplData, $author);//模板作者
+			preg_match("/AuthorUrl:(.*)/i", $nonceTplData, $tplUrl);//作者URL
+			preg_match("/AuthorEmail:(.*)/i", $nonceTplData, $tplEmail);//作者邮箱
+			preg_match("/ForIdealog:(.*)/i", $nonceTplData, $tplForLog);//适用程序版本
+
+			$pinfo['name'] = !empty($name[1]) ? trim($name[1]) : $val;
+			$pinfo['author'] = !empty($author[1]) ? trim($author[1]) : 'ideaLog开发者';
+			$pinfo['des'] = !empty($tplDes[1]) ? trim($tplDes[1]) : '';
+			$pinfo['authorUrl'] = !empty($tplUrl[1]) ? trim($tplUrl[1]) : IDEA_URL;
+			$pinfo['authorEmail'] = !empty($tplEmail[1]) ? trim($tplEmail[1]) : '';
+			$pinfo['version'] = !empty($tplVersion[1]) ? trim($tplVersion[1]) : '';
+			$pinfo['forIdealog'] = !empty($tplForLog[1]) ? '适用于ideaLog:'.$tplForLog[1] : '';
+			$pinfo['plugUrl'] = !empty($tplPlugUrl[1]) ? '适用于ideaLog:'.$tplPlugUrl[1] : '';
+			$pinfo['file'] = $val;
+			$pluglist[]=$pinfo;
+		}
+	}
+	return $pluglist;
 }
 
 function delAllDirAndFile($path){//删除目录下的所有文件和文件夹
