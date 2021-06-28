@@ -7,9 +7,8 @@
 			<div class="m_list" id="m_list">
 				<p><b>序号</b><b>标题</b><b>图片</b><b>打开方式</b><b>状态</b><b>跳转链接</b><b>操作</b></p>
 				<?php 
-				if(!empty($banners)){
-					foreach($banners as $key=>$value){
-						$pic = $value['pic']==""?TEMPLATE_URLA .'static/images/img.gif':$value['pic'];
+				if(!empty($banners)){foreach($banners as $key=>$value){
+					$pic = $value['pic']==""?TEMPLATE_URLA .'static/images/img.gif':$value['pic'];
 				?>
 					<p class="high <?php echo $value['show']=='0'?'gray':'';?>">
 					<span><input type="text" name="num[]" alt="<?php echo $key;?>" value="<?php echo $value['index'];?>" /></span>
@@ -19,10 +18,7 @@
 					<span><a href="javascript:showOrHide2('<?php echo $key."','".IDEA_URL."','";echo $value['show']==0?'1':'0';?>','banner_list');"><?php echo $value['show']==0?'<img title="隐藏" src="'. TEMPLATE_URLA .'static/images/plugin_inactive.gif" />':'<img title="显示" src="'. TEMPLATE_URLA .'static/images/plugin_active.gif" />';?></a></span>
 					<span><?php echo $value['link'];?></span>
 					<span><a href="javascript:delLine2('<?php echo $key."','".IDEA_URL;?>','banner_list');"><img title='删除' src='<?php echo TEMPLATE_URLA . "static/images/icon_error.gif";?>' /></a></span></p>
-				<?php
-					}
-				}
-				?>
+				<?php }}?>
 			</div>
 			<div class="m_button">
 				<input type="button" onClick="javascript:change_index2('<?php echo IDEA_URL;?>','banner_list');" class="m_sub" name='tj' value='更改排序' /><input type="button" onClick="javascript:show_add('banner_add');" class="m_but" name='add' value='添加轮换图 +' />

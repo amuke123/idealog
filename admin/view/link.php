@@ -25,7 +25,7 @@
 			<div class="m_list" id="m_list">
 				<p><b>序号</b><b>名称</b><b>描述</b><b>显隐</b><b>图片</b><b>查看</b><b>操作</b></p>
 				<?php
-				foreach($links as $key=>$value){
+				if(!empty($links)){foreach($links as $key=>$value){
 					$pic=$value['pic']==""?TEMPLATE_URLA .'static/images/img.gif':str_replace('../',IDEA_URL,$value['pic']);
 				?>
 					<p class="high <?php echo $value['show']=='0'?'gray':'';?>">
@@ -37,7 +37,7 @@
 					<span><a  target="_blank" href="<?php echo $value['url'];?>"><img title='查看' src='<?php echo TEMPLATE_URLA . "static/images/eye.png";?>' /></a></span>
 					<span><a href="javascript:delLine2('<?php echo $key."','".IDEA_URL;?>','link_list');"><img title='删除' src='<?php echo TEMPLATE_URLA . "static/images/icon_error.gif";?>' /></a></span>
 					</p>
-				<?php }?>
+				<?php }}?>
 			</div>
 			<div class="m_button">
 				<input type="button" onClick="javascript:change_index2('<?php echo IDEA_URL;?>','link_list');" class="m_sub" name='tj' value='更改序号' /><input type="button" onClick="javascript:show_add('link_add');" class="m_but" name='add' value='新建链接 +' />
