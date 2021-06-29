@@ -176,21 +176,13 @@ function getBakDir($path){//获取备份目录
 	return $dirs;
 }
 
-/*
-PluginName: sitemap
-Version: 2.0
-PluginUrl: http://www.qiyuuu.com/for-emlog/emlog-plugin-sitemap
-Description: 生成sitemap，供搜索引擎抓取
-Author: 奇遇
-AuthorEmail: qiyuuu@gmail.com
-AuthorUrl: http://www.qiyuuu.com
-*/
 
 function getPlugDir($path){//获取插件目录
 	$temlist=getDir($path);
 	$pluglist=array();
 	foreach($temlist as $val){
 		$purl = $path.$val.'/'.$val.'.php';
+		$purlset = $path.$val.'/'.$val.'_setting.php';
 		if(file_exists($purl)){
 			$nonceTplData = @implode('', @file($purl));
 			preg_match("/PluginName:(.*)/i", $nonceTplData, $name);//模板名称（缺省文件名命名）
@@ -209,8 +201,9 @@ function getPlugDir($path){//获取插件目录
 			$pinfo['authorEmail'] = !empty($tplEmail[1]) ? trim($tplEmail[1]) : '';
 			$pinfo['version'] = !empty($tplVersion[1]) ? trim($tplVersion[1]) : '';
 			$pinfo['forIdealog'] = !empty($tplForLog[1]) ? '适用于ideaLog:'.$tplForLog[1] : '';
-			$pinfo['plugUrl'] = !empty($tplPlugUrl[1]) ? '适用于ideaLog:'.$tplPlugUrl[1] : '';
+			$pinfo['plugUrl'] = !empty($tplPlugUrl[1]) ? trim($tplPlugUrl[1]) : '#';
 			$pinfo['file'] = $val;
+			$pinfo['setting']=file_exists($purlset)?'1':'0';
 			$pluglist[]=$pinfo;
 		}
 	}

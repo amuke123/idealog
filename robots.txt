@@ -1,5 +1,5 @@
 #
-# robots.txt for emlog
+# robots.txt for ideaLog
 #
 
 User-agent: *

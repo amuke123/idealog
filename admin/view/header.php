@@ -30,7 +30,7 @@
 			</ul>
 		</li>
 		<?php }else{?>
-		<li><a id='nav_<?php echo $navkey;?>' href="<?php echo ADMIN_URL .$urlkey;?>"><i class="icon aicon-<?php echo $ect[1];?>"><i></i></i><?php echo $ect[0];?></a></li>
+		<li><a id='nav_<?php echo $navkey;?>' href="<?php echo $navkey!='extend'?ADMIN_URL .$urlkey:'';?>"><i class="icon aicon-<?php echo $ect[1];?>"><i></i></i><?php echo $ect[0];?></a></li>
 		<?php }
 		}?>
 	</ul>

@@ -480,7 +480,7 @@ if(isset($_POST['deltem'])){
 				if(in_array($tem,$temlist)){
 					$path2=$path.$tem.'/';
 					delAllDirAndFile($path2);
-					$data['text']='模板删除成功';
+					$data['text']='模板已成功删除';
 					updateCacheAll('options');
 				}else{
 					$data['text']='删除失败，模板不存在，请刷新缓存后重试';
@@ -505,6 +505,52 @@ if(isset($_POST['delbak'])){
 			delThem(IDEA_ROOT .'/content/backup/'.urldecode($vel));
 		}
 		$data['text']='删除成功';
+	}else{
+		$data['text']='非法操作';
+	}
+	echo json_encode($data);
+}
+
+if(isset($_POST['plugin'])){//插件开启关闭
+	$db=Conn::getConnect();
+	$data=array();
+	$data['action']='plugin';
+	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
+	if($ajcode==$_SESSION['ajcode']){
+		$plugin=isset($_POST['plugin'])?$_POST['plugin']:'';
+		$key=isset($_POST['key'])?$_POST['key']:0;
+		$plugins=Control::get('plugins_list');
+		$ee='操作失败';
+		if($key){
+			if(!in_array($plugin,$plugins)){$plugins[]=$plugin;$ee='已开启';}
+		}else{
+			if(in_array($plugin,$plugins)){$plugins=array_diff($plugins,array($plugin));$ee='已关闭';}
+		}
+		$opdata['plugins_list']=serialize($plugins);
+		Control::set($opdata);
+		updateCacheAll('options');
+		$data['text']='插件'.$plugin.$ee;
+	}else{
+		$data['text']='非法操作';
+	}
+	echo json_encode($data);
+}
+
+if(isset($_POST['plugindel'])){//删除插件
+	$db=Conn::getConnect();
+	$data=array();
+	$data['action']='plugin';
+	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
+	if($ajcode==$_SESSION['ajcode']){
+		$plugin=isset($_POST['plugindel'])?$_POST['plugindel']:'';
+		$pluginpath=IDEA_ROOT .'/content/plugins/'.$plugin.'/';
+		delAllDirAndFile($pluginpath);
+		$plugins=Control::get('plugins_list');
+		if(in_array($plugin,$plugins)){$plugins=array_diff($plugins,array($plugin));}
+		$opdata['plugins_list']=serialize($plugins);
+		Control::set($opdata);
+		updateCacheAll('options');
+		$data['text']='插件'.$plugin.'删除成功';
 	}else{
 		$data['text']='非法操作';
 	}

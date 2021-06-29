@@ -10,8 +10,7 @@ if($action=='databak'){
 	$ajcode=isset($_GET['code'])?$_GET['code']:'';
 	if($ajcode==$_SESSION['ajcode']){
 		$_SESSION['ajcode']='';
-		Database::setBak();
-		$text='备份成功';
+		$text=Database::setBak();
 	}else{
 		$text='非法操作';
 	}

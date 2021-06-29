@@ -490,3 +490,25 @@ function delbak(path){//删除模板
 		sendHttpPost(url,data);
 	}
 }
+
+function pluginopin(path,tem,key=0){//开启关闭插件
+	if(confirm('确定执行当前操作吗?')){
+		var ajcode=document.getElementById("ajcode").value;
+		url = path + 'include/action/actiondo.php';
+		data="ajcode="+ajcode;
+		data+="&plugin="+tem;
+		data+="&key="+key;
+		sendHttpPost(url,data);
+	}
+}
+
+function plugindel(path,tem){//删除插件
+	if(confirm('确定删除操作吗?')){
+		var ajcode=document.getElementById("ajcode").value;
+		url = path + 'include/action/actiondo.php';
+		data="ajcode="+ajcode;
+		data+="&plugindel="+tem;
+		sendHttpPost(url,data);
+	}
+}
+

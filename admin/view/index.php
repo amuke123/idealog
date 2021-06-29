@@ -1,9 +1,9 @@
 <div class="main" id="main">
 	<div class="content">
 		<div class="m_title">管理首页</div>
-		<!--div class="m_warning"><span><i class="icon aicon-infor"></i></span>：出于演示站完整性考虑，演示站不开放图片上传和删除功能，且每次有用户登录演示后台时</div>
-		<div class="m_warning"><span><i class="icon aicon-infor"></i></span>：出于演示站完整性考虑，演示站不开放图片上传和删除功能，且每次有用户登录演示后台时，数据都将被自动还原</div-->
-		<!--div class="m_infor"><i class="icon-bell"></i><b>提示：</b>如果统计数据不准确，请点击此处<a href="#">更新缓存</a>即可更新为网站最新数据。</div-->
+		<?php if($warning){?>
+		<div class="m_warning"><span><i class="icon aicon-infor"></i></span>：网站程序已成功安装，建议手动删除网站根目录下的安装文件“install.php”，以免被他人非法利用，</div>
+		<?php }?>
 		<div class="m_info left">
 			<div class="m_i_title"><i class="icon aicon-info"></i>站点信息</div>
 			<div class="m_i_list">
@@ -31,6 +31,7 @@
 			</div>
 		</div>
 		<div class="clear"></div>
-
+		<div class="m_infor"><i class="icon-bell"></i><b>提示：</b>如果出现数据不准确，请点击此处<a href="<?php echo Url::getActionUrl('setcache');?>">更新缓存</a>即可更新为网站最新数据。</div>
+		<div class="clear"></div>
 	</div>
 </div>

@@ -74,6 +74,7 @@ function callback(){
 				case 'usertem':
 				case 'deltem':
 				case 'delbak':
+				case 'plugin':
 					ts(json.text);
 					break;
 				case 'sendid':

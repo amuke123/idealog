@@ -1,12 +1,12 @@
 <?php
 /*
-PluginName: sitemap
-Version: 2.0
-PluginUrl: http://www.qiyuuu.com/for-emlog/emlog-plugin-sitemap
-Description: 生成sitemap，供搜索引擎抓取
-Author: 奇遇
-AuthorEmail: qiyuuu@gmail.com
-AuthorUrl: http://www.qiyuuu.com
+PluginName: tips
+Version: 2.5
+PluginUrl: http://www.tips.com
+Description: tips，供搜索引擎抓取
+Author: tips
+AuthorEmail: tips@gmail.com
+AuthorUrl: http://www.good.com
 ForIdealog: 1.0+
 */
 

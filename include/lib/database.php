@@ -169,7 +169,7 @@ class Database{
 		$tbarr=array();
 		foreach($tbs as $v){
 			$tmpname=$v['Tables_in_'.DB_NAME];
-			if(empty(DB_PRE)||stripos($tmpname,DB_PRE)!=FALSE){$tbarr[]=$tmpname;}
+			if(empty(DB_PRE)||stripos($tmpname,DB_PRE)!==FALSE){$tbarr[]=$tmpname;}
 		}
 		return $tbarr;
 	}

@@ -2,10 +2,13 @@
 include_once 'global.php';
 
 $serverapp = $_SERVER['SERVER_SOFTWARE'];
-$DB = Conn::getConnect();
-$mysql_ver=$DB->getMysqlVersion();
+$db = Conn::getConnect();
+$mysql_ver=$db->getMysqlVersion();
 $php_ver = PHP_VERSION;
 $uploadfile_maxsize = ini_get('upload_max_filesize');
+
+$tem_path=IDEA_ROOT .'install.php';
+$warning=file_exists($tem_path)?true:false;
 
 if(function_exists("imagecreate")){
 	if(function_exists('gd_info')){

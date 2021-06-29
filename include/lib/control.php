@@ -149,8 +149,23 @@ class Control{
 			'ulist'=>array('name'=>'用户|user','child'=>array('user'=>'用户|user2','say'=>'评论|chat')),
 			'eye'=>array('name'=>'外观|eye','child'=>array('nav'=>'导航|fied','template'=>'模板|tian')),
 			'sys'=>array('name'=>'系统|pass','child'=>array('system'=>'设置|set','data'=>'数据|data','plugin'=>'插件|plugin','store'=>'应用|info')),
-			'extend'=>array('name'=>'扩展|code','child'=>array('more_sitimap'=>'sitemap|more','more_tel'=>'模板编辑|more','more_say'=>'评论拦截|more')),
 		);
+		$plist=array();
+		$path=IDEA_ROOT .'/content/plugins/';
+		$plist['name']='扩展|code';
+		$plugins=Control::get('plugins_list');
+		foreach($plugins as $val){
+			$purl = $path.$val.'/'.$val.'.php';
+			$purlset = $path.$val.'/'.$val.'_setting.php';
+			if(file_exists($purl)){
+				$nonceTplData = @implode('', @file($purl));
+				preg_match("/PluginName:(.*)/i", $nonceTplData,$name);//模板名称（缺省文件名命名）
+				$temname = !empty($name[1])?trim($name[1]):$val;
+				if(file_exists($purlset)){$plist['child']['more_'.$val]=$temname.'|more';}
+			}
+		}
+		$alist['extend']=$plist;
+		
 		return $alist;
 	}
 	
