@@ -26,6 +26,6 @@
 </div>
 <script>
 window.onload=function(){
-	autoShow('bookmark','banner');
+	autoShow('eye','banner');
 }
 </script>

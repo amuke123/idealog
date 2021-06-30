@@ -172,6 +172,15 @@ function databak(code){
 	}
 }
 
+function copyurl(el){
+	var input = el.parentNode.getElementsByTagName('input')[0];
+	input.type='text';
+	input.select();
+	document.execCommand('Copy');
+	input.type='hidden';
+	prompt1('复制成功');
+}
+
 function yzNavAdd(){
 	if(navadddiy.name.value==""){
 		prompt1('导航名称不能为空');

@@ -557,4 +557,19 @@ if(isset($_POST['plugindel'])){//删除插件
 	echo json_encode($data);
 }
 
+if(isset($_POST['delid'])){//删除资源文件
+	$db=Conn::getConnect();
+	$data=array();
+	$data['action']='delid';
+	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
+	if($ajcode==$_SESSION['ajcode']){
+		$delid=isset($_POST['delid'])?$_POST['delid']:'';
+		delFileLineId($delid);
+		$data['text']='删除成功';
+	}else{
+		$data['text']='非法操作';
+	}
+	echo json_encode($data);
+}
+
 ?>

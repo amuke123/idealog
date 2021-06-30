@@ -101,6 +101,24 @@ function delFileLine($path){//删除操作
 	}
 }
 
+function delFileLineId($delid){//删除操作id
+	$db=Conn::getConnect();
+	$sql="SELECT `path` FROM `". DB_PRE ."file` WHERE `id` = '".$delid."';";
+	$row=$db->getOnce($sql);
+	if(!empty($row['path'])){
+		delThem($row['path']);
+	}
+	$sql2="SELECT `id`,`path` FROM `". DB_PRE ."file` WHERE `top_id`=".$delid;
+	$row2=$db->getOnce($sql2);
+	if(!empty($row2['id'])){
+		delThem($row2['path']);
+		$delsql1="delete from `". DB_PRE ."file` where `id`=".$row2['id'];
+		$db->query($delsql1);
+	}
+	$delsql2="delete from `". DB_PRE ."file` where `id`=".$delid;
+	$db->query($delsql2);
+}
+
 function delThem($path){//删除文件
 	$tem_path=str_replace('../',IDEA_ROOT .'/',$path);
 	if(file_exists($tem_path)){unlink($tem_path);}

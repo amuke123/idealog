@@ -114,7 +114,7 @@
 .aicon-set i{color:currentColor;position:absolute;display:inline-block;width:9px;height:2px;margin-left:-5px;margin-top:1px;border-left:solid 3px currentColor;border-right:solid 3px currentColor;transform:rotate(45deg);}
 .aicon-set i:before{position:absolute;content:"";display:inline-block;width:2px;height:9px;margin-left:4px;margin-top:-6px;border-top:solid 3px currentColor;border-bottom:solid 3px currentColor;}
 
-.aicon-side{position:absolute;display:inline-block;width:11px;height:6px;margin-left:5px;margin-top:8px;border:solid 1px currentColor;border-top:solid 3px currentColor;}
+.aicon-side{position:absolute;display:inline-block;width:11px;height:6px;margin-left:4px;margin-top:8px;border:solid 1px currentColor;border-top:solid 3px currentColor;}
 .aicon-side:before{position:absolute;content:"";display:inline-block;height:6px;margin-left:5px;margin-top:0px;border-left:solid 1px currentColor;}
 
 .aicon-data{position:absolute;display:inline-block;width:13px;height:5px;margin-left:5px;margin-top:7px;background:currentColor;border-radius:50%;}
@@ -125,7 +125,7 @@
 .aicon-plugin:before{position:absolute;content:"";width:3px;height:5px;margin-left:5px;margin-top:10px;background:currentColor;}
 .aicon-plugin:after{position:absolute;content:"";width:5px;height:6px;margin-left:2px;margin-top:1px;border-left:solid 2px currentColor;border-right:solid 2px currentColor;}
 
-.aicon-store{position:absolute;display:inline-block;width:10px;height:0px;margin-left:4px;margin-top:7px;border-top:solid 7px currentColor;border-left:solid 2px transparent;border-right:solid 2px transparent;}
+.aicon-store{position:absolute;display:inline-block;width:10px;height:0px;margin-left:5px;margin-top:7px;border-top:solid 7px currentColor;border-left:solid 2px transparent;border-right:solid 2px transparent;}
 .aicon-store:before{position:absolute;content:"";display:inline-block;width:3px;height:3px;margin-left:-1px;margin-top:2px;border-radius:50%;background:currentColor;}
 .aicon-store:after{position:absolute;content:"";display:inline-block;width:3px;height:3px;margin-left:7px;margin-top:2px;border-radius:50%;background:currentColor;}
 

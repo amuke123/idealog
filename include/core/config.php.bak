@@ -1,9 +1,9 @@
 <?php
-header("location: ./install.php");exit;
+header("location: ../install.php");exit;
 define('DB_HOST','127.0.0.1');
 define('DB_USER','root');
 define('DB_PASSWD','');
 define('DB_NAME','idealog');
 define('DB_PRE','');
 
-define('AUTO_STR','$2Y$10$PLL3UUYOOHTHJSA8DOCM2USVPAK5SN6DFHA2TTIEBWUGBBBS9LKDW');
+define('AUTO_STR','');

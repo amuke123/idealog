@@ -28,7 +28,7 @@ function change_index(path,db=''){//改变顺序
 		arr2.push(indexs[i]['value']);
 	}
 	if(arr1.length<1){
-		alert('没有可操作的分类');
+		alert('没有可操作的项');
         return;
 	}
 	url = path + 'include/action/actiondo.php';
@@ -49,7 +49,7 @@ function change_index2(path,option=''){//改变顺序，配置
 		arr2.push(indexs[i]['value']);
 	}
 	if(arr1.length<1){
-		alert('没有可操作的分类');
+		alert('没有可操作的项');
         return;
 	}
 	url = path + 'include/action/actiondo.php';
@@ -508,6 +508,16 @@ function plugindel(path,tem){//删除插件
 		url = path + 'include/action/actiondo.php';
 		data="ajcode="+ajcode;
 		data+="&plugindel="+tem;
+		sendHttpPost(url,data);
+	}
+}
+
+function delfiles(path,delid){//删除资源附件
+	if(confirm('确定删除操作吗?')){
+		var ajcode=document.getElementById("ajcode").value;
+		url = path + 'include/action/actiondo.php';
+		data="ajcode="+ajcode;
+		data+="&delid="+delid;
 		sendHttpPost(url,data);
 	}
 }
