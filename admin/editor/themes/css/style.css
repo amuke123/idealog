@@ -48,4 +48,5 @@ a:hover{color:#33CC99;}
 .mk-editor pre.code{border-left:#ccc solid 2px;margin:1px 0px;}
 .mk-editor ol{list-style-type:decimal;padding-left:30px;margin:1px 0px;}
 .mk-editor ul{list-style-type:disc;padding-left:30px;margin:1px 0px;}
+.mk-editor p img{max-width:100%;}
 

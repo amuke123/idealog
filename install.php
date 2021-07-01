@@ -156,8 +156,8 @@ CREATE TABLE `{$db_prefix}article` (
   `copyrights` int(1) NOT NULL,
   PRIMARY KEY (`id`)
   ) {$table_charset_sql};
-DROP TABLE IF EXISTS {$db_prefix}comment;
 INSERT INTO `{$db_prefix}article` VALUES (1,'欢迎使用ideaLog','".time()."','成功安装了ideaLog，这是系统自动生成的一篇笔记，记录精彩生活从现在开始','','','',1,0,'a',0,0,0,0,0,'','',1,1,'','','','',1,'',0);
+DROP TABLE IF EXISTS {$db_prefix}comment;
 CREATE TABLE `{$db_prefix}comment` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `a_id` int(10) NOT NULL,

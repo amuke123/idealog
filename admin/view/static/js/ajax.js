@@ -48,7 +48,7 @@ function callback(){
 	if(xmlHttp.readyState == 4){
 		if(xmlHttp.status == 200){//获取服务器返回的数据//获取纯文本数据
 			var result=xmlHttp.responseText;
-			//console.log(result);
+			console.log(result);
 			var json = eval("(" + result + ")");
 			switch (json.action){
 				case 'addart':
@@ -59,23 +59,7 @@ function callback(){
 				case 'showfile':
 					xsbox(json.txt);
 					break;
-				case 'index':
-				case 'delline':
-				case 'showhide':
-				case 'dellist':
-				case 'draft':
-				case 'release':
-				case 'check':
-				case 'settop':
-				case 'delsay':
-				case 'checksay':
-				case 'goodsay':
-				case 'movesort':
-				case 'usertem':
-				case 'deltem':
-				case 'delbak':
-				case 'plugin':
-				case 'delid':
+				case 'tsxx':
 					ts(json.text);
 					break;
 				case 'sendid':

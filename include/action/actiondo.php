@@ -1,11 +1,11 @@
 <?php
 define('ROOT', dirname(dirname(dirname(__FILE__))));
-include_once ROOT.'/include/core/amuker.php';
+include_once ROOT .'/include/core/amuker.php';
 Checking::setSession();
 
 if(isset($_POST['idexid'])){
 	$data=array();
-	$data['action']='index';
+	$data['action']='tsxx';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
 	$dbtb=isset($_POST['db'])?$_POST['db']:'';
 	if($ajcode==$_SESSION['ajcode']){
@@ -22,7 +22,7 @@ if(isset($_POST['idexid'])){
 
 if(isset($_POST['idexid2'])){
 	$data=array();
-	$data['action']='index';
+	$data['action']='tsxx';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
 	$option=isset($_POST['option'])?$_POST['option']:'';
 	$banners=Control::get($option);
@@ -47,7 +47,7 @@ if(isset($_POST['idexid2'])){
 
 if(isset($_POST['delline'])){
 	$data=array();
-	$data['action']='delline';
+	$data['action']='tsxx';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
 	$dbtb=isset($_POST['db'])?$_POST['db']:'';
 	if($ajcode==$_SESSION['ajcode']){
@@ -65,7 +65,7 @@ if(isset($_POST['delline'])){
 
 if(isset($_POST['delline2'])){
 	$data=array();
-	$data['action']='delline';
+	$data['action']='tsxx';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
 	$option=isset($_POST['option'])?$_POST['option']:'';
 	$banners=Control::get($option);
@@ -85,7 +85,7 @@ if(isset($_POST['delline2'])){
 
 if(isset($_POST['showhide'])){
 	$data=array();
-	$data['action']='showhide';
+	$data['action']='tsxx';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
 	$dbtb=isset($_POST['db'])?$_POST['db']:'';
 	$key=isset($_POST['key'])?$_POST['key']:'';
@@ -105,7 +105,7 @@ if(isset($_POST['showhide'])){
 
 if(isset($_POST['showhide2'])){
 	$data=array();
-	$data['action']='showhide';
+	$data['action']='tsxx';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
 	$option=isset($_POST['option'])?$_POST['option']:'';
 	$key=isset($_POST['key'])?$_POST['key']:'';
@@ -218,7 +218,7 @@ if(isset($_POST['upaid'])){
 if(isset($_POST['dellist'])){
 	$db=Conn::getConnect();
 	$data=array();
-	$data['action']='dellist';
+	$data['action']='tsxx';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
 	$dbtb=isset($_POST['db'])?$_POST['db']:'';
 	if($ajcode==$_SESSION['ajcode']){
@@ -235,7 +235,7 @@ if(isset($_POST['dellist'])){
 if(isset($_POST['draft'])){
 	$db=Conn::getConnect();
 	$data=array();
-	$data['action']='draft';
+	$data['action']='tsxx';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
 	$dbtb=isset($_POST['db'])?$_POST['db']:'';
 	if($ajcode==$_SESSION['ajcode']){
@@ -253,7 +253,7 @@ if(isset($_POST['draft'])){
 
 if(isset($_POST['release'])){
 	$data=array();
-	$data['action']='release';
+	$data['action']='tsxx';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
 	$dbtb=isset($_POST['db'])?$_POST['db']:'';
 	if($ajcode==$_SESSION['ajcode']){
@@ -272,7 +272,7 @@ if(isset($_POST['release'])){
 if(isset($_POST['check'])){
 	$db=Conn::getConnect();
 	$data=array();
-	$data['action']='check';
+	$data['action']='tsxx';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
 	$dbtb=isset($_POST['db'])?$_POST['db']:'';
 	if($ajcode==$_SESSION['ajcode']){
@@ -290,7 +290,7 @@ if(isset($_POST['check'])){
 if(isset($_POST['move'])){
 	$db=Conn::getConnect();
 	$data=array();
-	$data['action']='movesort';
+	$data['action']='tsxx';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
 	if($ajcode==$_SESSION['ajcode']){
 		$list=isset($_POST['list'])?$_POST['list']:'';
@@ -306,7 +306,7 @@ if(isset($_POST['move'])){
 
 if(isset($_POST['top'])){
 	$data=array();
-	$data['action']='settop';
+	$data['action']='tsxx';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
 	if($ajcode==$_SESSION['ajcode']){
 		$list=isset($_POST['list'])?$_POST['list']:'';
@@ -360,7 +360,7 @@ if(isset($_POST['upfile'])){
 if(isset($_POST['delsay'])){
 	$db=Conn::getConnect();
 	$data=array();
-	$data['action']='delsay';
+	$data['action']='tsxx';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
 	if($ajcode==$_SESSION['ajcode']){
 		$list=isset($_POST['list'])?$_POST['list']:0;
@@ -387,7 +387,7 @@ if(isset($_POST['delsay'])){
 if(isset($_POST['checksay'])){
 	$db=Conn::getConnect();
 	$data=array();
-	$data['action']='checksay';
+	$data['action']='tsxx';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
 	if($ajcode==$_SESSION['ajcode']){
 		$list=isset($_POST['list'])?$_POST['list']:0;
@@ -407,7 +407,7 @@ if(isset($_POST['checksay'])){
 if(isset($_POST['goodsay'])){
 	$db=Conn::getConnect();
 	$data=array();
-	$data['action']='goodsay';
+	$data['action']='tsxx';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
 	if($ajcode==$_SESSION['ajcode']){
 		$list=isset($_POST['list'])?$_POST['list']:0;
@@ -427,7 +427,7 @@ if(isset($_POST['goodsay'])){
 if(isset($_POST['usertem'])){
 	$db=Conn::getConnect();
 	$data=array();
-	$data['action']='usertem';
+	$data['action']='tsxx';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
 	$key=isset($_POST['key'])?$_POST['key']:'';
 	if($ajcode==$_SESSION['ajcode']){
@@ -462,7 +462,7 @@ if(isset($_POST['usertem'])){
 if(isset($_POST['deltem'])){
 	$db=Conn::getConnect();
 	$data=array();
-	$data['action']='deltem';
+	$data['action']='tsxx';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
 	$key=isset($_POST['db'])?$_POST['db']:'';
 	if($ajcode==$_SESSION['ajcode']){
@@ -496,7 +496,7 @@ if(isset($_POST['deltem'])){
 if(isset($_POST['delbak'])){
 	$db=Conn::getConnect();
 	$data=array();
-	$data['action']='delbak';
+	$data['action']='tsxx';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
 	if($ajcode==$_SESSION['ajcode']){
 		$list=isset($_POST['delbak'])?$_POST['delbak']:'';
@@ -514,7 +514,7 @@ if(isset($_POST['delbak'])){
 if(isset($_POST['plugin'])){//插件开启关闭
 	$db=Conn::getConnect();
 	$data=array();
-	$data['action']='plugin';
+	$data['action']='tsxx';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
 	if($ajcode==$_SESSION['ajcode']){
 		$plugin=isset($_POST['plugin'])?$_POST['plugin']:'';
@@ -539,7 +539,7 @@ if(isset($_POST['plugin'])){//插件开启关闭
 if(isset($_POST['plugindel'])){//删除插件
 	$db=Conn::getConnect();
 	$data=array();
-	$data['action']='plugin';
+	$data['action']='tsxx';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
 	if($ajcode==$_SESSION['ajcode']){
 		$plugin=isset($_POST['plugindel'])?$_POST['plugindel']:'';
@@ -560,7 +560,7 @@ if(isset($_POST['plugindel'])){//删除插件
 if(isset($_POST['delid'])){//删除资源文件
 	$db=Conn::getConnect();
 	$data=array();
-	$data['action']='delid';
+	$data['action']='tsxx';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
 	if($ajcode==$_SESSION['ajcode']){
 		$delid=isset($_POST['delid'])?$_POST['delid']:'';

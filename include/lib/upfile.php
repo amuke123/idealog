@@ -126,6 +126,11 @@ class Upfile{
 		$fhz='';
 		if(Control::get('thumbnailok')&&$datas['top_id']==0){
 			$czid=$this->db->last_insert_id();
+			if(!$czid){
+				$cxidsql="SELECT `id` FROM `". DB_PRE ."file` ORDER BY `id` DESC";
+				$cxidarr=$this->db->getOnce($cxidsql);
+				$czid=$cxidarr['id'];
+			}
 			$_w=$datas['width'];
 			$_h=$datas['height'];
 			if($this->checkImg($_w,$_h)){
@@ -141,7 +146,6 @@ class Upfile{
 		$_h=$datas['height'];
 		$thum_w=Control::get('thum_imgmaxw');
 		$thum_h=Control::get('thum_imgmaxh');
-		echo $thum_w."-".$thum_h;
 		if(($thum_w*$_h)/$thum_h > $_w){
 			$new_h=$thum_h;
 			$new_w=($new_h*$_w)/$_h;
