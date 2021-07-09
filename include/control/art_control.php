@@ -8,6 +8,8 @@ class art_Control{
 		//print_r($params);
 		$system_cache=Control::getOptions();
 		extract($system_cache);
+		$site_title = $seo_type!=3 ? $sitename : $seo_title ;
+		$banners=Control::get('banner_list');
 		
 		
 		include View::getView('header');

@@ -1,0 +1,17 @@
+http://www.a.com/
+http://www.a.com/?post=1
+http://www.a.com/?post=2
+http://www.a.com/?sort=1
+http://www.a.com/?sort=5
+http://www.a.com/?sort=2
+http://www.a.com/?sort=3
+http://www.a.com/?sort=4
+http://www.a.com/?sort=6
+http://www.a.com/?sort=7
+http://www.a.com/?sort=1
+http://www.a.com/?sort=5
+http://www.a.com/bd
+http://www.a.com/?post=2
+http://www.a.com/ydb
+http://www.a.com/dzb
+http://www.a.com/?author=1
