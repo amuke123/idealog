@@ -64,6 +64,23 @@ function mkDirect($directUrl){
 	exit;
 }
 
+function getImg($aid=0){//获取笔记图片
+	$imgs=art_Model::getFiles($aid,'image');
+	if(!empty($imgs)){
+		$src=str_replace('../',IDEA_URL,$imgs[0]['path']);//文章第一张图片附件
+	}else{ 
+		$src=getRandImg();//随机图片路径
+	}
+	return $src;
+}
+
+function getRandImg(){//获取随机图片
+	$randval=rand(1,8); 
+	$src=TEMPLATE_URL .'images/randoms/'.$randval.'.jpg';//随机图片路径
+	return $src;
+}
+
+
 function getImgPath($tempath){//获取原始附件
 	$db=Conn::getConnect();
 	$topid=getPathTopid($tempath);
@@ -245,30 +262,6 @@ function delAllDirAndFile($path){//删除目录下的所有文件和文件夹
 	}
 }
 
-/**
-
-function checkMail($email){
-    if(preg_match("/^[\w\.\-]+@\w+([\.\-]\w+)*\.\w+$/",$email)&&strlen($email)<=80){return true;}else{return false;}
-}
-
-
-function getImg($aid=0){//获取笔记图片
-	$imgs=art_Model::getFiles($aid,'image');
-	if(!empty($imgs)){
-		$src=str_replace('../',IDEA_URL,$imgs[0]['path']);//文章第一张图片附件
-	}else{ 
-		$src=getRandImg();//随机图片路径
-	}
-	return $src;
-}
-
-function getRandImg(){//获取随机图片
-	$randval=rand(1,30); 
-	$src=TEMPLATE_URL .'images/randoms/'.$randval.'.jpg';//随机图片路径
-	return $src;
-}
-
-
 function getTag($tagids='',$tar=0){//获取笔记标签
 	$ids=tag_Model::getArtTagList($tagids);
 	$str='';
@@ -279,6 +272,19 @@ function getTag($tagids='',$tar=0){//获取笔记标签
 	}
 	return $str;
 }
+
+/**
+
+function checkMail($email){
+    if(preg_match("/^[\w\.\-]+@\w+([\.\-]\w+)*\.\w+$/",$email)&&strlen($email)<=80){return true;}else{return false;}
+}
+
+
+
+
+
+
+
 
 function hideEmail($email=''){//email部分隐藏
 	if(!empty($email)){

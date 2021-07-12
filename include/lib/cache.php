@@ -153,9 +153,13 @@ class Cache{
         foreach($navlist as $row){
             $children = array();
             if($row['type'] == nav_Model::navtype_sort && !empty($sorts[$row['type_id']]['children'])){
+				$row['url']=Url::sort($row['type_id']);
                 foreach($sorts[$row['type_id']]['children'] as $sortid){
                     $children[] = $sorts[$sortid];
                 }
+            }
+			if($row['type'] == nav_Model::navtype_page){
+				$row['url']=Url::log($row['type_id']);
             }
             $navData = array(
 				'id' => intval($row['id']),

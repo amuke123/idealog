@@ -48,6 +48,13 @@ class say_Model{
 		return $userinfo['name'];
 	}
 	
+	static function getSays2($artid,$sqltem,$startnum,$pagenum,$del='1',$order='DESC',$tid=''){
+		$comments=self::getSays($artid,$sqltem,$startnum,$pagenum,$del,$order,'0');
+		foreach($comments as $key => $value){
+			$comments[$key]['children']=self::getSays($artid,$sqltem,$startnum,$pagenum,$del,'ASC','',$key);
+		}
+		return $comments;
+	}
 	
 	
 	/**
@@ -60,13 +67,7 @@ class say_Model{
 		return $says;
 	}
 	
-	static function getSays2($artid,$sqltem,$startnum,$pagenum,$del='1',$order='DESC',$tid=''){
-		$comments=self::getSays($artid,$sqltem,$startnum,$pagenum,$del,$order,'0');
-		foreach($comments as $key => $value){
-			$comments[$key]['children']=self::getSays($artid,$sqltem,$startnum,$pagenum,$del,'ASC','',$key);
-		}
-		return $comments;
-	}
+	
 	static function isCommentExist($aid,$name,$content){
 		$db=Conn::getConnect();
 		$data = $db->getOnce("SELECT COUNT(*) AS `total` FROM `".DB_PRE ."comment` WHERE `a_id`='".$aid."' AND (`posterid`='".UID ."' OR `name`='".$name."') AND `content`='".$content."'");

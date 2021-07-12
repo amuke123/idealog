@@ -37,11 +37,11 @@ class sort_Model{
 		return $text;
 	}
 	
-	/**static function getSortName($sid=0){
+	static function getSortName($sid=0){
 		$cache=Conn::getCache();
 		$sorts=$cache->readCache('sort');
 		return $sid!=0?$sorts[$sid]['sortname']:'未分类';
-	}**/
+	}
 	
 	static function getSortList($sorts,$sid=0){//获取分类列表，可指定选中列表项
 		$text='';

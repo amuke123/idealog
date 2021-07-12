@@ -22,7 +22,6 @@ require_once View::getView('function');
 <?php echo $header_meta;?>
 <link href="<?php echo TEMPLATE_URL;?>css/style.css" rel="stylesheet" type="text/css" />
 <script src="<?php echo TEMPLATE_URL;?>js/index.js" type="text/javascript"></script>
-<script src="<?php echo TEMPLATE_URL;?>js/banner.js" type="text/javascript"></script>
 </head>
 <body>
 <header>

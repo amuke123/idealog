@@ -199,9 +199,56 @@ class art_Model{
 		$db->query($sql2);
 	}
 	
-	/**
+	static function getlogArt($aid){//笔记详情信息
+		$db=Conn::getConnect();
+		$sql="SELECT * FROM `". DB_PRE ."article` WHERE `id` =".$aid;
+		$art=$db->getOnce($sql);
+		$data=array();
+		$data['art_title']=$art['title'];
+		$data['art_date']=$art['date'];
+		$data['art_content']=$art['content'];
+		$data['art_excerpt']=$art['excerpt'];
+		$data['art_key']=$art['key'];
+		$data['art_alias']=$art['alias'];
+		$data['art_uid']=$art['author'];
+		$data['art_author']=user_Model::getUserName($art['author']);
+		$data['art_authorUrl']=user_Model::getUserPhoto($art['author']);
+		$data['art_sortid']=$art['s_id'];
+		$data['art_sortName']=sort_Model::getSortName($art['s_id']);
+		$data['art_type']=$art['type'];
+		$data['art_eyes']=$art['eyes'];
+		$data['art_goodnum']=$art['goodnum'];
+		$data['art_badnum']=$art['badnum'];
+		$data['art_saynum']=$art['saynum'];
+		$data['art_filenum']=$art['filenum'];
+		$data['art_mark']=$art['mark'];
+		$data['art_copyrights']=$art['copyrights'];
+		$data['art_show']=$art['show'];
+		$data['art_sayok']=$art['sayok'];
+		$data['art_template']=$art['template'];
+		$data['art_password']=$art['password'];
+		$data['art_pic']=$art['pic'];
+		$data['art_tags']=$art['tags'];
+		$data['art_check']=$art['check'];
+		$data['art_getsite']=$art['getsite'];
+		$data['art_geturl']=$art['geturl'];
+		return $data;
+	}
 	
+	static function upEyes($aid){//阅读量
+		$db=Conn::getConnect();
+        $db->query("UPDATE `". DB_PRE ."article` SET eyes=eyes+1 WHERE `id`=".$aid);
+    }
 	
+	static function getNeighbour($date){//上下篇
+		$neighbor = array();
+		$db=Conn::getConnect();
+        $neighbor['prev']=$db->getOnce("SELECT `title`,`id` FROM `". DB_PRE ."article` WHERE `date`<".$date." and `show`='1' and `check`='1' and `type`='a' ORDER BY `date` DESC LIMIT 0,1");
+        $neighbor['next']=$db->getOnce("SELECT `title`,`id` FROM `". DB_PRE ."article` WHERE `date`>".$date." and `show`='1' and `check`='1' and `type`='a' ORDER BY `date` LIMIT 0,1");
+        if($neighbor['next']){$neighbor['next']['title']=htmlspecialchars($neighbor['next']['title']);}
+        if($neighbor['prev']){$neighbor['prev']['title']=htmlspecialchars($neighbor['prev']['title']);}
+        return $neighbor;
+	}
 	
 	static function getArtType($aid){
 		$info=self::getOnceArt($aid);
@@ -224,7 +271,7 @@ class art_Model{
 	
 	
 	
-	
+	/**
 	static function getArtTags($aid,$tags='id'){//获取笔记指定的属性
 		$art=self::getOnceArt($aid);
 		return $art[$tags];
@@ -273,57 +320,11 @@ class art_Model{
 	
 	
 	
-	static function getlogArt($aid){//笔记详情信息
-		$db=Conn::getConnect();
-		$sql="SELECT * FROM `". DB_PRE ."article` WHERE `id` =".$aid;
-		$art=$db->getOnce($sql);
-		$data=array();
-		$data['art_title']=$art['title'];
-		$data['art_date']=$art['date'];
-		$data['art_content']=$art['content'];
-		$data['art_excerpt']=$art['excerpt'];
-		$data['art_key']=$art['key'];
-		$data['art_alias']=$art['alias'];
-		$data['art_uid']=$art['author'];
-		$data['art_author']=user_Model::getUserName($art['author']);
-		$data['art_authorUrl']=user_Model::getUserPhoto($art['author']);
-		$data['art_sortid']=$art['s_id'];
-		$data['art_sortName']=sort_Model::getSortName($art['s_id']);
-		$data['art_type']=$art['type'];
-		$data['art_eyes']=$art['eyes'];
-		$data['art_collects']=art_Model::getCollects($aid);
-		$data['art_goodnum']=$art['goodnum'];
-		$data['art_badnum']=$art['badnum'];
-		$data['art_saynum']=$art['saynum'];
-		$data['art_filenum']=$art['filenum'];
-		$data['art_mark']=$art['mark'];
-		$data['art_copyrights']=$art['copyrights'];
-		$data['art_show']=$art['show'];
-		$data['art_sayok']=$art['sayok'];
-		$data['art_template']=$art['template'];
-		$data['art_password']=$art['password'];
-		$data['art_pic']=$art['pic'];
-		$data['art_tags']=$art['tags'];
-		$data['art_check']=$art['check'];
-		$data['art_getsite']=$art['getsite'];
-		$data['art_geturl']=$art['geturl'];
-		return $data;
-	}
 	
-	static function getNeighbour($date){//上下篇
-		$neighbor = array();
-		$db=Conn::getConnect();
-        $neighbor['prev']=$db->getOnce("SELECT `title`,`id` FROM `". DB_PRE ."article` WHERE `date`<".$date." and `show`='1' and `check`='1' and `type`='a' ORDER BY `date` DESC LIMIT 0,1");
-        $neighbor['next']=$db->getOnce("SELECT `title`,`id` FROM `". DB_PRE ."article` WHERE `date`>".$date." and `show`='1' and `check`='1' and `type`='a' ORDER BY `date` LIMIT 0,1");
-        if($neighbor['next']){$neighbor['next']['title']=htmlspecialchars($neighbor['next']['title']);}
-        if($neighbor['prev']){$neighbor['prev']['title']=htmlspecialchars($neighbor['prev']['title']);}
-        return $neighbor;
-	}
 	
-    static function upEyes($aid){//阅读量
-		$db=Conn::getConnect();
-        $db->query("UPDATE `". DB_PRE ."article` SET eyes=eyes+1 WHERE `id`=".$aid);
-    }
+	
+	
+    
 	
 	
 	

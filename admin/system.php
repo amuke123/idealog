@@ -96,10 +96,10 @@ if(isset($_POST['tjseo'])){
 			$sql2="UPDATE `" . DB_PRE . "options` SET `value`='".$vals."' WHERE `key`='".$keys."'";
 			$db->query($sql2);
 		}
-		updateCacheAll('options');
+		updateCacheAll(array('options','nav'));
 		mkDirect(ADMIN_URL .'system.php?action=seo');
 	}else{
-		echo "<script>alert('非法操作');location.href='". ADMIN_URL ."system.php';</script>";
+		echo "<script>alert('非法操作');location.href='". ADMIN_URL ."system.php?action=seo';</script>";
 	}
 }
 if(isset($_POST['tjmail'])){
@@ -117,7 +117,7 @@ if(isset($_POST['tjmail'])){
 		updateCacheAll('options');
 		mkDirect(ADMIN_URL .'system.php?action=mail');
 	}else{
-		echo "<script>alert('非法操作');location.href='". ADMIN_URL ."system.php';</script>";
+		echo "<script>alert('非法操作');location.href='". ADMIN_URL ."system.php?action=mail';</script>";
 	}
 }
 if(isset($_POST['tjtell'])){
@@ -136,7 +136,7 @@ if(isset($_POST['tjtell'])){
 		updateCacheAll('options');
 		mkDirect(ADMIN_URL .'system.php?action=tell');
 	}else{
-		echo "<script>alert('非法操作');location.href='". ADMIN_URL ."system.php';</script>";
+		echo "<script>alert('非法操作');location.href='". ADMIN_URL ."system.php?action=tell';</script>";
 	}
 }
 if(isset($_POST['tjpay'])){
@@ -164,7 +164,7 @@ if(isset($_POST['tjpay'])){
 		updateCacheAll('options');
 		mkDirect(ADMIN_URL .'system.php?action=pay');
 	}else{
-		echo "<script>alert('非法操作');location.href='". ADMIN_URL ."system.php';</script>";
+		echo "<script>alert('非法操作');location.href='". ADMIN_URL ."system.php?action=pay';</script>";
 	}
 }
 

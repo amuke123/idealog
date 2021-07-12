@@ -28,7 +28,7 @@ class nav_Model{
 			if($key=='sort'){$name=$data[$v]['sortname'];}
 			if($key=='book'){$name=$data[$v]['name'];}
 			if($key=='page'){$name=$data[$v]['title'];$alia=$data[$v]["alias"]==''?$data[$v]["id"].".html":$data[$v]["alias"].".html";}else{$alia=$key."/".$data[$v]["alias"];}
-			$sqladdp="INSERT INTO `". DB_PRE ."nav` (`id`,`name`,`url`,`pic`,`blank`,`show`,`top_id`,`index`,`change`,`type`,`type_id`,`group`) VALUES (NULL,'".$name."','".IDEA_URL .$alia."','".$data[$v]["pic"]."','0','1','0','0','1','".$num."','".$data[$v]["id"]."','".$group."');";
+			$sqladdp="INSERT INTO `". DB_PRE ."nav` (`id`,`name`,`url`,`pic`,`blank`,`show`,`top_id`,`index`,`change`,`type`,`type_id`,`group`) VALUES (NULL,'".$name."','','".$data[$v]["pic"]."','0','1','0','0','1','".$num."','".$data[$v]["id"]."','".$group."');";
 			$textp="导航添加失败";
 			if(!$db->query($sqladdp)){
 				echo "<script>prompt1('".$textp."');</script>";

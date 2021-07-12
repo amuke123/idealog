@@ -74,6 +74,20 @@ class user_Model{
 		}
 	}
 	
+	public static function getUserName($uid){
+		$reset=self::getInfo($uid);
+		return $reset['name'];
+	}
+	
+	public static function getUserPhoto($uid,$y=''){
+		$reset=self::getInfo($uid);
+		if($y==''){
+			return $reset['photo']!=''?str_replace('../',IDEA_URL,$reset['photo']):IDEA_URL .ADMIN_TYPE .'/view/static/images/avatar.jpg';
+		}else{
+			return $reset['photo']!=''?str_replace('../',IDEA_URL,$reset['photo']):'';
+		}
+	}
+	
 /**
 	
 	
@@ -98,19 +112,9 @@ class user_Model{
 		return $reset['description'];
 	}
 	
-	public static function getUserName($uid){
-		$reset=self::getInfo($uid);
-		return $reset['name'];
-	}
 	
-	public static function getUserPhoto($uid,$y=''){
-		$reset=self::getInfo($uid);
-		if($y==''){
-			return $reset['photo']!=''?str_replace('../',IDEA_URL,$reset['photo']):IDEA_URL .ADMIN_TYPE .'/view/static/images/avatar.jpg';
-		}else{
-			return $reset['photo']!=''?str_replace('../',IDEA_URL,$reset['photo']):'';
-		}
-	}
+	
+	
 	
 	
 	

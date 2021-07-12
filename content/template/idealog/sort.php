@@ -1,46 +1,17 @@
 <?php
 if(!defined('IDEA_ROOT')){exit('error!');}
 ?>
-<script src="<?php echo TEMPLATE_URL;?>js/banner.js" type="text/javascript"></script>
-<?php if(!empty($banners)){?>
-<section>
-	<div class="content">
-		<div class="ban">
-			<div id="banner">   
-				<div class="tab">
-					<?php foreach($banners as $val){if($val['show']){?>
-						<a href="<?php echo $val["link"];?>" <?php echo $val["blank"]=='1'?'target="_blank"':'';?>><img class="tabImg" src="<?php echo $val["pic"];?>" alt="<?php echo $val["name"];?>" title="<?php echo $val["name"];?>" width="100%" /></a>
-					<?php }}?>
-				</div>
-				<div class="lunbo_btn">
-					<?php $i=0;foreach($banners as $val){if($val['show']){?>
-						<span onclick="tabBtnFc(<?php echo $i++;?>);" class="tabBtn"></span>
-					<?php }}?>
-				</div>
-				<div class="arrow prve">
-					<span class="slider_left"></span>
-				</div>
-				<div class="arrow next">
-					<span class="slider_right"></span>
-				</div>      
-			</div>
-			<div class="clear"></div>
-		</div>
-	</div>
-</section>
-<?php }?>
 
 <section>
 	<div class="content">
-		<div class="sorts">
+		<div class="main_top">
 			<div class="center">
-				<ul class="sortlist">
-					<li><a href="#"><img src="<?php echo TEMPLATE_URL;?>images/pic1.jpg" /></a></li>
-					<li><a href="#"><img src="<?php echo TEMPLATE_URL;?>images/pic.jpg" /></a></li>
-					<li><a href="#"><img src="<?php echo TEMPLATE_URL;?>images/pic1.jpg" /></a></li>
-					<li><a href="#"><img src="<?php echo TEMPLATE_URL;?>images/pic2.jpg" /></a></li>
-				</ul>
+				<div class="list_top">
+					<p><i></i><b>发现</b></p>
+					<p><span>创意是创造意识或创新意识的简称。它是指对现实存在事物的理解以及认知，所衍生出的一种新的抽象思维和行为潜能。</span></p>
+				</div>    
 			</div>
+			<div class="clear"></div>
 		</div>
 	</div>
 </section>
@@ -49,15 +20,11 @@ if(!defined('IDEA_ROOT')){exit('error!');}
 	<div class="content">
 		<div class="contents">
 			<div class="center">
-				<div class="cont_top">
-					<a href="javascript:void(0);" onclick="listorcard('list',this);" class="active"><i class="icon-list"></i></a>
-					<span></span>
-					<a href="javascript:void(0);" onclick="listorcard('card',this);"><i class="icon-card"></i></a>
-				</div>
-				<ul class="artlist">
+				<ul class="artcard">
 					<li>
 						<div class="list_left">
 							<a href="#"><img src="<?php echo TEMPLATE_URL;?>images/pic.jpg"></a>
+							<b><a href="#">手工</a></b>
 						</div>
 						<div class="list_right">
 							<h2><a href="#">杨浦区为推动区高新技术企业发展</a></h2>
@@ -69,6 +36,7 @@ if(!defined('IDEA_ROOT')){exit('error!');}
 					<li>
 						<div class="list_left">
 							<a href="#"><img src="<?php echo TEMPLATE_URL;?>images/pic1.jpg"></a>
+							<b><a href="#">网页</a></b>
 						</div>
 						<div class="list_right">
 							<h2><a href="#">近日发布了《杨浦区高新技术企业资助办法》杨浦区为推动区高新技术企业发展</a></h2>
@@ -80,6 +48,7 @@ if(!defined('IDEA_ROOT')){exit('error!');}
 					<li>
 						<div class="list_left">
 							<a href="#"><img src="<?php echo TEMPLATE_URL;?>images/pic.jpg"></a>
+							<b><a href="#">美工</a></b>
 						</div>
 						<div class="list_right">
 							<h2><a href="#">杨浦区为推动区高新技术企业发展</a></h2>
@@ -91,6 +60,7 @@ if(!defined('IDEA_ROOT')){exit('error!');}
 					<li>
 						<div class="list_left">
 							<a href="#"><img src="<?php echo TEMPLATE_URL;?>images/pic1.jpg"></a>
+							<b><a href="#">科技</a></b>
 						</div>
 						<div class="list_right">
 							<h2><a href="#">近日发布了《杨浦区高新技术企业资助办法》杨浦区为推动区高新技术企业发展</a></h2>
@@ -102,6 +72,7 @@ if(!defined('IDEA_ROOT')){exit('error!');}
 					<li>
 						<div class="list_left">
 							<a href="#"><img src="<?php echo TEMPLATE_URL;?>images/pic.jpg"></a>
+							<b><a href="#">手工</a></b>
 						</div>
 						<div class="list_right">
 							<h2><a href="#">杨浦区为推动区高新技术企业发展</a></h2>
@@ -113,6 +84,7 @@ if(!defined('IDEA_ROOT')){exit('error!');}
 					<li>
 						<div class="list_left">
 							<a href="#"><img src="<?php echo TEMPLATE_URL;?>images/pic1.jpg"></a>
+							<b><a href="#">技术</a></b>
 						</div>
 						<div class="list_right">
 							<h2><a href="#">近日发布了《杨浦区高新技术企业资助办法》杨浦区为推动区高新技术企业发展</a></h2>
@@ -122,22 +94,15 @@ if(!defined('IDEA_ROOT')){exit('error!');}
 						<div class="clear"></div>
 					</li>
 				</ul>
-				<div class="list_page">
-					<p><span>1</span><a href="#">2</a><a href="#">3</a><a href="#">4</a><a href="#">5</a><a href="#">6</a><a href="#">7</a></p>
+				<div class="list_page2">
+					<p><a href="#"> 再 发 现 </a></p>
 				</div>
+				<div class="c_ad"><p class="left"><a target="_blank" href="#"><img src="<?php echo TEMPLATE_URL;?>images/ad1200-100.jpg"></a></p><p class="right"></p><div class="clear"></div></div>
 			</div>
 		</div>
 	</div>
 </section>
-<section>
-	<div class="content">
-		<div class="links">
-			<div class="center">
-				<p><b>链接：</b><a href="#">首页</a><a href="#">下载</a><a href="#">关于</a><a href="#">免责</a><a href="#">留言</a></p>
-			</div>
-		</div>
-	</div>
-</section>
+
 
 <?php
 include View::getView('footer');
