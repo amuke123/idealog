@@ -134,7 +134,7 @@ class Url{
         $logPageUrl = '';
         switch(Control::get('url_type')){
             case '1':
-                $logPageUrl = IDEA_URL .'?pages=';
+                $logPageUrl = IDEA_URL .'?page=';
                 break;
             default:
                 $logPageUrl = IDEA_URL .'page/';

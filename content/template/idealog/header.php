@@ -26,7 +26,7 @@ require_once View::getView('function');
 <body>
 <header>
 	<div class="content">
-		<div class="header">
+		<div class="header" id="h_top">
 			<div class="center">
 				<div class="left">
 					<div class="h_logo"><a href="<?php echo IDEA_URL;?>"><img src="<?php echo TEMPLATE_URL;?>images/logo.png"><b>创意书</b></a></div>

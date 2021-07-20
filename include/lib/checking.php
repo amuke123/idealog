@@ -6,7 +6,7 @@ class Checking{
 		if(session_id()){
 			if(!empty($_COOKIE["ideashu"])){
 				$sid=$_COOKIE["ideashu"];
-				session_id($sid);
+				if($sid!=session_id()){session_id($sid);}
 			}
 		}else{
 			if(!empty($_COOKIE["ideashu"])){

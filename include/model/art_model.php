@@ -105,7 +105,7 @@ class art_Model{
 			$sqltem.=" AND `title` LIKE '%".$keyword."%'";
 		}
 		$sql.=$sqltem;
-		$sql.=" ORDER BY `mark` DESC,`date` DESC LIMIT ".$startnum.",".$pagenum;
+		$sql.=" ORDER BY `date` DESC LIMIT ".$startnum.",".$pagenum;
 		return $arts=$db->getlist($sql);
 	}
 	
@@ -204,34 +204,36 @@ class art_Model{
 		$sql="SELECT * FROM `". DB_PRE ."article` WHERE `id` =".$aid;
 		$art=$db->getOnce($sql);
 		$data=array();
-		$data['art_title']=$art['title'];
-		$data['art_date']=$art['date'];
-		$data['art_content']=$art['content'];
-		$data['art_excerpt']=$art['excerpt'];
-		$data['art_key']=$art['key'];
-		$data['art_alias']=$art['alias'];
-		$data['art_uid']=$art['author'];
-		$data['art_author']=user_Model::getUserName($art['author']);
-		$data['art_authorUrl']=user_Model::getUserPhoto($art['author']);
-		$data['art_sortid']=$art['s_id'];
-		$data['art_sortName']=sort_Model::getSortName($art['s_id']);
-		$data['art_type']=$art['type'];
-		$data['art_eyes']=$art['eyes'];
-		$data['art_goodnum']=$art['goodnum'];
-		$data['art_badnum']=$art['badnum'];
-		$data['art_saynum']=$art['saynum'];
-		$data['art_filenum']=$art['filenum'];
-		$data['art_mark']=$art['mark'];
-		$data['art_copyrights']=$art['copyrights'];
-		$data['art_show']=$art['show'];
-		$data['art_sayok']=$art['sayok'];
-		$data['art_template']=$art['template'];
-		$data['art_password']=$art['password'];
-		$data['art_pic']=$art['pic'];
-		$data['art_tags']=$art['tags'];
-		$data['art_check']=$art['check'];
-		$data['art_getsite']=$art['getsite'];
-		$data['art_geturl']=$art['geturl'];
+		if(!empty($art)){
+			$data['art_title']=$art['title'];
+			$data['art_date']=$art['date'];
+			$data['art_content']=$art['content'];
+			$data['art_excerpt']=$art['excerpt'];
+			$data['art_key']=$art['key'];
+			$data['art_alias']=$art['alias'];
+			$data['art_uid']=$art['author'];
+			$data['art_author']=user_Model::getUserName($art['author']);
+			$data['art_authorUrl']=user_Model::getUserPhoto($art['author']);
+			$data['art_sortid']=$art['s_id'];
+			$data['art_sortName']=sort_Model::getSortName($art['s_id']);
+			$data['art_type']=$art['type'];
+			$data['art_eyes']=$art['eyes'];
+			$data['art_goodnum']=$art['goodnum'];
+			$data['art_badnum']=$art['badnum'];
+			$data['art_saynum']=$art['saynum'];
+			$data['art_filenum']=$art['filenum'];
+			$data['art_mark']=$art['mark'];
+			$data['art_copyrights']=$art['copyrights'];
+			$data['art_show']=$art['show'];
+			$data['art_sayok']=$art['sayok'];
+			$data['art_template']=$art['template'];
+			$data['art_password']=$art['password'];
+			$data['art_pic']=$art['pic'];
+			$data['art_tags']=$art['tags'];
+			$data['art_check']=$art['check'];
+			$data['art_getsite']=$art['getsite'];
+			$data['art_geturl']=$art['geturl'];
+		}
 		return $data;
 	}
 	

@@ -81,10 +81,14 @@ class user_Model{
 	
 	public static function getUserPhoto($uid,$y=''){
 		$reset=self::getInfo($uid);
-		if($y==''){
-			return $reset['photo']!=''?str_replace('../',IDEA_URL,$reset['photo']):IDEA_URL .ADMIN_TYPE .'/view/static/images/avatar.jpg';
+		if(isset($reset['photo'])){
+			if($y==''){
+				return $reset['photo']!=''?str_replace('../',IDEA_URL,$reset['photo']):IDEA_URL .ADMIN_TYPE .'/view/static/images/avatar.jpg';
+			}else{
+				return $reset['photo']!=''?str_replace('../',IDEA_URL,$reset['photo']):'';
+			}
 		}else{
-			return $reset['photo']!=''?str_replace('../',IDEA_URL,$reset['photo']):'';
+			return IDEA_URL .ADMIN_TYPE .'/view/static/images/avatar.jpg';
 		}
 	}
 	

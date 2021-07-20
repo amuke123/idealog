@@ -4,13 +4,26 @@
 */
 class art_Control{
 	function disIndex($params=array()){
-		//echo "首页<pre>";
 		//print_r($params);
 		$system_cache=Control::getOptions();
 		extract($system_cache);
 		$site_title = $seo_type!=3 ? $sitename : $seo_title ;
 		$banners=Control::get('banner_list');
+		$links=Control::get('link_list');
 		
+		$pnum=count($params)-1;
+		$pagenum = Control::get('art_num');
+		
+		$toparts=art_Model::getArtList(1,1," AND mark like '%T%' ",'',0,4);
+		
+		$arts=art_Model::getArtList(1,1,'','',0,$pagenum);
+		
+		$artnumb=art_Model::getArtsNum(1,1,'','');
+		$pages=ceil($artnumb/$pagenum);
+		$urlpre=Url::logPage();
+		$txtsub='篇笔记';
+		
+		$pagestr=action_Model::pagelist($artnumb,$pages,1,$urlpre,$txtsub,'');
 		
 		include View::getView('header');
         include View::getView('index');
@@ -38,7 +51,7 @@ class art_Control{
         }
 		if(!$aid){show_404();}
 		$artData=art_Model::getlogArt($aid);
-		if($artData === false){show_404();}
+		if(empty($artData)){show_404();exit;}
 		extract($artData);
 		
 		switch($seo_type){
@@ -58,7 +71,7 @@ class art_Control{
 		$site_key=str_replace('，',',',$site_key);
 		
 		$pnum=count($params)-1;
-		$pageid = isset($params[$pnum-1])&&$params[$pnum-1]=='say-page'?abs(intval($params[$pnum])):1;
+		$pageid = (isset($params[$pnum-1])&&$params[$pnum-1]=='say-page')?abs(intval($params[$pnum])):(isset($_GET['page'])?$_GET['page']:1);
 
 		$verifyCode=Control::get('say_code')=='1'? '<input type="text" name="imgcode" placeholder="验证码" tabindex="5"><img src="'.IDEA_URL .'include/core/code.php?ac=1" align="absmiddle" onclick="this.src=this.src+Math.floor(Math.random()*10);">' : '';
 		$ckname = isset($_COOKIE['commentposter']) ? htmlspecialchars(stripslashes($_COOKIE['commentposter'])) : '';
@@ -99,10 +112,30 @@ class art_Control{
 	}
 	
 	function disPage($params=array()){
-		//echo "首页文章分页<pre>";
 		//print_r($params);
 		$system_cache=Control::getOptions();
 		extract($system_cache);
+		$site_title = $seo_type!=3 ? $sitename : $seo_title ;
+		$banners=Control::get('banner_list');
+		$links=Control::get('link_list');
+		
+		$pnum=count($params)-1;
+		$pagenum = Control::get('art_num');
+		$pageid = isset($params[$pnum-1])&&$params[$pnum-1]=='page'?abs(intval($params[$pnum])):(isset($_GET['page'])?$_GET['page']:1);
+		$startnum = $pagenum*($pageid-1);
+		
+		
+		$arts=art_Model::getArtList(1,1,'','',$startnum,$pagenum);
+		
+		$artnumb=art_Model::getArtsNum(1,1,'','');
+		$pages=ceil($artnumb/$pagenum);
+		$urlpre=Url::logPage();
+		$txtsub='篇笔记';
+		
+		$pagestr=action_Model::pagelist($artnumb,$pages,$pageid,$urlpre,$txtsub,'');
+		
+		include View::getView('header');
+        include View::getView('index');
 		
 	}
 	

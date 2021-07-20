@@ -13,7 +13,7 @@ class sort_Control{
 		
 		$pnum=count($params)-1;
 		$pagenum = Control::get('art_num');
-		$pageid = isset($params[$pnum-1])&&$params[$pnum-1]=='page'?abs(intval($params[$pnum])):1;
+		$pageid = isset($params[$pnum-1])&&$params[$pnum-1]=='page'?abs(intval($params[$pnum])):isset($_GET['page'])?$_GET['page']:1;
 		$startnum = $pagenum*($pageid-1);
 		
 		$sortid = '';

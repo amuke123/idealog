@@ -161,6 +161,9 @@ class Cache{
 			if($row['type'] == nav_Model::navtype_page){
 				$row['url']=Url::log($row['type_id']);
             }
+			if($row['type'] == nav_Model::navtype_home){
+				$row['url']=IDEA_URL;
+            }
             $navData = array(
 				'id' => intval($row['id']),
 				'name' => htmlspecialchars(trim($row['name'])),

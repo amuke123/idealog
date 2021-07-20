@@ -1,21 +1,23 @@
 <?php
 if(!defined('IDEA_ROOT')){exit('error!');}
 ?>
-<script src="<?php echo TEMPLATE_URL;?>js/banner.js" type="text/javascript"></script>
-<?php if(!empty($banners)){?>
+
+
 <section>
 	<div class="content">
+	<?php if(!empty($banners)){?>
+	<script src="<?php echo TEMPLATE_URL;?>js/banner.js" type="text/javascript"></script>
 		<div class="ban">
 			<div id="banner">   
 				<div class="tab">
-					<?php foreach($banners as $val){if($val['show']){?>
-						<a href="<?php echo $val["link"];?>" <?php echo $val["blank"]=='1'?'target="_blank"':'';?>><img class="tabImg" src="<?php echo $val["pic"];?>" alt="<?php echo $val["name"];?>" title="<?php echo $val["name"];?>" width="100%" /></a>
+					<?php $bnun=1;foreach($banners as $bval){if($bval['show']){$bnun++;?>
+						<a href="<?php echo $bval["link"];?>" <?php echo $bval["blank"]=='1'?'target="_blank"':'';?>><img class="tabImg" src="<?php echo $bval["pic"];?>" alt="<?php echo $bval["name"];?>" title="<?php echo $bval["name"];?>" width="100%" /></a>
 					<?php }}?>
 				</div>
 				<div class="lunbo_btn">
-					<?php $i=0;foreach($banners as $val){if($val['show']){?>
+					<?php for($i=0;$i<$bnun;$i++){?>
 						<span onclick="tabBtnFc(<?php echo $i++;?>);" class="tabBtn"></span>
-					<?php }}?>
+					<?php }?>
 				</div>
 				<div class="arrow prve">
 					<span class="slider_left"></span>
@@ -26,22 +28,28 @@ if(!defined('IDEA_ROOT')){exit('error!');}
 			</div>
 			<div class="clear"></div>
 		</div>
+	<?php }?>
 	</div>
 </section>
-<?php }?>
+
+
 
 <section>
 	<div class="content">
+	<?php if(!empty($toparts)){?>
 		<div class="sorts">
 			<div class="center">
 				<ul class="sortlist">
-					<li><a href="#"><img src="<?php echo TEMPLATE_URL;?>images/pic1.jpg" /></a></li>
-					<li><a href="#"><img src="<?php echo TEMPLATE_URL;?>images/pic.jpg" /></a></li>
-					<li><a href="#"><img src="<?php echo TEMPLATE_URL;?>images/pic1.jpg" /></a></li>
-					<li><a href="#"><img src="<?php echo TEMPLATE_URL;?>images/pic2.jpg" /></a></li>
+					<?php foreach($toparts as $topval){?>
+						<li><a href="<?php echo Url::log($topval['id']);?>"><img src="<?php echo $topval['pic']!=''?str_replace('../',IDEA_URL,$topval['pic']):getImg($topval['id']);?>" /><p><b><?php echo $topval['title'];?></b></p></a></li>
+					<?php }?>
+					<?php for($i=0;$i<(4-count($toparts));$i++){?>
+					<span></span>
+					<?php }?>
 				</ul>
 			</div>
 		</div>
+	<?php }?>
 	</div>
 </section>
 
@@ -55,75 +63,23 @@ if(!defined('IDEA_ROOT')){exit('error!');}
 					<a href="javascript:void(0);" onclick="listorcard('card',this);"><i class="icon-card"></i></a>
 				</div>
 				<ul class="artlist">
+				<?php if(!empty($arts)){foreach($arts as $value){?>
 					<li>
 						<div class="list_left">
-							<a href="#"><img src="<?php echo TEMPLATE_URL;?>images/pic.jpg"></a>
+							<a href="<?php echo Url::log($value['id']);?>"><img src="<?php echo $value['pic']!=''?str_replace('../',IDEA_URL,$value['pic']):getImg($value['id']);?>"></a>
 						</div>
 						<div class="list_right">
-							<h2><a href="#">杨浦区为推动区高新技术企业发展</a></h2>
-							<p>近日发布了《杨浦区高新技术企业资助办法》，自2021年8月1日开始施行。办法》，自2021年8月1日开始施行。办法》，自2021年8月1日开始施行。办法》，自2021年8月1日开始施行。办法》，自2021年8月1日开始施行。杨浦区为推动区高新技术企业发展，近日发布了《杨浦区高新技术企业资助办法》，自2021年8月1日开始施行。办法》，自2021年8月1日开始施行。办法》，</p>
-							<div class="art_info"><span class="left">2021-07-07</span><span>分类：<a href="#">技术</a></span><span>阅读：<a href="#">236</a></span></div>
+							<h2><a href="<?php echo Url::log($value['id']);?>"><?php echo $value['title'];?></a></h2>
+							<?php $excerpt=$value['excerpt']==''?strip_tags(htmlspecialchars_decode($value['content'])):strip_tags($value['excerpt']);?>
+							<p><?php echo mb_substr(trim($excerpt),0,100);?>...</p>
+							<div class="art_info"><span class="left"><?php echo date("Y-m-d",$value['date']);?></span><span>阅读：<a href="<?php echo Url::log($value['id']);?>"><?php echo $value['eyes'];?></a></span></div>
 						</div>
 						<div class="clear"></div>
 					</li>
-					<li>
-						<div class="list_left">
-							<a href="#"><img src="<?php echo TEMPLATE_URL;?>images/pic1.jpg"></a>
-						</div>
-						<div class="list_right">
-							<h2><a href="#">近日发布了《杨浦区高新技术企业资助办法》杨浦区为推动区高新技术企业发展</a></h2>
-							<p>近日发布了《杨浦区高新技术企业资助办法》，自2021年8月1日开始施行。办法》，自2021年8月1日开始施行。办法》，自2021年8月1日开始施行。办法》，自2021年8月1日开始施行。办法》，自2021年8月1日开始施行。杨浦区为推动区高新技术企业发展，近日发布了《杨浦区高新技术企业资助办法》，自2021年8月1日开始施行。办法》，自2021年8月1日开始施行。办法》，</p>
-							<div class="art_info"><span class="left">2021-07-07</span><span>分类：<a href="#">技术</a></span><span>阅读：<a href="#">236</a></span></div>
-						</div>
-						<div class="clear"></div>
-					</li>
-					<li>
-						<div class="list_left">
-							<a href="#"><img src="<?php echo TEMPLATE_URL;?>images/pic.jpg"></a>
-						</div>
-						<div class="list_right">
-							<h2><a href="#">杨浦区为推动区高新技术企业发展</a></h2>
-							<p>近日发布了《杨浦区高新技术企业资助办法》，自2021年8月1日开始施行。办法》，自2021年8月1日开始施行。办法》，自2021年8月1日开始施行。办法》，自2021年8月1日开始施行。办法》，自2021年8月1日开始施行。杨浦区为推动区高新技术企业发展，近日发布了《杨浦区高新技术企业资助办法》，自2021年8月1日开始施行。办法》，自2021年8月1日开始施行。办法》，</p>
-							<div class="art_info"><span class="left">2021-07-07</span><span>分类：<a href="#">技术</a></span><span>阅读：<a href="#">236</a></span></div>
-						</div>
-						<div class="clear"></div>
-					</li>
-					<li>
-						<div class="list_left">
-							<a href="#"><img src="<?php echo TEMPLATE_URL;?>images/pic1.jpg"></a>
-						</div>
-						<div class="list_right">
-							<h2><a href="#">近日发布了《杨浦区高新技术企业资助办法》杨浦区为推动区高新技术企业发展</a></h2>
-							<p>近日发布了《杨浦区高新技术企业资助办法》，自2021年8月1日开始施行。办法》，自2021年8月1日开始施行。办法》，自2021年8月1日开始施行。办法》，自2021年8月1日开始施行。办法》，自2021年8月1日开始施行。杨浦区为推动区高新技术企业发展，近日发布了《杨浦区高新技术企业资助办法》，自2021年8月1日开始施行。办法》，自2021年8月1日开始施行。办法》，</p>
-							<div class="art_info"><span class="left">2021-07-07</span><span>分类：<a href="#">技术</a></span><span>阅读：<a href="#">236</a></span></div>
-						</div>
-						<div class="clear"></div>
-					</li>
-					<li>
-						<div class="list_left">
-							<a href="#"><img src="<?php echo TEMPLATE_URL;?>images/pic.jpg"></a>
-						</div>
-						<div class="list_right">
-							<h2><a href="#">杨浦区为推动区高新技术企业发展</a></h2>
-							<p>近日发布了《杨浦区高新技术企业资助办法》，自2021年8月1日开始施行。办法》，自2021年8月1日开始施行。办法》，自2021年8月1日开始施行。办法》，自2021年8月1日开始施行。办法》，自2021年8月1日开始施行。杨浦区为推动区高新技术企业发展，近日发布了《杨浦区高新技术企业资助办法》，自2021年8月1日开始施行。办法》，自2021年8月1日开始施行。办法》，</p>
-							<div class="art_info"><span class="left">2021-07-07</span><span>分类：<a href="#">技术</a></span><span>阅读：<a href="#">236</a></span></div>
-						</div>
-						<div class="clear"></div>
-					</li>
-					<li>
-						<div class="list_left">
-							<a href="#"><img src="<?php echo TEMPLATE_URL;?>images/pic1.jpg"></a>
-						</div>
-						<div class="list_right">
-							<h2><a href="#">近日发布了《杨浦区高新技术企业资助办法》杨浦区为推动区高新技术企业发展</a></h2>
-							<p>近日发布了《杨浦区高新技术企业资助办法》，自2021年8月1日开始施行。办法》，自2021年8月1日开始施行。办法》，自2021年8月1日开始施行。办法》，自2021年8月1日开始施行。办法》，自2021年8月1日开始施行。杨浦区为推动区高新技术企业发展，近日发布了《杨浦区高新技术企业资助办法》，自2021年8月1日开始施行。办法》，自2021年8月1日开始施行。办法》，</p>
-							<div class="art_info"><span class="left">2021-07-07</span><span>分类：<a href="#">技术</a></span><span>阅读：<a href="#">236</a></span></div>
-						</div>
-						<div class="clear"></div>
-					</li>
+				<?php }}?>
 				</ul>
 				<div class="list_page">
-					<p><span>1</span><a href="#">2</a><a href="#">3</a><a href="#">4</a><a href="#">5</a><a href="#">6</a><a href="#">7</a></p>
+					<p><?php echo $pagestr;?></p>
 				</div>
 			</div>
 		</div>
@@ -133,7 +89,14 @@ if(!defined('IDEA_ROOT')){exit('error!');}
 	<div class="content">
 		<div class="links">
 			<div class="center">
-				<p><b>链接：</b><a href="#">首页</a><a href="#">下载</a><a href="#">关于</a><a href="#">免责</a><a href="#">留言</a></p>
+				<p>
+					<b>链接：</b>
+					<?php if(!empty($links)){?>
+					<?php foreach($links as $lval){if($lval['show']){?>
+						<a href="<?php echo $lval["url"];?>" title="<?php echo $lval["des"];?>" target="_blank"><?php echo $lval["name"];?></a>
+					<?php }}?>
+					<?php }?>
+				</p>
 			</div>
 		</div>
 	</div>

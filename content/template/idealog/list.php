@@ -41,9 +41,7 @@ if(!defined('IDEA_ROOT')){exit('error!');}
 				<div class="c_cont_left left">
 					<div class="c_cl_top"><p><?php echo $sortName;?></p></div>
 					<div class="artlist">
-						<?php 
-						if(!empty($arts)){foreach($arts as $value){
-						?>
+					<?php if(!empty($arts)){foreach($arts as $value){?>
 						<li>
 							<div class="list_left">
 								<a href="<?php echo Url::log($value['id']);?>"><img src="<?php echo $value['pic']!=''?str_replace('../',IDEA_URL,$value['pic']):getImg($value['id']);?>"></a>
@@ -56,7 +54,7 @@ if(!defined('IDEA_ROOT')){exit('error!');}
 							</div>
 							<div class="clear"></div>
 						</li>
-						<?php }}?>
+					<?php }}?>
 					</div>
 					<div class="list_page">
 						<p><?php echo $pagestr;?></p>
