@@ -38,16 +38,17 @@ if(isset($_POST['tj'])){
 		$arr['goodnum'] = isset($_POST['goodnum']) ? htmlspecialchars($_POST['goodnum']) : '0';
 		$arr['badnum'] = isset($_POST['badnum']) ? htmlspecialchars($_POST['badnum']) : '0';
 		$arr['mark'] = isset($_POST['mark']) ? $_POST['mark'] : '';
-		$arr['filenum'] = isset($_POST['filenum']) ? $_POST['filenum'] : '0';
+		$arr['filenum'] = isset($_POST['filenum'])&&!empty($arr['filenum']) ? $_POST['filenum'] : '0';
 	}else{
 		$arr['filenum'] = art_Model::getArtFileNum($id);
+		$arr['filenum']=!empty($arr['filenum'])?$arr['filenum']:'0';
 	}
 	if($fb==''){$data['show'] = '1';}
 	$arr['type'] = isset($_POST['arttype']) ? $_POST['arttype'] : 'p';
 	$arr['template'] = isset($_POST['template']) ? $_POST['template'] : '';
 	$arr['title'] = isset($_POST['title']) ? htmlspecialchars($_POST['title']) : '';
 	$arr['content'] = isset($_POST['content']) ? $_POST['content'] : '';
-	$arr['saynum'] = isset($_POST['saynum']) ? $_POST['saynum'] : '0';
+	$arr['saynum'] = isset($_POST['saynum'])&&!empty($arr['saynum']) ? $_POST['saynum'] : '0';
 
 	$arr['alias'] = isset($_POST['alias']) ? htmlspecialchars($_POST['alias']) : '';
 	$arr['key'] = isset($_POST['key']) ? htmlspecialchars($_POST['key']) : '';

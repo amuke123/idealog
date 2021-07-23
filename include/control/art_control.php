@@ -5,6 +5,7 @@
 class art_Control{
 	function disIndex($params=array()){
 		//print_r($params);
+		$cache=Conn::getCache();
 		$system_cache=Control::getOptions();
 		extract($system_cache);
 		$site_title = $seo_type!=3 ? $sitename : $seo_title ;
@@ -14,9 +15,10 @@ class art_Control{
 		$pnum=count($params)-1;
 		$pagenum = Control::get('art_num');
 		
-		$toparts=art_Model::getArtList(1,1," AND mark like '%T%' ",'',0,4);
+		$topartarr=$cache->readCache('arttop');
+		$toparts=$topartarr['top'];
 		
-		$arts=art_Model::getArtList(1,1,'','',0,$pagenum);
+		$arts=$cache->readCache('newart');
 		
 		$artnumb=art_Model::getArtsNum(1,1,'','');
 		$pages=ceil($artnumb/$pagenum);
@@ -43,7 +45,7 @@ class art_Control{
             }else if(is_numeric($params[1])){
                 $aid=intval($params[1]);
             }else{
-                if(!empty($artalias_cache)) {
+                if(!empty($artalias_cache)){
                     $alias=addslashes(urldecode(trim($params[1])));
                     $aid=array_search($alias,$artalias_cache);
                 }
@@ -60,7 +62,7 @@ class art_Control{
             case '3':$site_title=$art_title.'-'.$site_title;break;
         }
 		$des=$art_excerpt==''?strip_tags(htmlspecialchars_decode($art_content)):strip_tags($art_excerpt);
-        $site_description = mb_substr(trim($des),0,90);
+        $site_description = mb_substr(trim($des),0,120);
 		if($art_key!=''){$site_key=$art_key.','.$site_key;}
         $tagsarr=$art_tags==''?'':tag_Model::getArtTagList($art_tags);
         if(!empty($tagsarr)){
@@ -95,13 +97,14 @@ class art_Control{
 		$pages=$pagenum==0?0:ceil($counts/$pagenum);
 		$urlpre=Url::saypre($aid);
 		//echo $urlpre;
-		$txtsub='条评论';
+		$txtsub='条主评论';
 		
 		$pagestr=action_Model::pagelist($counts,$pages,$pageid,$urlpre,$txtsub,'','0','#comments');
 		//echo $pagestr;
 		if($art_type=='a'){
 			art_Model::upEyes($aid);
 			$neighbour=art_Model::getNeighbour($art_date);
+			$hotart=$cache->readCache('hotart');
 			include View::getView('header');
 			include View::getView('article');
 		}else if($art_type=='p'){
@@ -123,6 +126,7 @@ class art_Control{
 		$pagenum = Control::get('art_num');
 		$pageid = isset($params[$pnum-1])&&$params[$pnum-1]=='page'?abs(intval($params[$pnum])):(isset($_GET['page'])?$_GET['page']:1);
 		$startnum = $pagenum*($pageid-1);
+		$style=isset($_GET['style'])?$_GET['style']:'';
 		
 		
 		$arts=art_Model::getArtList(1,1,'','',$startnum,$pagenum);

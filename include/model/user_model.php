@@ -3,17 +3,22 @@
 ***用户信息
 **/
 class user_Model{
-	public static function getInfo($uid=UID){//获取指定用户信息，默认获取当前登录用户
+	public static function getInfo($uid=UID,$option=''){//获取指定用户信息，默认获取当前登录用户
 		$mysql = Conn::getConnect();
-		$data=array();
-		$sql = "SELECT * FROM `". DB_PRE ."user` where `id`='". $uid ."'";
+		$cxop = $option==''?'*':'`'.$option.'`';
+		$data = array();
+		$sql = "SELECT ".$cxop." FROM `". DB_PRE ."user` where `id`='". $uid ."'";
 		$row = $mysql->getOnce($sql);
 		$data=$row;
-		$name=empty($data['nickname'])?$data['username']:$data['nickname'];
-		$artnum = art_Model::getUserArtNum($uid);
-		$data['artnum']=$artnum;
-		$data['name']=$name;
-		return $data;
+		if($option==''){
+			$name=empty($data['nickname'])?$data['username']:$data['nickname'];
+			$artnum = art_Model::getUserArtNum($uid);
+			$data['artnum']=$artnum;
+			$data['name']=$name;
+			return $data;
+		}else{
+			return $data[$option];
+		}
 	}
 	public static function setLastdate($uid){
 		$mysql = Conn::getConnect();
@@ -80,16 +85,23 @@ class user_Model{
 	}
 	
 	public static function getUserPhoto($uid,$y=''){
-		$reset=self::getInfo($uid);
-		if(isset($reset['photo'])){
+		$photo=self::getInfo($uid,'photo');
+		if(isset($photo)){
 			if($y==''){
-				return $reset['photo']!=''?str_replace('../',IDEA_URL,$reset['photo']):IDEA_URL .ADMIN_TYPE .'/view/static/images/avatar.jpg';
+				return $photo!=''?str_replace('../',IDEA_URL,$photo):IDEA_URL .ADMIN_TYPE .'/view/static/images/avatar.jpg';
 			}else{
-				return $reset['photo']!=''?str_replace('../',IDEA_URL,$reset['photo']):'';
+				return $photo!=''?str_replace('../',IDEA_URL,$photo):'';
 			}
 		}else{
 			return IDEA_URL .ADMIN_TYPE .'/view/static/images/avatar.jpg';
 		}
+	}
+	
+	public static function getAdminsAllNameAndEmail(){
+		$mysql = Conn::getConnect();
+		$sql = "SELECT `username`,`nickname`,`email` FROM `". DB_PRE ."user` WHERE `role`='admin' ";
+		$row = $mysql->getlist($sql);
+		return $row;
 	}
 	
 /**
@@ -104,12 +116,7 @@ class user_Model{
 		return $row;
 	}
 	
-	public static function getUsersAllNameAndEmail(){
-		$mysql = Conn::getConnect();
-		$sql = "SELECT `username`,`nickname`,`email` FROM `". DB_PRE ."user` ";
-		$row = $mysql->getlist($sql);
-		return $row;
-	}
+	
 	
 	public static function getUserDes($uid){
 		$reset=self::getInfo($uid);

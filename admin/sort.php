@@ -15,7 +15,7 @@ if(isset($_POST['add'])){
 	$adddata['pic']=isset($_POST['pic2'])?$_POST['pic2']:'';
 	if(!empty($_FILES["pic"]["name"])){$adddata['pic'] = $upfile->upload($_FILES["pic"],'','sort');if($sid!=''){action_Model::delFile($sid,'sort');}}
 	$adddata['description']=isset($_POST['description'])?$_POST['description']:'';
-	$adddata['key']=isset($_POST['key'])?$_POST['key']:'';
+	$adddata['key']=isset($_POST['key'])?str_replace('，',',',$_POST['key']):'';
 	$adddata['template']=isset($_POST['template'])?$_POST['template']:'';
 	$adddata['group']=isset($_POST['group'])?$_POST['group']:'0';
 	$adddata['top_id']=isset($_POST['top_id'])?$_POST['top_id']:'0';

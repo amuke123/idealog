@@ -119,7 +119,9 @@ class Checking{
 	
 	public static function getAjCode($num=6){//js异步验证码
 		self::setSession();
-		return $_SESSION['ajcode'] = getStr($num);
+		$wyz=mt_rand(1,999999);
+		$_SESSION['ajcode'][$wyz] = getStr($num);
+		return $_SESSION['ajcode'][$wyz];
 	}
 	
 	
@@ -146,9 +148,12 @@ class Checking{
 		$keystr=trim($keystr,',');
 		$valstr=trim($valstr,',');
 		$sql="INSERT INTO `". DB_PRE ."user` (`id`, `username`, ".$keystr.") VALUES (NULL, '".$username."',".$valstr.");";
+		//echo $sql;
 		if($conn->query($sql)){
 			updateCacheAll('sta');
 			echo "<script>alert('注册成功，请登录！');location.href='".Url::getActionUrl('login')."';</script>";
+		}else{
+			echo "<script>alert('注册失败，请重新注册！');</script>";
 		}
 	}
 	

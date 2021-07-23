@@ -65,7 +65,8 @@ if(isset($_POST['tjsys'])){
 	
 	$ajcode=isset($_POST['checking'])?$_POST['checking']:'';
 	
-	if($ajcode==$_SESSION['ajcode']){
+	if(in_array($ajcode,$_SESSION['ajcode'])){
+		unset($_SESSION['ajcode'][array_search($ajcode,$_SESSION['ajcode'])]);
 		foreach($data1 as $keys => $vals){
 			$sql2="UPDATE `" . DB_PRE . "options` SET `value`='".$vals."' WHERE `key`='".$keys."'";
 			$db->query($sql2);
@@ -87,11 +88,12 @@ if(isset($_POST['tjseo'])){
 	$data2['htmlok']=$html!=''?$html:'0';
 	
 	$data2['seo_title']=isset($_POST['sitetitle'])?addslashes(htmlspecialchars($_POST['sitetitle'])):'';
-	$data2['seo_key']=isset($_POST['key'])?addslashes(htmlspecialchars($_POST['key'])):'';
+	$data2['seo_key']=isset($_POST['key'])?addslashes(htmlspecialchars(str_replace('，',',',$_POST['key']))):'';
 	$data2['seo_description']=isset($_POST['description'])?addslashes(htmlspecialchars($_POST['description'])):'';
 	$data2['seo_type']=isset($_POST['seotype'])?$_POST['seotype']:'';
 	$ajcode=isset($_POST['checking'])?$_POST['checking']:'';
-	if($ajcode==$_SESSION['ajcode']){
+	if(in_array($ajcode,$_SESSION['ajcode'])){
+		unset($_SESSION['ajcode'][array_search($ajcode,$_SESSION['ajcode'])]);
 		foreach($data2 as $keys => $vals){
 			$sql2="UPDATE `" . DB_PRE . "options` SET `value`='".$vals."' WHERE `key`='".$keys."'";
 			$db->query($sql2);
@@ -109,7 +111,8 @@ if(isset($_POST['tjmail'])){
 	$data3['mailpswd']=isset($_POST['mailpswd'])?$_POST['mailpswd']:'';
 	$data3['mailport']=isset($_POST['mailport'])?$_POST['mailport']:'';
 	$ajcode=isset($_POST['checking'])?$_POST['checking']:'';
-	if($ajcode==$_SESSION['ajcode']){
+	if(in_array($ajcode,$_SESSION['ajcode'])){
+		unset($_SESSION['ajcode'][array_search($ajcode,$_SESSION['ajcode'])]);
 		foreach($data3 as $keys => $vals){
 			$sql3="UPDATE `" . DB_PRE . "options` SET `value`='".$vals."' WHERE `key`='".$keys."'";
 			$db->query($sql3);
@@ -128,7 +131,8 @@ if(isset($_POST['tjtell'])){
 	$data4['message_sign']=isset($_POST['message_sign'])?$_POST['message_sign']:'';
 	$data4['message_url']=isset($_POST['message_url'])?$_POST['message_url']:'';
 	$ajcode=isset($_POST['checking'])?$_POST['checking']:'';
-	if($ajcode==$_SESSION['ajcode']){
+	if(in_array($ajcode,$_SESSION['ajcode'])){
+		unset($_SESSION['ajcode'][array_search($ajcode,$_SESSION['ajcode'])]);
 		foreach($data4 as $keys => $vals){
 			$sql4="UPDATE `" . DB_PRE . "options` SET `value`='".$vals."' WHERE `key`='".$keys."'";
 			$db->query($sql4);
@@ -156,7 +160,8 @@ if(isset($_POST['tjpay'])){
 	$data5['pay_bank']=isset($_POST['pay_bank'])?$_POST['pay_bank']:'';
 	$data5['pay_id']=isset($_POST['pay_id'])?$_POST['pay_id']:'';
 	$ajcode=isset($_POST['checking'])?$_POST['checking']:'';
-	if($ajcode==$_SESSION['ajcode']){
+	if(in_array($ajcode,$_SESSION['ajcode'])){
+		unset($_SESSION['ajcode'][array_search($ajcode,$_SESSION['ajcode'])]);
 		foreach($data5 as $keys => $vals){
 			$sql5="UPDATE `" . DB_PRE . "options` SET `value`='".$vals."' WHERE `key`='".$keys."'";
 			$db->query($sql5);

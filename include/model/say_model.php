@@ -56,16 +56,12 @@ class say_Model{
 		return $comments;
 	}
 	
-	
-	/**
-	static function getTipsSay($num,$sqlpro='',$order=''){
-		$db=Conn::getConnect();
-		$sql="SELECT * FROM `". DB_PRE ."comment` WHERE `del`='1' AND `check`='1' AND `show`='1' ";
-		$sql.=$sqlpro;
-		$sql.=" ORDER BY ".$order."`date` DESC limit 0,".$num;
-		$says=$db->getlist($sql);
-		return $says;
-	}
+	static function setCommentCookie($name,$mail,$url) {
+        $cookietime = time() + 31536000;
+        setcookie('commentposter',$name,$cookietime);
+        setcookie('postermail',$mail,$cookietime);
+        setcookie('posterurl',$url,$cookietime);
+    }
 	
 	
 	static function isCommentExist($aid,$name,$content){
@@ -73,11 +69,49 @@ class say_Model{
 		$data = $db->getOnce("SELECT COUNT(*) AS `total` FROM `".DB_PRE ."comment` WHERE `a_id`='".$aid."' AND (`posterid`='".UID ."' OR `name`='".$name."') AND `content`='".$content."'");
 		return intval($data['total'])>0?true:false;
 	}
+	
+	static function isCommentTooFast(){
+		$db=Conn::getConnect();
+        $ipaddr=getIp();
+        $timess=time()-intval(Control::get('say_time'));
+        $row = $db->getOnce("SELECT COUNT(*) AS `total` FROM `".DB_PRE ."comment` WHERE `date`>'".$timess."' AND `ip`='".$ipaddr."'");
+        return intval($row['total'])>0?true:false;
+    }
+	
+	static function isNameAndMailValid($name,$mail){
+        $user_cache = user_Model::getAdminsAllNameAndEmail();
+        foreach($user_cache as $user) {
+            if($user['username']==$name||$user['nickname']==$name||($mail!=''&&$user['email']==$mail)){return false;}
+        }
+        return true;
+    }
+	
 	static function getSayTid($pid){
 		$db=Conn::getConnect();
 		$data=$db->getOnce("SELECT `t_id` FROM `". DB_PRE ."comment` WHERE `id`='".$pid."'");
 		return $data['t_id'];
 	}
+	
+	
+	static function addComment($name,$content,$mail,$url,$aid,$pid,$tid){
+		$db=Conn::getConnect();
+        $ipaddr = getIp();
+        $times=time();
+
+        $say_check=Control::get('say_check')?0:1;
+        $hide=ROLE==ROLE_VISITOR?$say_check:'1';
+        $sql="INSERT INTO `".DB_PRE ."comment` (`id`,`a_id`,`top_id`,`t_id`,`date`,`posterid`,`name`,`content`,`mail`,`url`,`ip`,`show`,`check`,`mark`,`good`,`bad`,`del`) VALUES (NULL,'".$aid."','".$pid."','".$tid."','".$times."','".UID ."','".$name."','".$content."','".$mail."','".$url."','".$ipaddr."','1','".$hide."','0','0','0','1')";
+        $ret = $db->query($sql);
+
+        if($hide){
+            self::updateCommentNum($aid);
+            mkDirect(Url::log($aid).'#comments');
+        }else{
+           mkMsg('评论发表成功，请等待管理员审核',Url::log($aid));
+        }
+		updateCacheAll();
+    }
+	
 	static function updateCommentNum($aid) {
 		$db=Conn::getConnect();
         if(is_array($aid)){
@@ -90,52 +124,16 @@ class say_Model{
             return $comNum;
         }
     }
-	static function addComment($name,$content,$mail,$url,$aid,$pid,$tid){
+	
+	/**
+	static function getTipsSay($num,$sqlpro='',$order=''){
 		$db=Conn::getConnect();
-        $ipaddr = getIp();
-        $utctimestamp=time();
-
-        $say_check=Control::get('say_check')?0:1;
-        $hide=ROLE==ROLE_VISITOR?$say_check:'1';
-        $sql="INSERT INTO `".DB_PRE ."comment` (`id`,`a_id`,`top_id`,`t_id`,`date`,`posterid`,`name`,`content`,`mail`,`url`,`ip`,`show`,`check`,`mark`,`good`,`bad`,`del`) VALUES (NULL,'".$aid."','".$pid."','".$tid."','".$utctimestamp."','".UID ."','".$name."','".$content."','".$mail."','".$url."','".$ipaddr."','1','".$hide."','0','0','0','1')";
-        $ret = $db->query($sql);
-
-        if($hide){
-            self::updateCommentNum($aid);
-            emDirect(Url::log($aid).'#comments');
-        }else{
-           mkMsg('评论发表成功，请等待管理员审核',Url::log($aid));
-        }
-		updateCacheAll(array('sta','newArts','goods','eyes','collect'));
-    }
-	
-	static function isNameAndMailValid($name,$mail){
-        $user_cache = user_Model::getUsersAllNameAndEmail();
-        foreach($user_cache as $user) {
-            if($user['username']==$name||$user['nickname']==$name||($mail!=''&&$user['email']==$mail)){return false;}
-        }
-        return true;
-    }
-	
-	static function isCommentTooFast(){
-		$db=Conn::getConnect();
-        $ipaddr=getIp();
-        $utctimestamp=time()-Control::get('say_time');
-        $sql = 'select count(*) as `total` from `'.DB_PRE ."comment` where `date`>".$utctimestamp." AND ip='".$ipaddr."'";
-        $row = $getOnce($sql);
-        return intval($row['total'])>0?true:false;
-    }
-	
-	static function setCommentCookie($name,$mail,$url) {
-        $cookietime = time() + 31536000;
-        setcookie('commentposter',$name,$cookietime);
-        setcookie('postermail',$mail,$cookietime);
-        setcookie('posterurl',$url,$cookietime);
-    }
-	
-	
-	
-	
+		$sql="SELECT * FROM `". DB_PRE ."comment` WHERE `del`='1' AND `check`='1' AND `show`='1' ";
+		$sql.=$sqlpro;
+		$sql.=" ORDER BY ".$order."`date` DESC limit 0,".$num;
+		$says=$db->getlist($sql);
+		return $says;
+	}
 	
 	
 	**/

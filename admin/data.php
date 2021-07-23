@@ -8,7 +8,8 @@ $action=isset($_GET['action'])?$_GET['action']:'';
 
 if($action=='databak'){
 	$ajcode=isset($_GET['code'])?$_GET['code']:'';
-	if($ajcode==$_SESSION['ajcode']){
+	if(in_array($ajcode,$_SESSION['ajcode'])){
+		unset($_SESSION['ajcode'][array_search($ajcode,$_SESSION['ajcode'])]);
 		$_SESSION['ajcode']='';
 		$text=Database::setBak();
 	}else{
@@ -19,7 +20,8 @@ if($action=='databak'){
 
 if($action=='import'){
 	$ajcode=isset($_POST['token'])?$_POST['token']:'';
-	if($ajcode==$_SESSION['ajcode']){
+	if(in_array($ajcode,$_SESSION['ajcode'])){
+		unset($_SESSION['ajcode'][array_search($ajcode,$_SESSION['ajcode'])]);
 		$_SESSION['ajcode']='';
 		$dbname=isset($_POST['dbname'])?urldecode($_POST['dbname']):'';
 		$pathname='';

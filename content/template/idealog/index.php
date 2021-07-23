@@ -72,7 +72,7 @@ if(!defined('IDEA_ROOT')){exit('error!');}
 							<h2><a href="<?php echo Url::log($value['id']);?>"><?php echo $value['title'];?></a></h2>
 							<?php $excerpt=$value['excerpt']==''?strip_tags(htmlspecialchars_decode($value['content'])):strip_tags($value['excerpt']);?>
 							<p><?php echo mb_substr(trim($excerpt),0,100);?>...</p>
-							<div class="art_info"><span class="left"><?php echo date("Y-m-d",$value['date']);?></span><span>阅读：<a href="<?php echo Url::log($value['id']);?>"><?php echo $value['eyes'];?></a></span></div>
+							<div class="art_info"><span class="left"><?php echo date("Y-m-d",$value['date']);?></span><span>阅读：<a href="<?php echo Url::log($value['id']);?>"><?php echo $value['eyes'];?></a></span><span>赞同：<a href="<?php echo Url::log($value['id']);?>"><?php echo $value['goodnum'];?></a></span><span>评论：<a href="<?php echo Url::log($value['id']);?>#comments"><?php echo $value['saynum'];?></a></span></div>
 						</div>
 						<div class="clear"></div>
 					</li>
@@ -87,20 +87,24 @@ if(!defined('IDEA_ROOT')){exit('error!');}
 </section>
 <section>
 	<div class="content">
+	<?php if(!empty($links)&&isset($toparts)){?>
 		<div class="links">
 			<div class="center">
 				<p>
 					<b>链接：</b>
-					<?php if(!empty($links)){?>
 					<?php foreach($links as $lval){if($lval['show']){?>
 						<a href="<?php echo $lval["url"];?>" title="<?php echo $lval["des"];?>" target="_blank"><?php echo $lval["name"];?></a>
 					<?php }}?>
-					<?php }?>
 				</p>
 			</div>
 		</div>
+	<?php }?>
 	</div>
 </section>
+
+<?php if(isset($style)){if($style=="card"){?>
+<script>window.onload=function(){document.getElementsByClassName('icon-card')[0].parentNode.click();}</script>
+<?php }}?>
 
 <?php
 include View::getView('footer');

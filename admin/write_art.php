@@ -37,7 +37,7 @@ if(isset($_POST['id'])){
 	//$data['tags'] = isset($_POST['tags']) ? htmlspecialchars($_POST['tags']) : '';
 	$data['date'] = isset($_POST['date']) ? strtotime(htmlspecialchars($_POST['date'])) : '';
 	$data['alias'] = isset($_POST['alias']) ? htmlspecialchars($_POST['alias']) : '';
-	$data['key'] = isset($_POST['key']) ? htmlspecialchars($_POST['key']) : '';
+	$data['key'] = isset($_POST['key']) ? htmlspecialchars(str_replace('，',',',$_POST['key'])) : '';
 	$data['password'] = isset($_POST['password']) ? htmlspecialchars($_POST['password']) : '';
 	$data['eyes'] = isset($_POST['eyes']) ? htmlspecialchars($_POST['eyes']) : '0';
 	$data['goodnum'] = isset($_POST['goodnum']) ? htmlspecialchars($_POST['goodnum']) : '0';

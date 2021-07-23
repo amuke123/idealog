@@ -23,10 +23,12 @@ class art_Model{
 		}
 	}
 	
-	static function getOnceArt($aid){//获取单篇笔记
+	static function getOnceArt($aid,$op=''){//获取单篇笔记/属性
 		$db=Conn::getConnect();
-		$sql="SELECT * FROM `". DB_PRE ."article` WHERE `id` =".$aid;
-		return $art=$db->getOnce($sql);
+		$cxop = $op==''?'*':'`'.$op.'`';
+		$sql="SELECT ".$cxop." FROM `". DB_PRE ."article` WHERE `id` =".$aid;
+		$art=$db->getOnce($sql);
+		return $op==''?$art:$art[$op];
 	}
 	
 	static function getArtFileNum($aid){//获取笔记附件数
@@ -54,7 +56,7 @@ class art_Model{
 		}else{
 			$sql="UPDATE `". DB_PRE ."article` SET ".$upstr." WHERE `id`=".$id;
 		}
-		//echo $sql;
+		//echo $sql;exit;
 		if($db->query($sql)){
 			$dataid=$id==""?$db->last_insert_id():$id;
 			if($dataid!=''&&$tagstr!=''){tag_Model::getTagsId($tagstr,$dataid);}
@@ -186,11 +188,6 @@ class art_Model{
 		return $pages=$db->getlist($sql1);
 	}
 	
-	static function getArtName($aid){//获取笔记名称
-		$art=self::getOnceArt($aid);
-		return $art['title'];
-	}
-	
 	static function setComment($aid,$dbtb){//更换笔记评论数
 		$db=Conn::getConnect();
 		$sql1="SELECT count(*) as sumnum FROM `". DB_PRE .$dbtb."` WHERE `del`='1' and `a_id` = ".$aid.";";
@@ -252,21 +249,14 @@ class art_Model{
         return $neighbor;
 	}
 	
-	static function getArtType($aid){
-		$info=self::getOnceArt($aid);
-		return $info['type'];
+	static function getNewLog($sqlpro='',$order='',$start=0,$num=10){//获取笔记
+		$db=Conn::getConnect();
+		$sql="SELECT * FROM `". DB_PRE ."article` WHERE `type`='a' and `show`='1' and `check`='1' ";
+		$sql.=$sqlpro;
+		$sql.=" ORDER BY ".$order."`date` DESC limit ".$start.",".$num;
+		$arts=$db->getlist($sql);
+		return $arts;
 	}
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
@@ -274,10 +264,6 @@ class art_Model{
 	
 	
 	/**
-	static function getArtTags($aid,$tags='id'){//获取笔记指定的属性
-		$art=self::getOnceArt($aid);
-		return $art[$tags];
-	}
 	
 	static function getCollects($aid,$tp='a'){//blog：收藏数
 		$snum=0;
@@ -297,14 +283,7 @@ class art_Model{
 		return $snum;
 	}
 	
-	static function getNewLog($num=10,$start=0,$sqlpro='',$order=''){//获取笔记
-		$db=Conn::getConnect();
-		$sql="SELECT * FROM `". DB_PRE ."article` WHERE `type`='a' and `show`='1' and `check`='1' ";
-		$sql.=$sqlpro;
-		$sql.=" ORDER BY ".$order."`date` DESC limit ".$start.",".$num;
-		$arts=$db->getlist($sql);
-		return $arts;
-	}
+	
 	
 	static function getRandLog($num=12){//获取随机笔记
 		$db=Conn::getConnect();

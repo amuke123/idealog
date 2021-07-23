@@ -7,4 +7,5 @@ for($i=0;$i<1000;$i++){
 }
 $t2 = microtime(true);
 echo '耗时'.round($t2-$t1,16).'秒';
+echo substr(uniqid(),-8);
 ?>

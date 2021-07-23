@@ -8,7 +8,8 @@ if(isset($_POST['sendid'])){
 	$data['action']='sendid';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
 	$text='';
-	if($ajcode==$_SESSION['ajcode']){
+	if(in_array($ajcode,$_SESSION['ajcode'])){
+		unset($_SESSION['ajcode'][array_search($ajcode,$_SESSION['ajcode'])]);
 		$sendid=isset($_POST['sendid'])?$_POST['sendid']:'';
 		$type=isset($_POST['type'])?$_POST['type']:'';
 		$do=isset($_POST['do'])?$_POST['do']:'';

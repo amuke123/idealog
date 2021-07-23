@@ -47,7 +47,7 @@
 							<?php echo date("Y-m-d H:i:s",$dtime);?>
 						</span>
 						<span class="tleft linesort"><a target="_blank" href="<?php echo $value['url'];?>"><?php echo $uname;?></a> <?php echo $value['mail']!=''?"(".$value['mail'].")":'';?><br />来自：<?php echo $value['ip'];?> </span>
-						<span><a target="_blank" href="<?php echo Url::log($value['a_id']);?>"><?php echo art_Model::getArtName($value['a_id']);?></a></span>
+						<span><a target="_blank" href="<?php echo Url::log($value['a_id']);?>"><?php echo art_Model::getOnceArt($value['a_id'],'title');?></a></span>
 						<span><?php echo $value['good'];?></span><span><?php echo $value['bad'];?></span>
 						<span><a href="javascript:showOrHide('<?php echo $value['id']."','".IDEA_URL."','";echo $value['show']==0?'1':'0';?>','comment','<?php echo $value['a_id'];?>');"><?php echo $value['show']==0?'<img title="隐藏" src="'. TEMPLATE_URLA .'static/images/plugin_inactive.gif" />':'<img title="显示" src="'. TEMPLATE_URLA .'static/images/plugin_active.gif" />';?></a></span>
 					</p>

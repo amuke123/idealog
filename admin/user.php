@@ -67,7 +67,8 @@ if(isset($_POST['add'])||isset($_POST['edit'])){
 	$datauser=array();
 	$userid=isset($_POST['userid'])?$_POST['userid']:'';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
-	if($ajcode==$_SESSION['ajcode']){
+	if(in_array($ajcode,$_SESSION['ajcode'])){
+		unset($_SESSION['ajcode'][array_search($ajcode,$_SESSION['ajcode'])]);
 		
 		$usernames=isset($_POST['username'])?$_POST['username']:'';
 		if(isset($_POST['add'])){

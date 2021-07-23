@@ -273,16 +273,13 @@ function getTag($tagids='',$tar=0){//获取笔记标签
 	return $str;
 }
 
-/**
-
 function checkMail($email){
     if(preg_match("/^[\w\.\-]+@\w+([\.\-]\w+)*\.\w+$/",$email)&&strlen($email)<=80){return true;}else{return false;}
 }
 
 
 
-
-
+/**
 
 
 

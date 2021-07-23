@@ -50,7 +50,7 @@ if(!defined('IDEA_ROOT')){exit('error!');}
 								<h2><a href="<?php echo Url::log($value['id']);?>"><?php echo $value['title'];?></a></h2>
 								<?php $excerpt=$value['excerpt']==''?strip_tags(htmlspecialchars_decode($value['content'])):strip_tags($value['excerpt']);?>
 								<p><?php echo mb_substr(trim($excerpt),0,100);?>...</p>
-								<div class="art_info"><span class="left"><?php echo date("Y-m-d",$value['date']);?></span><span>阅读：<a href="<?php echo Url::log($value['id']);?>"><?php echo $value['eyes'];?></a></span></div>
+								<div class="art_info"><span class="left"><?php echo date("Y-m-d",$value['date']);?></span><span>阅读：<a href="<?php echo Url::log($value['id']);?>"><?php echo $value['eyes'];?></a></span><span>赞同：<a href="<?php echo Url::log($value['id']);?>"><?php echo $value['goodnum'];?></a></span><span>评论：<a href="<?php echo Url::log($value['id']);?>#comments"><?php echo $value['saynum'];?></a></span></div>
 							</div>
 							<div class="clear"></div>
 						</li>
@@ -62,18 +62,13 @@ if(!defined('IDEA_ROOT')){exit('error!');}
 				</div>
 				<div class="c_cont_hot right">
 					<div class="c_cr_top">
-						<p><b>一周热点</b></p>
+						<p><b>热门排行</b></p>
 					</div>
 					<div class="c_cr_hot">
 						<p><b><img src="<?php echo TEMPLATE_URL;?>images/pic.jpg"></b></p>
-						<li><i class="hot">1</i><a href="#">网页设计需要了解的网页设计技巧</a></li>
-						<li><i class="hot">2</i><a href="#">centos搭建Apache+php+mysql+phpmyadmin等Web服务器环境</a></li>
-						<li><i class="hot">3</i><a href="#">访客最讨厌的3种网站交互方式</a></li>
-						<li><i>4</i><a href="#">手工制作可帮助您缓解睡眠或疲劳的眼睛的镇静眼枕</a></li>
-						<li><i>5</i><a href="#">如何修复厨房臭水槽排水口</a></li>
-						<li><i>6</i><a href="#">免费可商用图片网站</a></li>
-						<li><i>7</i><a href="#">为何临摹容易，自己做设计却完全没思路？</a></li>
-						<li><i>8</i><a href="#">脑洞极大的设计想法怎么来的？</a></li>
+						<?php if(!empty($hotart)){$ii=1;foreach($hotart as $hotval){?>
+						<li><i <?php echo $ii<4?'class="hot"':'';?>><?php echo $ii++;?></i><a href="<?php echo $hotval['arturl'];?>" title="<?php echo $hotval['title'];?>"><?php echo $hotval['title'];?></a></li>
+						<?php }}?>
 					</div>
 					<div class="c_cr_ad">
 						<p><b><img src="<?php echo TEMPLATE_URL;?>images/pic2.jpg"></b></p>

@@ -2,7 +2,10 @@ function sendMail(path){//获取邮箱验证码
 	var ajcode=document.getElementById("ajcode").value;
 	var sendid=document.getElementById("sendid").value;
 	var dotype=document.getElementById("do").value;
+	var bt=document.getElementById("mailcode");
 	if(sendid==''){alert('请输入邮箱或手机号');return false;}
+	bt.disabled=true;
+	bt.value='发送中...';
 	var type='';
 	var myreg=/^[1][3,4,5,6,7,8,9][0-9]{9}$/;
 	var reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;

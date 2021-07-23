@@ -8,7 +8,8 @@ if(isset($_POST['idexid'])){
 	$data['action']='tsxx';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
 	$dbtb=isset($_POST['db'])?$_POST['db']:'';
-	if($ajcode==$_SESSION['ajcode']){
+	if(in_array($ajcode,$_SESSION['ajcode'])){
+		unset($_SESSION['ajcode'][array_search($ajcode,$_SESSION['ajcode'])]);
 		$sids=explode(',',$_POST['idexid']);
 		$indexs=explode(',',$_POST['idexval']);
 		action_Model::setIndex($sids,$indexs,$dbtb);
@@ -26,7 +27,8 @@ if(isset($_POST['idexid2'])){
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
 	$option=isset($_POST['option'])?$_POST['option']:'';
 	$banners=Control::get($option);
-	if($ajcode==$_SESSION['ajcode']){
+	if(in_array($ajcode,$_SESSION['ajcode'])){
+		unset($_SESSION['ajcode'][array_search($ajcode,$_SESSION['ajcode'])]);
 		$sids=explode(',',$_POST['idexid2']);
 		$indexs=explode(',',$_POST['idexval']);
 		$orda=array();
@@ -50,7 +52,8 @@ if(isset($_POST['delline'])){
 	$data['action']='tsxx';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
 	$dbtb=isset($_POST['db'])?$_POST['db']:'';
-	if($ajcode==$_SESSION['ajcode']){
+	if(in_array($ajcode,$_SESSION['ajcode'])){
+		unset($_SESSION['ajcode'][array_search($ajcode,$_SESSION['ajcode'])]);
 		$sortid=$_POST['delline'];
 		if($dbtb=='sort'){art_Model::moveSort($sortid);}
 		action_Model::delFile($sortid,$dbtb);
@@ -69,7 +72,8 @@ if(isset($_POST['delline2'])){
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
 	$option=isset($_POST['option'])?$_POST['option']:'';
 	$banners=Control::get($option);
-	if($ajcode==$_SESSION['ajcode']){
+	if(in_array($ajcode,$_SESSION['ajcode'])){
+		unset($_SESSION['ajcode'][array_search($ajcode,$_SESSION['ajcode'])]);
 		$id=$_POST['delline2'];
 		delThem($banners[$id]['pic']);
 		unset($banners[$id]);
@@ -91,7 +95,8 @@ if(isset($_POST['showhide'])){
 	$key=isset($_POST['key'])?$_POST['key']:'';
 	$id=isset($_POST['showhide'])?$_POST['showhide']:'';
 	$aid=isset($_POST['aid'])?$_POST['aid']:'';
-	if($ajcode==$_SESSION['ajcode']){
+	if(in_array($ajcode,$_SESSION['ajcode'])){
+		unset($_SESSION['ajcode'][array_search($ajcode,$_SESSION['ajcode'])]);
 		if($dbtb=='say'){art_Model::setComment($aid,$dbtb);}
 		action_Model::showOrHide($key,$id,$dbtb);
 		updateCacheAll();
@@ -111,7 +116,8 @@ if(isset($_POST['showhide2'])){
 	$key=isset($_POST['key'])?$_POST['key']:'';
 	$id=isset($_POST['showhide2'])?$_POST['showhide2']:'';
 	$banners=Control::get($option);
-	if($ajcode==$_SESSION['ajcode']){
+	if(in_array($ajcode,$_SESSION['ajcode'])){
+		unset($_SESSION['ajcode'][array_search($ajcode,$_SESSION['ajcode'])]);
 		$banners[$id]['show']=$key;
 		$opdata[$option]=serialize($banners);
 		Control::set($opdata);
@@ -183,7 +189,8 @@ if(isset($_POST['showfile'])){
 	$data['action']='showfile';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
 	$aid=isset($_POST['showfile'])?$_POST['showfile']:'';
-	if($ajcode==$_SESSION['ajcode']){
+	if(in_array($ajcode,$_SESSION['ajcode'])){
+		unset($_SESSION['ajcode'][array_search($ajcode,$_SESSION['ajcode'])]);
 		$data['txt']=art_Model::setFileList($aid);
 		$data['text']='更改成功';
 	}else{
@@ -198,7 +205,8 @@ if(isset($_POST['upaid'])){
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
 	$aid=isset($_POST['upaid'])?$_POST['upaid']:'';
 	$type=isset($_POST['type'])?$_POST['type']:'';
-	if($ajcode==$_SESSION['ajcode']){
+	if(in_array($ajcode,$_SESSION['ajcode'])){
+		unset($_SESSION['ajcode'][array_search($ajcode,$_SESSION['ajcode'])]);
 		$upfile=new Upfile();
 		$files=$upfile->getFileList($_FILES);
 		if(!empty($files)){
@@ -221,7 +229,8 @@ if(isset($_POST['dellist'])){
 	$data['action']='tsxx';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
 	$dbtb=isset($_POST['db'])?$_POST['db']:'';
-	if($ajcode==$_SESSION['ajcode']){
+	if(in_array($ajcode,$_SESSION['ajcode'])){
+		unset($_SESSION['ajcode'][array_search($ajcode,$_SESSION['ajcode'])]);
 		$list=isset($_POST['list'])?$_POST['list']:'';
 		$lists=explode(',',$list);
 		action_Model::delList($lists,$dbtb,'path');
@@ -238,7 +247,8 @@ if(isset($_POST['draft'])){
 	$data['action']='tsxx';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
 	$dbtb=isset($_POST['db'])?$_POST['db']:'';
-	if($ajcode==$_SESSION['ajcode']){
+	if(in_array($ajcode,$_SESSION['ajcode'])){
+		unset($_SESSION['ajcode'][array_search($ajcode,$_SESSION['ajcode'])]);
 		$list=isset($_POST['list'])?$_POST['list']:'';
 		$key=$_POST['draft'];
 		$lists=explode(',',$list);
@@ -256,7 +266,8 @@ if(isset($_POST['release'])){
 	$data['action']='tsxx';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
 	$dbtb=isset($_POST['db'])?$_POST['db']:'';
-	if($ajcode==$_SESSION['ajcode']){
+	if(in_array($ajcode,$_SESSION['ajcode'])){
+		unset($_SESSION['ajcode'][array_search($ajcode,$_SESSION['ajcode'])]);
 		$list=isset($_POST['list'])?$_POST['list']:'';
 		$key=$_POST['release'];
 		$lists=explode(',',$list);
@@ -275,7 +286,8 @@ if(isset($_POST['check'])){
 	$data['action']='tsxx';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
 	$dbtb=isset($_POST['db'])?$_POST['db']:'';
-	if($ajcode==$_SESSION['ajcode']){
+	if(in_array($ajcode,$_SESSION['ajcode'])){
+		unset($_SESSION['ajcode'][array_search($ajcode,$_SESSION['ajcode'])]);
 		$list=isset($_POST['list'])?$_POST['list']:'';
 		$key=$_POST['check'];
 		$lists=explode(',',$list);
@@ -292,7 +304,8 @@ if(isset($_POST['move'])){
 	$data=array();
 	$data['action']='tsxx';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
-	if($ajcode==$_SESSION['ajcode']){
+	if(in_array($ajcode,$_SESSION['ajcode'])){
+		unset($_SESSION['ajcode'][array_search($ajcode,$_SESSION['ajcode'])]);
 		$list=isset($_POST['list'])?$_POST['list']:'';
 		$newsid=isset($_POST['move'])?$_POST['move']:0;
 		$lists=explode(',',$list);
@@ -308,7 +321,8 @@ if(isset($_POST['top'])){
 	$data=array();
 	$data['action']='tsxx';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
-	if($ajcode==$_SESSION['ajcode']){
+	if(in_array($ajcode,$_SESSION['ajcode'])){
+		unset($_SESSION['ajcode'][array_search($ajcode,$_SESSION['ajcode'])]);
 		$list=isset($_POST['list'])?$_POST['list']:'';
 		$topmark=isset($_POST['top'])?$_POST['top']:'0';
 		$lists=explode(',',$list);
@@ -326,7 +340,8 @@ if(isset($_POST['userpic'])){
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
 	$userpic=isset($_POST['userpic'])?$_POST['userpic']:'';
 	$uid=isset($_POST['uid'])?$_POST['uid']:'';
-	if($ajcode==$_SESSION['ajcode']){
+	if(in_array($ajcode,$_SESSION['ajcode'])){
+		unset($_SESSION['ajcode'][array_search($ajcode,$_SESSION['ajcode'])]);
 		if($userpic!=''){delFileLine($userpic);}
 		if($uid!=''){user_Model::delUserPhoto($uid);}
 		$data['text']='删除成功';
@@ -341,7 +356,8 @@ if(isset($_POST['upfile'])){
 	$data['action']='upfile';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
 	$up=isset($_POST['upfile'])?$_POST['upfile']:'';
-	if($ajcode==$_SESSION['ajcode']){
+	if(in_array($ajcode,$_SESSION['ajcode'])){
+		unset($_SESSION['ajcode'][array_search($ajcode,$_SESSION['ajcode'])]);
 		$upfile=new Upfile();
 		$files=$upfile->getFileList($_FILES);
 		if(!empty($files)){
@@ -362,7 +378,8 @@ if(isset($_POST['delsay'])){
 	$data=array();
 	$data['action']='tsxx';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
-	if($ajcode==$_SESSION['ajcode']){
+	if(in_array($ajcode,$_SESSION['ajcode'])){
+		unset($_SESSION['ajcode'][array_search($ajcode,$_SESSION['ajcode'])]);
 		$list=isset($_POST['list'])?$_POST['list']:0;
 		$lists=explode(',',$list);
 		foreach($lists as $val){
@@ -389,7 +406,8 @@ if(isset($_POST['checksay'])){
 	$data=array();
 	$data['action']='tsxx';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
-	if($ajcode==$_SESSION['ajcode']){
+	if(in_array($ajcode,$_SESSION['ajcode'])){
+		unset($_SESSION['ajcode'][array_search($ajcode,$_SESSION['ajcode'])]);
 		$list=isset($_POST['list'])?$_POST['list']:0;
 		$checkid=$_POST['checksay'];
 		$lists=explode(',',$list);
@@ -409,7 +427,8 @@ if(isset($_POST['goodsay'])){
 	$data=array();
 	$data['action']='tsxx';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
-	if($ajcode==$_SESSION['ajcode']){
+	if(in_array($ajcode,$_SESSION['ajcode'])){
+		unset($_SESSION['ajcode'][array_search($ajcode,$_SESSION['ajcode'])]);
 		$list=isset($_POST['list'])?$_POST['list']:0;
 		$goodid=$_POST['goodsay'];
 		$lists=explode(',',$list);
@@ -430,7 +449,8 @@ if(isset($_POST['usertem'])){
 	$data['action']='tsxx';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
 	$key=isset($_POST['key'])?$_POST['key']:'';
-	if($ajcode==$_SESSION['ajcode']){
+	if(in_array($ajcode,$_SESSION['ajcode'])){
+		unset($_SESSION['ajcode'][array_search($ajcode,$_SESSION['ajcode'])]);
 		$tem=$_POST['usertem'];
 		$path = IDEA_ROOT .'/content/template/'.$tem.'/';
 		if(is_dir($path)){
@@ -465,7 +485,8 @@ if(isset($_POST['deltem'])){
 	$data['action']='tsxx';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
 	$key=isset($_POST['db'])?$_POST['db']:'';
-	if($ajcode==$_SESSION['ajcode']){
+	if(in_array($ajcode,$_SESSION['ajcode'])){
+		unset($_SESSION['ajcode'][array_search($ajcode,$_SESSION['ajcode'])]);
 		$tem=$_POST['deltem'];
 		$sql="SELECT * FROM `" . DB_PRE ."options` WHERE `key` = '".$key."';";
 		$arr=$db->getlist($sql);
@@ -498,7 +519,8 @@ if(isset($_POST['delbak'])){
 	$data=array();
 	$data['action']='tsxx';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
-	if($ajcode==$_SESSION['ajcode']){
+	if(in_array($ajcode,$_SESSION['ajcode'])){
+		unset($_SESSION['ajcode'][array_search($ajcode,$_SESSION['ajcode'])]);
 		$list=isset($_POST['delbak'])?$_POST['delbak']:'';
 		$lists=explode(',',$list);
 		foreach($lists as $vel){
@@ -516,7 +538,8 @@ if(isset($_POST['plugin'])){//插件开启关闭
 	$data=array();
 	$data['action']='tsxx';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
-	if($ajcode==$_SESSION['ajcode']){
+	if(in_array($ajcode,$_SESSION['ajcode'])){
+		unset($_SESSION['ajcode'][array_search($ajcode,$_SESSION['ajcode'])]);
 		$plugin=isset($_POST['plugin'])?$_POST['plugin']:'';
 		$key=isset($_POST['key'])?$_POST['key']:0;
 		$plugins=Control::get('plugins_list');
@@ -541,7 +564,8 @@ if(isset($_POST['plugindel'])){//删除插件
 	$data=array();
 	$data['action']='tsxx';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
-	if($ajcode==$_SESSION['ajcode']){
+	if(in_array($ajcode,$_SESSION['ajcode'])){
+		unset($_SESSION['ajcode'][array_search($ajcode,$_SESSION['ajcode'])]);
 		$plugin=isset($_POST['plugindel'])?$_POST['plugindel']:'';
 		$pluginpath=IDEA_ROOT .'/content/plugins/'.$plugin.'/';
 		delAllDirAndFile($pluginpath);
@@ -562,7 +586,8 @@ if(isset($_POST['delid'])){//删除资源文件
 	$data=array();
 	$data['action']='tsxx';
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
-	if($ajcode==$_SESSION['ajcode']){
+	if(in_array($ajcode,$_SESSION['ajcode'])){
+		unset($_SESSION['ajcode'][array_search($ajcode,$_SESSION['ajcode'])]);
 		$delid=isset($_POST['delid'])?$_POST['delid']:'';
 		delFileLineId($delid);
 		$data['text']='删除成功';

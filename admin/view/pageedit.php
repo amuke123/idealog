@@ -8,8 +8,8 @@
 				<input type="hidden" name='arttype' id='arttype' value="p" />
 				<input type="hidden" name="id" id="aid" value="<?php echo $pid?$pagei['id']:'';?>" />
 				<input type="hidden" name="fb" id="fb" value="<?php echo $pid?$pagei['id']:'';?>" />
-				<input type="hidden" name="filenum" id="filenum" value="<?php echo $pid?$pagei['filenum']:'';?>"/>
-				<input type="hidden" name="saynum" value="<?php echo $pid?$pagei['saynum']:'';?>" />
+				<input type="hidden" name="filenum" id="filenum" value="<?php echo $pid?$pagei['filenum']:'0';?>"/>
+				<input type="hidden" name="saynum" value="<?php echo $pid?$pagei['saynum']:'0';?>" />
 				<p><input type="text" name="title" value="<?php echo $pid?$pagei['title']:'';?>" class="formtitle" placeholder="请在这里输入标题" /></p>
 				<p><textarea id="editor" class="formtext" name="content" ><?php echo $pid?$pagei['content']:'';?></textarea></p>
 			</div>

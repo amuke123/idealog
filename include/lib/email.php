@@ -2,6 +2,7 @@
 class Email{
 	static function sendMail($emailid,$data=''){//发送邮件
 		include_once IDEA_ROOT .'/include/core/mail/PHPMailer.php';
+		include_once IDEA_ROOT .'/include/core/mail/Exception.php';
 		include_once IDEA_ROOT .'/include/core/mail/SMTP.php';
 		
 		$host=Control::get('mailhost');
@@ -38,78 +39,7 @@ class Email{
 		$status = $mail->send();// 发送邮件 返回状态,debug开启后才会返回状态
 
 	}
-	/**static function sendMail2($emailid,$data=''){//发送邮件
 	
-		//$host=Control::get('mailhost');
-		$host='smtp.qq.com';
-		//$port=Control::get('mailport');
-		$port=25;
-		//$sendmail=Control::get('mail');
-		$sendmail='amuke123@ideashu.com';
-		$te=explode('@',$sendmail);
-		$sendname=$te[0];
-		//$sendmailpswd=Control::get('mailpswd');
-		$sendmailpswd='dmpvsmoxczwbcbca';
-		$title='验证码';
-		$code=Cellcode::getCode($emailid);
-		$sitename=SITE_NAME;
-		$toemail=$emailid;
-		$str = $data!=''?$data:'<p>您的验证码是：</p><p><b>'.$code.'</b></p><p>如非本人操作，请忽略此邮件，由此给您带来的不便请谅解！</p><p>'.$sitename .'</p>';
-$content = <<<EOF
-Subject: $title
-From:"$sendname"<$sendmail>
-To:""<$toemail>
-Content-Type: text/html;
-
-$str
-.
-
-EOF;
-
-		//$streamContext = stream_context_create();
-		//$stream = stream_socket_client("tcp://$host:$port",$errno,$errstr,$timeout = 10,STREAM_CLIENT_CONNECT,$streamContext);
-		$stream = fsockopen($host,$port,$errno,$error,10);
-		if($stream===false){exit('无法建立连接');}
-		stream_set_blocking($stream,1);
-		$response = fgets($stream);
-		if(strpos($response,'220')!==0){exit('连接邮件服务器失败');}
-		
-		fwrite($stream, sprintf("HELO %s\n", $host));
-		$response = fgets($stream);
-		if(strpos($response,'250')!==0){exit('helo命令执行失败');}
-		
-		fwrite($stream, "AUTH LOGIN\n");
-		$response = fgets($stream);
-		if(strpos($response,'334')!==0){exit('AUTH LOGIN命令执行失败');}
-		
-		fwrite($stream, sprintf("%s\n", base64_encode($sendname)));
-		$response = fgets($stream);
-		if(strpos($response,'334')!==0){exit('账号验证失败');}
-		
-		fwrite($stream, sprintf("%s\n", base64_encode($sendmailpswd)));
-		$response = fgets($stream);
-		if(strpos($response,'235')!==0){exit('密码验证失败');}
-		
-		fwrite($stream, sprintf("MAIL FROM: <%s>\n",$sendmail));
-		$response = fgets($stream);
-		if(strpos($response,'250')!==0){exit('mail from命令执行失败');}
-		
-		fwrite($stream, sprintf("RCPT TO: <%s>\n",$toemail));
-		$response = fgets($stream);
-		if(strpos($response,'250')!==0){exit('rcpt to命令执行失败');}
-		
-		fwrite($stream, sprintf("%s\n", 'DATA'));
-		$response = fgets($stream);
-		if(strpos($response,'354')!==0){exit('data命令执行失败');}
-		
-		fwrite($stream, $content);
-		$response = fgets($stream);
-		if(strpos($response,'250')!==0){exit('发送邮件失败');}
-
-		fwrite($stream, sprintf("%s\n", 'QUIT'));
-		echo '发送邮件成功' . PHP_EOL;
-		fgets($stream);
-	}**/
 }
 
 ?>

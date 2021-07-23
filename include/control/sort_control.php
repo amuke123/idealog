@@ -13,7 +13,7 @@ class sort_Control{
 		
 		$pnum=count($params)-1;
 		$pagenum = Control::get('art_num');
-		$pageid = isset($params[$pnum-1])&&$params[$pnum-1]=='page'?abs(intval($params[$pnum])):isset($_GET['page'])?$_GET['page']:1;
+		$pageid = isset($params[$pnum-1])&&$params[$pnum-1]=='page'?abs(intval($params[$pnum])):(isset($_GET['page'])?$_GET['page']:1);
 		$startnum = $pagenum*($pageid-1);
 		
 		$sortid = '';
@@ -50,7 +50,10 @@ class sort_Control{
 			$rolestr = " AND `s_id` in (". implode(',', $sortids) .")";
         }
 		
-		$toparts=art_Model::getArtList(1,1,$rolestr." AND mark like '%ST%' ",'',0,4);
+		$topartarr=$cache->readCache('arttop');
+		$toparts=$topartarr[$sortid];
+		
+		$hotart=$cache->readCache('hotart');
 		
 		$arts=art_Model::getArtList(1,1,$rolestr,'',$startnum,$pagenum);
 		$artnumb=art_Model::getArtsNum(1,1,$rolestr,'');

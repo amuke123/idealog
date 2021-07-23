@@ -3,15 +3,15 @@ define('ROOT', dirname(dirname(dirname(__FILE__))));
 include_once ROOT.'/include/core/amuker.php';
 Checking::setSession();
 
-/**
 if(isset($_POST['type'])){
 	$db=Conn::getConnect();
 	$data=array();
 	$ajcode=isset($_POST['ajcode'])?$_POST['ajcode']:'';
 	$tp=isset($_POST['type'])?$_POST['type']:'';
-	$data['action']=$tp;
+	$data['action']='tsxx';
 	$aid=isset($_POST['aid'])?$_POST['aid']:'';
-	if($ajcode==$_SESSION['ajcode']){
+	if(in_array($ajcode,$_SESSION['ajcode'])){
+		unset($_SESSION['ajcode'][array_search($ajcode,$_SESSION['ajcode'])]);
 		switch($tp){
 			case 'good':
 				$nowdate=date("Y-m-d");
@@ -28,7 +28,7 @@ if(isset($_POST['type'])){
 						$_SESSION['goodnum']=$nowdate;
 						$_SESSION['ids'].=$aid.",";
 					}
-					$data['text']="点赞成功";
+					$data['text']="成功赞了一下";
 				}
 				break;
 			case 'bad':
@@ -103,6 +103,9 @@ if(isset($_POST['type'])){
 	echo json_encode($data);
 }
 
+/**
+
+
 if(isset($_POST['readmore'])){
 	$db=Conn::getConnect();
 	$data=array();
@@ -110,7 +113,8 @@ if(isset($_POST['readmore'])){
 	$data['action']='readmore';
 	$page=isset($_POST['page'])?$_POST['page']:'0';
 	$num=isset($_POST['num'])?$_POST['num']:'1';
-	if($ajcode==$_SESSION['ajcode']){
+	if(in_array($ajcode,$_SESSION['ajcode'])){
+		unset($_SESSION['ajcode'][array_search($ajcode,$_SESSION['ajcode'])]);
 		$nArts=art_Model::getNewLog($num,(int)Control::get('art_num')+($page*$num),'','');
 		$str='';
 		foreach($nArts as $nval){

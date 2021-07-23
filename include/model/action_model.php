@@ -62,6 +62,63 @@ class action_Model{
 		echo "<script>alert('缓存更新成功！');window.history.go(-1);</script>";
 	}
 	
+	static function fc_comments($site_title){
+		$site_title='回复-'.$site_title;
+		Checking::setSession();
+		$name = isset($_POST['comname']) ? addslashes(trim($_POST['comname'])) : '';
+        $content = isset($_POST['comment']) ? addslashes(trim($_POST['comment'])) : '';
+        $mail = isset($_POST['commail']) ? addslashes(trim($_POST['commail'])) : '';
+        $url = isset($_POST['comurl']) ? addslashes(trim($_POST['comurl'])) : '';
+        $imgcode = isset($_POST['imgcode']) ? addslashes(trim(strtolower($_POST['imgcode']))):'';
+        $aid = isset($_POST['aid']) ? intval($_POST['aid']) : -1;
+        $pid = isset($_POST['pid']) ? intval($_POST['pid']) : 0;
+		if(UID!=0){
+            $user_cache=user_Model::getInfo();
+            $name = addslashes($user_cache['name']);
+            $mail = addslashes($user_cache['email']);
+            $url = addslashes(Url::author(UID));
+        }
+
+        if($url && strncasecmp($url,'http',4)){$url = 'http://'.$url;}
+		say_Model::setCommentCookie($name,$mail,$url);
+		if(Control::get('sayok')==0||art_Model::getOnceArt($aid,'sayok')==0){
+			mkMsg('评论失败：该文章已关闭评论');
+		}else if(say_Model::isCommentExist($aid,$name,$content)===true){
+            mkMsg('评论失败：已存在相同内容评论');
+        }else if(ROLE==ROLE_VISITOR&&say_Model::isCommentTooFast()===true){
+            mkMsg('评论失败：您提交评论的速度太快了，请稍后再发表评论');
+        }else if(empty($name)){
+            mkMsg('评论失败：请填写姓名');
+        }else if(strlen($name) > 20){
+            mkMsg('评论失败：输入的姓名太长');
+        }else if($mail!=''&&!checkMail($mail)){
+            mkMsg('评论失败：邮件地址不符合规范');
+        }else if(UID==0&&say_Model::isNameAndMailValid($name,$mail)===false){
+            mkMsg('评论失败：禁止使用管理员昵称或邮箱评论');
+        }else if(!empty($url)&&preg_match("/^(http|https)\:\/\/[^<>'\"]*$/",$url)==false) {
+            mkMsg('评论失败：主页地址不符合规范','javascript:history.back(-1);');
+        }else if(empty($content)){
+            mkMsg('评论失败：请填写评论内容');
+        }else if(strlen($content)>8000){
+            mkMsg('评论失败：内容不符合规范');
+        }else if(Control::get('say_chinese')=='1'&&!preg_match('/[\x{4e00}-\x{9fa5}]/iu',$content)){
+            mkMsg('评论失败：评论内容需包含中文');
+        }else if(Control::get('say_code')=='1'&&(empty($imgcode)||$imgcode!==$_SESSION['code'])){
+			//echo $imgcode."--"; echo $_SESSION['code'];
+            mkMsg('评论失败：验证码错误');
+        }else{
+            $_SESSION['code']=null;
+			if($pid!=0){
+				$tid_tem=say_Model::getSayTid($pid);
+				$tid=$tid_tem!="0"?$tid_tem:$pid;
+			}else{
+				$tid=0;
+			}
+            say_Model::addComment($name,$content,$mail,$url,$aid,$pid,$tid);
+        }
+		
+	}
+	
 	static function addLine($adddata,$dbtb,$sid=''){//创建
 		$db=Conn::getConnect();
 		$keystr='';
@@ -185,75 +242,7 @@ class action_Model{
 		$db->query($sql);
 	}
 	
-	/**
-	static function fc_comments($site_title){
-		$site_title='回复-'.$site_title;
-		Checking::setSession();
-		$name = isset($_POST['comname']) ? addslashes(trim($_POST['comname'])) : '';
-        $content = isset($_POST['comment']) ? addslashes(trim($_POST['comment'])) : '';
-        $mail = isset($_POST['commail']) ? addslashes(trim($_POST['commail'])) : '';
-        $url = isset($_POST['comurl']) ? addslashes(trim($_POST['comurl'])) : '';
-        $imgcode = isset($_POST['imgcode']) ? addslashes(trim(strtolower($_POST['imgcode']))):'';
-        $aid = isset($_POST['aid']) ? intval($_POST['aid']) : -1;
-        $pid = isset($_POST['pid']) ? intval($_POST['pid']) : 0;
-		if(UID!=0){
-            $user_cache=user_Model::getInfo();
-            $name = addslashes($user_cache['name']);
-            $mail = addslashes($user_cache['email']);
-            $url = addslashes(Url::author(UID));
-        }
 
-        if($url && strncasecmp($url,'http',4)){$url = 'http://'.$url;}
-		say_Model::setCommentCookie($name,$mail,$url);
-		if(Control::get('sayok')==0||art_Model::getArtTags($aid,'sayok')==0){
-			mkMsg('评论失败：该文章已关闭评论');
-		}else if(say_Model::isCommentExist($aid,$name,$content)===true){
-            mkMsg('评论失败：已存在相同内容评论');
-        }else if(ROLE==ROLE_VISITOR&&say_Model::isCommentTooFast()===true){
-            mkMsg('评论失败：您提交评论的速度太快了，请稍后再发表评论');
-        }else if(empty($name)){
-            mkMsg('评论失败：请填写姓名');
-        }else if(strlen($name) > 20){
-            mkMsg('评论失败：输入的姓名太长');
-        }else if($mail!=''&&!checkMail($mail)){
-            mkMsg('评论失败：邮件地址不符合规范');
-        }else if(UID==0&&say_Model::isNameAndMailValid($name,$mail)===false){
-            mkMsg('评论失败：禁止使用管理员昵称或邮箱评论');
-        }else if(!empty($url)&&preg_match("/^(http|https)\:\/\/[^<>'\"]*$/",$url)==false) {
-            mkMsg('评论失败：主页地址不符合规范','javascript:history.back(-1);');
-        }else if(empty($content)){
-            mkMsg('评论失败：请填写评论内容');
-        }else if(strlen($content)>8000){
-            mkMsg('评论失败：内容不符合规范');
-        }else if(ROLE==ROLE_VISITOR&&Control::get('say_chinese')=='1'&&!preg_match('/[\x{4e00}-\x{9fa5}]/iu',$content)){
-            mkMsg('评论失败：评论内容需包含中文');
-        }else if(Control::get('say_code')=='1'&&(empty($imgcode)||$imgcode!==$_SESSION['code'])){
-			//echo $imgcode."--"; echo $_SESSION['code'];
-            mkMsg('评论失败：验证码错误');
-        }else{
-            $_SESSION['code']=null;
-			if($pid!=0){
-				$tid_tem=say_Model::getSayTid($pid);
-				$tid=$tid_tem!="0"?$tid_tem:$pid;
-			}else{
-				$tid=0;
-			}
-            say_Model::addComment($name,$content,$mail,$url,$aid,$pid,$tid);
-        }
-		
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-**/
 	
 }
 

@@ -6,9 +6,9 @@ if(!defined('IDEA_ROOT')){exit('error!');}
 //获取评论
 function getComments($comments,$aid){?>
 	<a name="comments"></a>
-	<div class="c_title"><b></b><span><?php echo art_Model::getArtType($aid)=="p"?'留言':'评论';?></span></div>
+	<div class="c_title"><b></b><span><?php echo art_Model::getOnceArt($aid,'type')=="p"?'留言':'评论';?></span></div>
 	<?php if(empty($comments)){?>
-		<p class="comment_header"><b><?php echo art_Model::getArtType($aid)=="p"?'':'还没有评论奥，快来抢个沙发吧！';?></b></p>
+		<p class="comment_header"><b><?php echo art_Model::getOnceArt($aid,'type')=="p"?'':'还没有评论奥，快来抢个沙发吧！';?></b></p>
 	<?php }else{?>
 		<?php
 		$isGravatar=Control::get('say_gravatar');
@@ -21,7 +21,7 @@ function getComments($comments,$aid){?>
 				<a name="<?php echo $cid;?>"></a>
 				<?php if($isGravatar=='1'){?>
 				<div class="avatar left">
-					<img src="<?php echo $posterPhoto==''?getGravatar($sayval['mail']):$posterPhoto;?>" />
+					<img src="<?php echo $posterPhoto==''?IDEA_URL .ADMIN_TYPE ."/view/static/images/avatar.jpg":$posterPhoto;?>" />
 				</div>
 				<?php }?>
 				<div class="comment_info right">
@@ -52,7 +52,7 @@ function getComments2($comments,$children,$aid){
 			<a name="<?php echo $cid;?>"></a>
 			<?php if($isGravatar=='1'){?>
 			<div class="avatar left">
-				<img src="<?php echo $posterPhoto==''?getGravatar($sayval['mail']):$posterPhoto;?>" />
+				<img src="<?php echo $posterPhoto==''?IDEA_URL .ADMIN_TYPE ."/view/static/images/avatar.jpg":$posterPhoto;?>" />
 			</div>
 			<?php }?>
 			<div class="comment_info right">

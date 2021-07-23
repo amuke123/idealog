@@ -42,7 +42,7 @@
 						<span><input type="checkbox" name="artck[]" value="<?php echo $value['id'];?>" /></span>
 						<span class="tleft">
 							<a title="点击标题编辑笔记" href="<?php echo  ADMIN_URL ."write_art.php?artid=".$value['id'];?>"><?php echo $value['title']==''?'无标题':$value['title'];?></a>
-							<?php echo in_array('T',$marks)?'<img src="'. TEMPLATE_URLA .'static/images/top.png" title="首页置顶" />':'';?>
+							<?php echo in_array('TT',$marks)?'<img src="'. TEMPLATE_URLA .'static/images/top.png" title="首页置顶" />':'';?>
 							<?php echo in_array('ST',$marks)?'<img src="'. TEMPLATE_URLA .'static/images/sortop.png" title="分类置顶" />':'';?>
 							<?php echo $value['filenum']!=0?'<img src="'. TEMPLATE_URLA .'static/images/att.gif" title="附件数：'.$value['filenum'].'" />':'';?>
 						</span>
@@ -66,7 +66,7 @@
 					<?php if($draft=='1' && $examine=='1'){?>
 						<select name="top" onChange="setTop(this,'<?php echo IDEA_URL;?>');">
 							<option value="">置顶操作..</option>
-							<option value="T">首页置顶</option>
+							<option value="TT">首页置顶</option>
 							<option value="ST">分类置顶</option>
 							<option value="0">取消置顶</option>
 						</select> 

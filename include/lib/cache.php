@@ -116,6 +116,50 @@ class Cache{
         $this->cacheWrite($cacheData, 'userdiy');
 	}
 	
+	private function ch_newart(){//最新笔记缓存
+		$arts_cache=art_Model::getArtList(1,1,'','',0,Control::get('art_num'));
+        $cacheData = serialize($arts_cache);
+        $this->cacheWrite($cacheData, 'newart');
+	}
+	
+	
+	private function ch_hotart(){//热门笔记缓存
+		$order=' `saynum` DESC,`goodnum` DESC,`eyes` DESC,';
+		$hotArts=art_Model::getNewLog('',$order);
+		$hotArts_cache = array();
+		foreach($hotArts as $val){
+			$val['arturl']=Url::log($val['id']);
+			$hotArts_cache[$val['id']]=$val;
+		}
+        $cacheData = serialize($hotArts_cache);
+        $this->cacheWrite($cacheData,'hotart');
+	}
+
+	
+	private function ch_arttop(){//置顶笔记缓存
+		$toparts_cache = array();
+		$toparts_cache['top'] = art_Model::getArtList(1,1," AND mark like '%TT%' ",'',0,4);
+		$sorts = $this->readCache('sort');
+		foreach($sorts as $key){
+			$sort=$key;
+			if(empty($sort['children'])){
+				$rolestr = " AND `s_id`='".$sort['id']."' ";
+			}else{
+				$sortids = array_merge(array($sort['id']),$sort['children']);
+				foreach($sort['children'] as $valcd){
+					if(!empty($sorts[$valcd]['children'])){
+						$sortids = array_merge($sortids,$sorts[$valcd]['children']);
+					}
+				}
+				$rolestr = " AND `s_id` in (". implode(',', $sortids) .")";
+			}
+			$arts=art_Model::getArtList(1,1,$rolestr." AND mark like '%ST%' ",'',0,4);
+			$toparts_cache[$sort['id']]=$arts;
+		}
+        $cacheData = serialize($toparts_cache);
+        $this->cacheWrite($cacheData, 'arttop');
+	}
+	
 	private function ch_artalias(){//笔记别名缓存
 		$sql = "SELECT `id`,`alias` FROM `". DB_PRE ."article` where `alias`!=''";
         $row = $this->db->getlist($sql);
@@ -153,10 +197,12 @@ class Cache{
         foreach($navlist as $row){
             $children = array();
             if($row['type'] == nav_Model::navtype_sort && !empty($sorts[$row['type_id']]['children'])){
-				$row['url']=Url::sort($row['type_id']);
                 foreach($sorts[$row['type_id']]['children'] as $sortid){
                     $children[] = $sorts[$sortid];
                 }
+            }
+			if($row['type'] == nav_Model::navtype_sort){
+				$row['url']=Url::sort($row['type_id']);
             }
 			if($row['type'] == nav_Model::navtype_page){
 				$row['url']=Url::log($row['type_id']);
