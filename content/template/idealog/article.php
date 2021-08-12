@@ -52,8 +52,8 @@ if(!defined('IDEA_ROOT')){exit('error!');}
 							<a href="javascript:bad('<?php echo $aid;?>','<?php echo IDEA_URL;?>');">踩</a>
 						</div>
 						<div class="d_next">
-							<div class="left">上一篇：<a href="<?php echo Url::log($neighbour['prev']['id']);?>"><?php echo $neighbour['prev']['title'];?></a></div>
-							<div class="right">下一篇：<a href="<?php echo Url::log($neighbour['next']['id']);?>"><?php echo $neighbour['next']['title'];?></a></div>
+							<?php if($neighbour['prev']){?><div class="left">上一篇：<a href="<?php echo Url::log($neighbour['prev']['id']);?>"><?php echo $neighbour['prev']['title'];?></a></div><?php }?>
+							<?php if($neighbour['next']){?><div class="right">下一篇：<a href="<?php echo Url::log($neighbour['next']['id']);?>"><?php echo $neighbour['next']['title'];?></a></div><?php }?>
 							<div class="clear"></div>
 						</div>
 						<div class="clear"></div>
