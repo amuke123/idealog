@@ -17,7 +17,7 @@
 			fileType:{image:["jpg","jpeg","gif","png"],audio:["mp3","wav"],video:["avi","mp4","ogg","rm"],file:["rar","zip","txt","pdf","docx","doc","xls","xlsx"]},
 		},
 		options:{
-			version:"1.1.0",/**版本**/
+			version:"1.2.0",/**版本**/
 			lang:{},/**语言包数据**/
 			id:'',/**文本框id**/
 			Path:'',/**本文件地址**/
@@ -256,8 +256,10 @@
 			this.layout("removeFormat")
 		},
 		fc_removeHtml(id){/**清除多余的HTML代码**/
-			this.options.elemBox.innerHTML=this.options.elemBox.innerText.replace(/\r\n/g,"<br/>");
-			this.options.elemBox.innerHTML=this.options.elemBox.innerText.replace(/\n/g,"<br/>");
+			if(confirm("当前操作会丢失历史操作记录，导致无法撤销操作，是否确认操作？")){
+				this.options.elemBox.innerHTML=this.options.elemBox.innerText.replace(/\r\n/g,"<br/>");
+				this.options.elemBox.innerHTML=this.options.elemBox.innerText.replace(/\n/g,"<br/>");
+			}
 		},
 		fc_subscript(id){/**下标**/
 			this.layout("subscript");
