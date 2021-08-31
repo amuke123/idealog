@@ -11,7 +11,7 @@ if(!defined('IDEA_ROOT')){exit('error!');}
 					<h2><?php echo $art_title;?></h2>
 					<div class="u_info">
 						<div class="left"><p><img src="<?php echo $art_authorUrl;?>"></p></div>
-						<div class="right"><b><a href="<?php echo Url::author($art_uid);?>" target="_blank">by <?php echo $art_author;?></a></b><span><?php echo date("Y-m-d",$art_date);?></span></div>
+						<div class="right"><b>by <a href="<?php echo Url::author($art_uid);?>" target="_blank"><?php echo $art_author;?></a></b><span><?php echo date("Y-m-d",$art_date);?></span></div>
 					</div>
 					<div class="d_ac">
 						<ul>

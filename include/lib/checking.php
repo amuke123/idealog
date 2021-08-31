@@ -24,7 +24,7 @@ class Checking{
 			self::setSession();
 			if(!isset($_SESSION['uid'])){setcookie("ideashu","",time() - 3600);echo "<script>location.reload();</script>";}
 			$iname='cookie_'.self::jm(getStrSub(AUTO_STR).$_SESSION['uid']);
-			if(self::jm($_SESSION['uid'])==$_COOKIE[$iname] && $_SESSION['password']!=""){
+			if(isset($_COOKIE[$iname])&&self::jm($_SESSION['uid'])==$_COOKIE[$iname] && $_SESSION['password']!=""){
 				$loginid=$_SESSION['uid'];
 			}
 		}

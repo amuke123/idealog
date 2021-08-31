@@ -38,7 +38,7 @@
 					<p><a href="javascript:databak('<?php echo $code;?>');">开始备份</a></p>
 				</div>
 				<div class="cont3" id="cont2">
-					<p><span>仅可导入同版本ideslog导出的数据库备份文件，且数据库表前缀需保持一致。</span></p>
+					<p><span>仅可导入同版本ideashu导出的数据库备份文件，且数据库表前缀需保持一致。</span></p>
 					<p><span>当前数据库表前缀：<?php echo DB_PRE;?></span></p><p></p>
 					<form action="?action=import" enctype="multipart/form-data" method="post" name="myimport">
 						<div class="group"><p><input type="file" class="formfile" required name="file" /></p></div>

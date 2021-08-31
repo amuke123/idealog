@@ -21,3 +21,11 @@ function commentReply(pid,c,txt){
 	c.parentNode.parentNode.parentNode.appendChild(response);
 	document.getElementById('cancel-reply').style.display = 'block';
 }
+
+function cancelReply(){
+	var commentPlace = document.getElementById('comment-place'),response = document.getElementById('comment-post');
+	document.getElementById('comment-pid').value = 0;
+	document.getElementById('comment').setAttribute("placeholder",'相信你的评论可以一针见血！');
+	document.getElementById('cancel-reply').style.display = 'none';
+	commentPlace.appendChild(response);
+}
